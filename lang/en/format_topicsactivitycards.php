@@ -22,3 +22,5 @@
 
 $string['pluginname'] = 'Topics activity cards format';
 $string['privacy:metadata'] = 'The Topics format plugin does not store any personal data.';
+$string['hidefromothers'] = 'Hide topic';
+$string['showfromothers'] = 'Show topic';
