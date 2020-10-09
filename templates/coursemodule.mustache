@@ -1,0 +1,54 @@
+<div style="min-width: 24rem; max-width: 30px; margin-bottom: 7px;"
+     id="module-{{mod.id}}"
+     data-region="module"
+     data-module="{{mod.id}}"
+     class="card {{^mod.uservisible}} notavailable bg-gray020 {{/mod.uservisible}} activity type-{{mod.modname}} {{mod.extraclasses}}">
+
+    {{#editing}}
+        <div class="card-header">
+            {{{moveicons}}}
+            <span class="float-right editoptions">
+                {{{editoptions}}}
+            </span>
+        </div>
+    {{/editing}}
+    <div class="card-body">
+        {{#cmname}}
+            <div class="cmname">
+                <div class="float-left">{{{cmname}}}</div>
+                {{#completion}}
+                    <div class="float-right completion">
+                        {{{completion}}}
+                    </div>
+                {{/completion}}
+            </div>
+        {{/cmname}}
+        <div class="activityinfo">
+            {{#text}}
+                <div class="text">
+                    {{{text}}}
+                </div>
+                {{^cmname}}
+                    {{#completion}}
+                        <div class="completion">
+                            {{{completion}}}
+                        </div>
+                    {{/completion}}
+                {{/cmname}}
+            {{/text}}
+        </div>
+
+        {{#mod.afterlink}}
+            <span class="afterlink">
+                {{{mod.afterlink}}}
+            </span>
+        {{/mod.afterlink}}
+    </div>
+    {{#availability}}
+        <div class="card-footer">
+            <span class="availability">
+                {{{availability}}}
+            </span>
+        </div>
+    {{/availability}}
+</div>
