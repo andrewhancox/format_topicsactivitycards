@@ -2,3 +2,10 @@ body#page-course-view-topicsactivitycards div.activityinfo {
     clear: both;
     padding-top: 15px;
 }
+.format-topicsactivitycards.path-course-view #region-main {
+    background: none;
+    border: none;
+}
+.format-topicsactivitycards.path-course-view .course-content ul li.section.main {
+    border-bottom: none;
+}
