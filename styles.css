@@ -9,3 +9,9 @@ body#page-course-view-topicsactivitycards div.activityinfo {
 .format-topicsactivitycards.path-course-view .course-content ul li.section.main {
     border-bottom: none;
 }
+.format-topicsactivitycards .section .activity .availabilityinfo {
+    margin: 0;
+}
+.format-topicsactivitycards #region-main {
+    padding: 0;
+}
