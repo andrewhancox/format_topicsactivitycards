@@ -25,7 +25,7 @@
         {{/cmname}}
         <div class="activityinfo">
             {{#text}}
-                <div class="text">
+                <div class="text {{^mod.uservisible}} contentwithoutlink dimmed dimmed_text {{/mod.uservisible}}">
                     {{{text}}}
                 </div>
                 {{^cmname}}

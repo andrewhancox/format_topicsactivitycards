@@ -128,6 +128,10 @@ class course_renderer extends \core_course_renderer {
 
         $unstyledmodules = ['label'];
 
+        if (!$mod->is_visible_on_course_page()) {
+            return '';
+        }
+
         $template = new stdClass();
         $template->mod = $mod;
 
