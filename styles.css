@@ -15,3 +15,9 @@ body#page-course-view-topicsactivitycards div.activityinfo {
 .format-topicsactivitycards #region-main {
     padding: 0;
 }
+.format-topicsactivitycards li#section-0 .content{
+    clear: both;
+}
+.format-topicsactivitycards li.section.main div.card-deck{
+    margin-right: 0;
+}

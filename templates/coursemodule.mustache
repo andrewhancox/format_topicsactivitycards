@@ -1,17 +1,29 @@
-<div style="min-width: 24rem; max-width: 30px; margin-bottom: 7px;"
+<div style="min-width: 400px; max-width: 400px; margin-bottom: 7px;"
      id="module-{{mod.id}}"
      data-region="module"
      data-module="{{mod.id}}"
      class="card {{^mod.uservisible}} notavailable bg-gray020 {{/mod.uservisible}} activity type-{{mod.modname}} {{mod.extraclasses}}">
 
-    {{#editing}}
-        <div class="card-header">
-            {{{moveicons}}}
-            <span class="float-right editoptions">
-                {{{editoptions}}}
-            </span>
+    {{#showheader}}
+        <div class="card-header" style="{{#cardimage}}background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
+                height: 175px;
+                background-image: url({{{cardimage}}});{{/cardimage}}">
+            {{#editing}}
+                {{{moveicons}}}
+                <span class="float-right editoptions">
+                    {{{editoptions}}}
+                </span>
+
+                {{#availability}}
+                    <span class="availability">
+                        {{{availability}}}
+                    </span>
+                {{/availability}}
+            {{/editing}}
         </div>
-    {{/editing}}
+    {{/showheader}}
     <div class="card-body">
         {{#cmname}}
             <div class="cmname">
@@ -44,11 +56,18 @@
             </span>
         {{/mod.afterlink}}
     </div>
-    {{#availability}}
+    {{#showfooter}}
         <div class="card-footer">
-            <span class="availability">
-                {{{availability}}}
-            </span>
+            {{#duration}}
+                <span class="duration">
+                    {{{duration}}}
+                </span>
+            {{/duration}}
+            {{#availability}}
+                <span class="availability">
+                    {{{availability}}}
+                </span>
+            {{/availability}}
         </div>
-    {{/availability}}
+    {{/showfooter}}
 </div>

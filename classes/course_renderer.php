@@ -25,7 +25,7 @@ class course_renderer extends \core_course_renderer {
      * @return void
      */
     public function course_section_cm_list($course, $section, $sectionreturn = null, $displayoptions = array()) {
-        global $USER;
+        global $USER, $DB;
 
         $output = '';
         $modinfo = get_fast_modinfo($course);
@@ -42,6 +42,39 @@ class course_renderer extends \core_course_renderer {
             $movingpix = new pix_icon('movehere', get_string('movehere'), 'moodle', array('class' => 'movetarget'));
             $strmovefull = strip_tags(get_string("movefull", "", "'$USER->activitycopyname'"));
         }
+
+        $displayoptions['durations'] = [];
+        if ($field = $DB->get_record('local_metadata_field', ['shortname' => 'duration', 'contextlevel' => CONTEXT_MODULE])) {
+            $displayoptions['durationfield'] = $field;
+            list($insql, $params) = $DB->get_in_or_equal(array_keys($modinfo->get_cms()), SQL_PARAMS_NAMED);
+            $sql = "instanceid $insql AND fieldid = :fieldid";
+            $params['fieldid'] = $field->id;
+            ;
+            $durationsraw = $DB->get_records_select('local_metadata', $sql, $params);
+
+            foreach ($durationsraw as $durationraw) {
+                $displayoptions['durations'][$durationraw->instanceid] = $durationraw;
+            }
+        }
+
+        $displayoptions['cardimages'] = [];
+        if ($field = $DB->get_record('local_metadata_field', ['shortname' => 'cardimage', 'contextlevel' => CONTEXT_MODULE])) {
+            $contexts = \context_course::instance($course->id)->get_child_contexts();
+            $contextids = array_keys($contexts);
+            $filerecords = $this->get_area_files($contextids, 'metadatafieldtype_file', 'cardimage');
+
+            foreach ($filerecords as $file) {
+                if ($file->get_filesize() == 0) {
+                    continue;
+                }
+                $imageurl = moodle_url::make_pluginfile_url($file->get_contextid(),
+                        $file->get_component(), $file->get_filearea(), $file->get_itemid(), $file->get_filepath(), $file->get_filename());
+                $imageurl = $imageurl->out();
+
+                $displayoptions['cardimages'][$file->get_itemid()] = $imageurl;
+            }
+        }
+
 
         // Get the list of modules visible to user (excluding the module being moved if there is one)
         $moduleshtml = array();
@@ -152,7 +185,67 @@ class course_renderer extends \core_course_renderer {
             $template->moveicons = course_get_cm_move($mod, $sectionreturn);
         }
 
+        if (!empty($displayoptions['durations'][$mod->id])) {
+            $template->duration = $displayoptions['durationfield']->name . ": " . format_time($displayoptions['durations'][$mod->id]->data);
+        }
+
+        if (!empty($displayoptions['cardimages'][$mod->id])) {
+            $template->cardimage = $displayoptions['cardimages'][$mod->id];
+        }
+
+        $template->showheader = (!empty($template->editing) || !empty($template->cardimage));
+        $template->showfooter = (!empty($template->availability) || !empty($template->duration));
+
         return $this->render_from_template('format_topicsactivitycards/coursemodule', $template);
     }
 
+    public function get_area_files($contextids, $component, $filearea) {
+        global $DB;
+
+        $fs = get_file_storage();
+
+        list($contextidsql, $params) = $DB->get_in_or_equal($contextids, SQL_PARAMS_NAMED);
+        $params['filearea'] = $filearea;
+        $params['component'] = $component;
+
+        $sql = "SELECT ".self::instance_sql_fields('f', 'r')."
+                  FROM {files} f
+             LEFT JOIN {files_reference} r
+                       ON f.referencefileid = r.id
+                 WHERE f.contextid $contextidsql
+                       AND f.component = :component
+                       AND f.filearea  = :filearea";
+
+        $result = array();
+        $filerecords = $DB->get_records_sql($sql, $params);
+        foreach ($filerecords as $filerecord) {
+            $result[$filerecord->pathnamehash] = $fs->get_file_instance($filerecord);
+        }
+        return $result;
+    }
+
+    private static function instance_sql_fields($filesprefix, $filesreferenceprefix) {
+        // Note, these fieldnames MUST NOT overlap between the two tables,
+        // else problems like MDL-33172 occur.
+        $filefields = array('contenthash', 'pathnamehash', 'contextid', 'component', 'filearea',
+                'itemid', 'filepath', 'filename', 'userid', 'filesize', 'mimetype', 'status', 'source',
+                'author', 'license', 'timecreated', 'timemodified', 'sortorder', 'referencefileid');
+
+        $referencefields = array('repositoryid' => 'repositoryid',
+                                 'reference' => 'reference',
+                                 'lastsync' => 'referencelastsync');
+
+        // id is specifically named to prevent overlaping between the two tables.
+        $fields = array();
+        $fields[] = $filesprefix.'.id AS id';
+        foreach ($filefields as $field) {
+            $fields[] = "{$filesprefix}.{$field}";
+        }
+
+        foreach ($referencefields as $field => $alias) {
+            $fields[] = "{$filesreferenceprefix}.{$field} AS {$alias}";
+        }
+
+        return implode(', ', $fields);
+    }
 }

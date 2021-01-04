@@ -15,16 +15,14 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package    format_topicsactivitycards
- * @copyright  2020 onwards Andrew Hancox <andrewdchancox@googlemail.com> (https://www.opensourcelearning.co.uk/)
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @author Andrew Hancox <andrewdchancox@googlemail.com>
+ * @package local
+ * @subpackage customuserfields
  */
+use format_topicsactivitycards\upgradelib;
 
-$string['pluginname'] = 'Topics activity cards format';
-$string['privacy:metadata'] = 'The Topics format plugin does not store any personal data.';
-$string['hidefromothers'] = 'Hide topic';
-$string['showfromothers'] = 'Show topic';
-$string['sectionname'] = 'Topic';
-$string['cardimage'] = 'Card image';
-$string['duration'] = 'Duration';
-$string['cardimagedescription'] = 'An image 398px by 174px';
+function xmldb_format_topicsactivitycards_install() {
+    global $DB;
+
+    upgradelib::add_custom_user_fields();
+}
