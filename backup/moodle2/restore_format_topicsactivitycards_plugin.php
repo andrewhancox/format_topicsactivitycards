@@ -32,5 +32,5 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright 2017 Marina Glancy
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class restore_format_topicsactivitycards_plugin extends restore_format_topicsactivitycards_plugin {
+class restore_format_topicsactivitycards_plugin extends restore_format_topics_plugin {
 }
