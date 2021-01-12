@@ -15,26 +15,17 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @author Andrew Hancox <andrewdchancox@googlemail.com>
- * @package local
- * @subpackage customuserfields
+ * Script to remove unwanted enrolment plugin instances from OSKA courses
+ *
+ * @package   local_customuserfields
+ * @copyright 2017 Davo Smith, Synergy Learning
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+define('CLI_SCRIPT', true);
 
-/**
- * Steps to take during upgrades
- * @param int $oldversion (optional)
- * @return bool
- */
-function xmldb_format_topicsactivitycards_upgrade($oldversion = 0) {
-    global $DB;
+require_once(__DIR__.'/../../../config.php');
+global $DB, $CFG;
+require_once($CFG->libdir.'/clilib.php');
 
-    $dbman = $DB->get_manager();
-    if ($oldversion < 2020061503) {
-        \format_topicsactivitycards\upgradelib::add_custom_user_fields();
-        upgrade_plugin_savepoint(true, 2020061503, 'local', 'customuserfields');
-    }
-
-    return true;
-}
+\format_topicsactivitycards\upgradelib::add_custom_user_fields();;
