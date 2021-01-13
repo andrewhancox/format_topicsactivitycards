@@ -46,14 +46,17 @@ class course_renderer extends \core_course_renderer {
         $displayoptions['durations'] = [];
         if ($field = $DB->get_record('local_metadata_field', ['shortname' => 'duration', 'contextlevel' => CONTEXT_MODULE])) {
             $displayoptions['durationfield'] = $field;
-            list($insql, $params) = $DB->get_in_or_equal(array_keys($modinfo->get_cms()), SQL_PARAMS_NAMED);
-            $sql = "instanceid $insql AND fieldid = :fieldid";
-            $params['fieldid'] = $field->id;
-            ;
-            $durationsraw = $DB->get_records_select('local_metadata', $sql, $params);
+            $cm_infos = $modinfo->get_cms();
+            if (!empty($cm_infos)) {
+                list($insql, $params) = $DB->get_in_or_equal(array_keys($cm_infos), SQL_PARAMS_NAMED);
+                $sql = "instanceid $insql AND fieldid = :fieldid";
+                $params['fieldid'] = $field->id;
+                ;
+                $durationsraw = $DB->get_records_select('local_metadata', $sql, $params);
 
-            foreach ($durationsraw as $durationraw) {
-                $displayoptions['durations'][$durationraw->instanceid] = $durationraw;
+                foreach ($durationsraw as $durationraw) {
+                    $displayoptions['durations'][$durationraw->instanceid] = $durationraw;
+                }
             }
         }
 
