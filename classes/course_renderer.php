@@ -189,7 +189,21 @@ class course_renderer extends \core_course_renderer {
         }
 
         if (!empty($displayoptions['durations'][$mod->id])) {
-            $template->duration = $displayoptions['durationfield']->name . ": " . format_time($displayoptions['durations'][$mod->id]->data);
+
+            $class = 'durationfield_timeunit';
+            $str = new stdClass();
+            $str->day   = html_writer::span(get_string('day'), $class);
+            $str->days  = html_writer::span(get_string('days'), $class);
+            $str->hour  = html_writer::span(get_string('hour'), $class);
+            $str->hours = html_writer::span(get_string('hours'), $class);
+            $str->min   = html_writer::span(get_string('min'), $class);
+            $str->mins  = html_writer::span(get_string('mins'), $class);
+            $str->sec   = html_writer::span(get_string('sec'), $class);
+            $str->secs  = html_writer::span(get_string('secs'), $class);
+            $str->year  = html_writer::span(get_string('year'), $class);
+            $str->years = html_writer::span(get_string('years'), $class);
+
+            $template->duration = html_writer::span($displayoptions['durationfield']->name . ": ", 'durationfield_fieldname') . format_time($displayoptions['durations'][$mod->id]->data, $str);
         }
 
         if (!empty($displayoptions['cardimages'][$mod->id])) {
