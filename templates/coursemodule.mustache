@@ -1,26 +1,19 @@
-<div style="min-width: 400px; max-width: 400px; margin-bottom: 7px;"
-     id="module-{{mod.id}}"
-     data-region="module"
-     data-module="{{mod.id}}"
-     class="card {{^mod.uservisible}} notavailable bg-gray020 {{/mod.uservisible}} activity type-{{mod.modname}} {{mod.extraclasses}}">
+<li id="module-{{mod.id}}"
+    data-region="module"
+    data-module="{{mod.id}}"
+    class="card {{^mod.uservisible}} notavailable bg-gray020 {{/mod.uservisible}} activity type-{{mod.modname}} {{mod.extraclasses}}">
 
     {{#showheader}}
-        <div class="card-header" style="{{#cardimage}}background-size: contain;
+        <div class="card-header" style="min-height:40px; {{#cardimage}}background-size: contain;
                 background-position: center;
                 background-repeat: no-repeat;
                 height: 175px;
                 background-image: url({{{cardimage}}});{{/cardimage}}">
             {{#editing}}
                 {{{moveicons}}}
-                <span class="float-right editoptions">
+                <span class="float-right editoptions actions">
                     {{{editoptions}}}
                 </span>
-
-                {{#availability}}
-                    <span class="availability">
-                        {{{availability}}}
-                    </span>
-                {{/availability}}
             {{/editing}}
         </div>
     {{/showheader}}
@@ -70,4 +63,4 @@
             {{/availability}}
         </div>
     {{/showfooter}}
-</div>
+</li>

@@ -98,6 +98,7 @@ class course_renderer extends \core_course_renderer {
         }
 
         $sectionoutput = '';
+        $sectionoutput .= '<ul class="img-text section card-deck" data-draggroups="resource">';
         if (!empty($moduleshtml) || $ismoving) {
             foreach ($moduleshtml as $modnumber => $modulehtml) {
                 if ($ismoving) {
@@ -116,10 +117,11 @@ class course_renderer extends \core_course_renderer {
                         html_writer::link($movingurl, $this->output->render($movingpix), array('title' => $strmovefull)),
                         array('class' => 'movehere'));
             }
+            $sectionoutput .= "</ul>";
         }
 
         // Always output the section module list.
-        $output .= html_writer::tag('div', $sectionoutput, array('class' => 'section img-text card-deck'));
+        $output .= $sectionoutput;
 
         return $output;
     }

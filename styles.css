@@ -1,23 +1,63 @@
-body#page-course-view-topicsactivitycards div.activityinfo {
-    clear: both;
-    padding-top: 15px;
-}
-.format-topicsactivitycards.path-course-view #region-main {
-    background: none;
-    border: none;
-}
 .format-topicsactivitycards.path-course-view .course-content ul li.section.main {
     border-bottom: none;
 }
-.format-topicsactivitycards .section .activity .availabilityinfo {
-    margin: 0;
-}
-.format-topicsactivitycards #region-main {
+
+.format-topicsactivitycards.path-course-view #region-main {
+    border: none;
     padding: 0;
 }
-.format-topicsactivitycards li#section-0 .content{
+
+.format-topicsactivitycards #section-0 .content {
     clear: both;
 }
-.format-topicsactivitycards li.section.main div.card-deck{
+
+.format-topicsactivitycards .section .card-deck {
     margin-right: 0;
+}
+
+.format-topicsactivitycards .card.activity {
+    border: 1px solid rgba(0, 0, 0, .125);
+    min-width: 400px;
+    max-width: 400px;
+    margin-bottom: 7px;
+    margin-top: 0;
+    margin-right: .25rem;
+    margin-left: .25rem;
+    padding: 0;
+}
+
+.format-topicsactivitycards .card.activity .menubar {
+    padding: 10px;
+}
+
+.format-topicsactivitycards .card.activity .activityinfo {
+     clear: both;
+     padding-top: 15px;
+ }
+
+.format-topicsactivitycards .card.activity .availabilityinfo {
+    margin: 0;
+}
+
+.format-topicsactivitycards .card.activity .card-body {
+    padding: 1.25rem 1.25rem 0 1.25rem;
+}
+
+.format-topicsactivitycards .card.activity .card-footer {
+    font-size: 80%;
+    font-weight: 400;
+    border-top: 0;
+    padding: 4px;
+}
+
+.format-topicsactivitycards .card.activity .card-header {
+    border-bottom: none;
+}
+
+.format-topicsactivitycards .card.activity .duration {
+    font-weight: bolder;
+}
+
+.format-topicsactivitycards .card.activity .durationfield_timeunit {
+    font-weight: 400;
 }

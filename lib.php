@@ -21,7 +21,7 @@
  */
 
 defined('MOODLE_INTERNAL') || die();
-require_once($CFG->dirroot. '/course/format/topics/lib.php');
+require_once($CFG->dirroot . '/course/format/topics/lib.php');
 
 /**
  * Main class for the Topics course format
@@ -51,4 +51,39 @@ function format_topicsactivitycards_inplace_editable($itemtype, $itemid, $newval
                 array($itemid, 'topicsactivitycards'), MUST_EXIST);
         return course_get_format($section->course)->inplace_editable_update_section_name($section, $itemtype, $newvalue);
     }
+}
+
+function format_topicsactivitycards_override_webservice_execution($externalfunctioninfo, $params) {
+    if ($externalfunctioninfo->name !== 'core_course_get_module') {
+        return false;
+    }
+
+    global $PAGE, $CFG;
+
+    require_once("$CFG->dirroot/course/externallib.php");
+
+    // Validate and normalize parameters.
+    $params = \external_api::validate_parameters(\core_course_external::get_module_parameters(),
+            array('id' => $params[0], 'sectionreturn' => $params[1]));
+    $id = $params[0];
+    $sectionreturn = $params['sectionreturn'];
+
+    // Set of permissions an editing user may have.
+    $contextarray = [
+            'moodle/course:update',
+            'moodle/course:manageactivities',
+            'moodle/course:activityvisibility',
+            'moodle/course:sectionvisibility',
+            'moodle/course:movesections',
+            'moodle/course:setcurrentsection',
+    ];
+    $PAGE->set_other_editing_capability($contextarray);
+
+    // Validate access to the course (note, this is html for the course view page, we don't validate access to the module).
+    list($course, $cm) = get_course_and_cm_from_cmid($id);
+    \core_course_external::validate_context(context_course::instance($course->id));
+
+    $courserenderer = new \format_topicsactivitycards\course_renderer($PAGE, null);
+    $completioninfo = new completion_info($course);
+    return $courserenderer->course_section_cm_list_item($course, $completioninfo, $cm, $sectionreturn);
 }
