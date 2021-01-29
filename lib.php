@@ -53,6 +53,8 @@ function format_topicsactivitycards_inplace_editable($itemtype, $itemid, $newval
     }
 }
 
+// We need to override the core_course_get_module web service function so that when the activity
+// is moved the correct renderer gets used to re-insert into the DOM.
 function format_topicsactivitycards_override_webservice_execution($externalfunctioninfo, $params) {
     if ($externalfunctioninfo->name !== 'core_course_get_module') {
         return false;
@@ -65,7 +67,7 @@ function format_topicsactivitycards_override_webservice_execution($externalfunct
     // Validate and normalize parameters.
     $params = \external_api::validate_parameters(\core_course_external::get_module_parameters(),
             array('id' => $params[0], 'sectionreturn' => $params[1]));
-    $id = $params[0];
+    $id = $params['id'];
     $sectionreturn = $params['sectionreturn'];
 
     // Set of permissions an editing user may have.
@@ -81,6 +83,11 @@ function format_topicsactivitycards_override_webservice_execution($externalfunct
 
     // Validate access to the course (note, this is html for the course view page, we don't validate access to the module).
     list($course, $cm) = get_course_and_cm_from_cmid($id);
+
+    if($course->format !== 'topicsactivitycards') {
+        return false;
+    }
+
     \core_course_external::validate_context(context_course::instance($course->id));
 
     $courserenderer = new \format_topicsactivitycards\course_renderer($PAGE, null);
