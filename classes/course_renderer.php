@@ -2,6 +2,7 @@
 
 namespace format_topicsactivitycards;
 
+use CFPropertyList\PListException;
 use cm_info;
 use completion_info;
 use html_writer;
@@ -220,6 +221,11 @@ class course_renderer extends \core_course_renderer {
 
     public function get_area_files($contextids, $component, $filearea) {
         global $DB;
+        $result = [];
+
+        if (empty($contextids)) {
+            return $result;
+        }
 
         $fs = get_file_storage();
 
@@ -235,7 +241,6 @@ class course_renderer extends \core_course_renderer {
                        AND f.component = :component
                        AND f.filearea  = :filearea";
 
-        $result = array();
         $filerecords = $DB->get_records_sql($sql, $params);
         foreach ($filerecords as $filerecord) {
             $result[$filerecord->pathnamehash] = $fs->get_file_instance($filerecord);
