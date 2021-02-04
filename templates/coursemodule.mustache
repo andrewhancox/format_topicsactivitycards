@@ -1,7 +1,7 @@
 <li id="module-{{mod.id}}"
     data-region="module"
     data-module="{{mod.id}}"
-    class="card {{^mod.uservisible}} notavailable bg-gray020 {{/mod.uservisible}} activity type-{{mod.modname}} {{mod.extraclasses}}">
+    class="card {{^mod.uservisible}} notavailable bg-gray020 {{/mod.uservisible}} activity {{mod.modname}} modtype_{{mod.modname}} {{mod.extraclasses}}">
 
     {{#showheader}}
         <div class="card-header" style="min-height:40px; {{#cardimage}}background-size: contain;
