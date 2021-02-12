@@ -1,18 +1,41 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * @package format_topicsactivitycards
+ * @author Andrew Hancox <andrewdchancox@googlemail.com>
+ * @author Open Source Learning <enquiries@opensourcelearning.co.uk>
+ * @link https://opensourcelearning.co.uk
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright 2021, Andrew Hancox
+ */
 
 namespace format_topicsactivitycards;
 
 use CFPropertyList\PListException;
 use cm_info;
 use completion_info;
+use context_course;
 use html_writer;
 use moodle_url;
 use pix_icon;
+use section_info;
 use stdClass;
 
 class course_renderer extends \core_course_renderer {
-
-
     /**
      * Renders HTML to display a list of course modules in a course section
      * Also displays "move here" controls in Javascript-disabled mode
@@ -23,7 +46,7 @@ class course_renderer extends \core_course_renderer {
      * @param int|stdClass|section_info $section relative section number or section object
      * @param int $sectionreturn section number to return to
      * @param int $displayoptions
-     * @return void
+     * @return String
      */
     public function course_section_cm_list($course, $section, $sectionreturn = null, $displayoptions = array()) {
         global $USER, $DB;
@@ -51,8 +74,7 @@ class course_renderer extends \core_course_renderer {
             if (!empty($cm_infos)) {
                 list($insql, $params) = $DB->get_in_or_equal(array_keys($cm_infos), SQL_PARAMS_NAMED);
                 $sql = "instanceid $insql AND fieldid = :fieldid";
-                $params['fieldid'] = $field->id;
-                ;
+                $params['fieldid'] = $field->id;;
                 $durationsraw = $DB->get_records_select('local_metadata', $sql, $params);
 
                 foreach ($durationsraw as $durationraw) {
@@ -63,7 +85,7 @@ class course_renderer extends \core_course_renderer {
 
         $displayoptions['cardimages'] = [];
         if ($field = $DB->get_record('local_metadata_field', ['shortname' => 'cardimage', 'contextlevel' => CONTEXT_MODULE])) {
-            $contexts = \context_course::instance($course->id)->get_child_contexts();
+            $contexts = context_course::instance($course->id)->get_child_contexts();
             $contextids = array_keys($contexts);
             $filerecords = $this->get_area_files($contextids, 'metadatafieldtype_file', 'cardimage');
 
@@ -72,13 +94,13 @@ class course_renderer extends \core_course_renderer {
                     continue;
                 }
                 $imageurl = moodle_url::make_pluginfile_url($file->get_contextid(),
-                        $file->get_component(), $file->get_filearea(), $file->get_itemid(), $file->get_filepath(), $file->get_filename());
+                        $file->get_component(), $file->get_filearea(), $file->get_itemid(), $file->get_filepath(),
+                        $file->get_filename());
                 $imageurl = $imageurl->out();
 
                 $displayoptions['cardimages'][$file->get_itemid()] = $imageurl;
             }
         }
-
 
         // Get the list of modules visible to user (excluding the module being moved if there is one)
         $moduleshtml = array();
@@ -140,7 +162,8 @@ class course_renderer extends \core_course_renderer {
      * @param array $displayoptions
      * @return String
      */
-    public function course_section_cm_list_item($course, &$completioninfo, cm_info $mod, $sectionreturn, $displayoptions = array()) {
+    public function course_section_cm_list_item($course, &$completioninfo, cm_info $mod, $sectionreturn,
+            $displayoptions = array()) {
         $output = '';
         if ($modulehtml = $this->course_section_cm($course, $completioninfo, $mod, $sectionreturn, $displayoptions)) {
             $output = $modulehtml;
@@ -163,7 +186,7 @@ class course_renderer extends \core_course_renderer {
      */
     public function course_section_cm($course, &$completioninfo, cm_info $mod, $sectionreturn,
             $displayoptions = array()) {
-        global $OUTPUT, $PAGE;
+        global $PAGE;
 
         $unstyledmodules = ['label'];
 
@@ -195,18 +218,19 @@ class course_renderer extends \core_course_renderer {
 
             $class = 'durationfield_timeunit';
             $str = new stdClass();
-            $str->day   = html_writer::span(get_string('day'), $class);
-            $str->days  = html_writer::span(get_string('days'), $class);
-            $str->hour  = html_writer::span(get_string('hour'), $class);
+            $str->day = html_writer::span(get_string('day'), $class);
+            $str->days = html_writer::span(get_string('days'), $class);
+            $str->hour = html_writer::span(get_string('hour'), $class);
             $str->hours = html_writer::span(get_string('hours'), $class);
-            $str->min   = html_writer::span(get_string('min'), $class);
-            $str->mins  = html_writer::span(get_string('mins'), $class);
-            $str->sec   = html_writer::span(get_string('sec'), $class);
-            $str->secs  = html_writer::span(get_string('secs'), $class);
-            $str->year  = html_writer::span(get_string('year'), $class);
+            $str->min = html_writer::span(get_string('min'), $class);
+            $str->mins = html_writer::span(get_string('mins'), $class);
+            $str->sec = html_writer::span(get_string('sec'), $class);
+            $str->secs = html_writer::span(get_string('secs'), $class);
+            $str->year = html_writer::span(get_string('year'), $class);
             $str->years = html_writer::span(get_string('years'), $class);
 
-            $template->duration = html_writer::span($displayoptions['durationfield']->name . ": ", 'durationfield_fieldname') . format_time($displayoptions['durations'][$mod->id]->data, $str);
+            $template->duration = html_writer::span($displayoptions['durationfield']->name . ": ", 'durationfield_fieldname') .
+                    format_time($displayoptions['durations'][$mod->id]->data, $str);
         }
 
         if (!empty($displayoptions['cardimages'][$mod->id])) {
@@ -233,7 +257,7 @@ class course_renderer extends \core_course_renderer {
         $params['filearea'] = $filearea;
         $params['component'] = $component;
 
-        $sql = "SELECT ".self::instance_sql_fields('f', 'r')."
+        $sql = "SELECT " . self::instance_sql_fields('f', 'r') . "
                   FROM {files} f
              LEFT JOIN {files_reference} r
                        ON f.referencefileid = r.id
@@ -256,12 +280,12 @@ class course_renderer extends \core_course_renderer {
                 'author', 'license', 'timecreated', 'timemodified', 'sortorder', 'referencefileid');
 
         $referencefields = array('repositoryid' => 'repositoryid',
-                                 'reference' => 'reference',
-                                 'lastsync' => 'referencelastsync');
+                                 'reference'    => 'reference',
+                                 'lastsync'     => 'referencelastsync');
 
         // id is specifically named to prevent overlaping between the two tables.
         $fields = array();
-        $fields[] = $filesprefix.'.id AS id';
+        $fields[] = $filesprefix . '.id AS id';
         foreach ($filefields as $field) {
             $fields[] = "{$filesprefix}.{$field}";
         }

@@ -15,9 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * @package format_topicsactivitycards
  * @author Andrew Hancox <andrewdchancox@googlemail.com>
- * @package local
- * @subpackage customuserfields
+ * @author Open Source Learning <enquiries@opensourcelearning.co.uk>
+ * @link https://opensourcelearning.co.uk
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright 2021, Andrew Hancox
  */
 
 namespace format_topicsactivitycards;
@@ -78,7 +81,8 @@ class upgradelib {
 
         foreach ($fields as $field) {
             if (!$DB->record_exists('local_metadata_field', array('shortname' => $field['shortname']))) {
-                $field['sortorder'] = (1 + $DB->get_field('local_metadata_field', 'max(sortorder)', ['categoryid' => $defaultcategory->id]));
+                $field['sortorder'] =
+                        (1 + $DB->get_field('local_metadata_field', 'max(sortorder)', ['categoryid' => $defaultcategory->id]));
                 $field['id'] = $DB->insert_record('local_metadata_field', (object) $field);
             }
         }

@@ -15,20 +15,17 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package    format_topicsactivitycards
- * @copyright  2020 onwards Andrew Hancox <andrewdchancox@googlemail.com> (https://www.opensourcelearning.co.uk/)
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package format_topicsactivitycards
+ * @author Andrew Hancox <andrewdchancox@googlemail.com>
+ * @author Open Source Learning <enquiries@opensourcelearning.co.uk>
+ * @link https://opensourcelearning.co.uk
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright 2021, Andrew Hancox
  */
 
 defined('MOODLE_INTERNAL') || die();
-require_once($CFG->dirroot.'/course/format/topics/renderer.php');
+require_once($CFG->dirroot . '/course/format/topics/renderer.php');
 
-/**
- * Basic renderer for topics format.
- *
- * @copyright 2012 Dan Poltawski
- * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
 class format_topicsactivitycards_renderer extends format_topics_renderer {
 
     /**

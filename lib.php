@@ -15,21 +15,17 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package    format_topicsactivitycards
- * @copyright  2020 onwards Andrew Hancox <andrewdchancox@googlemail.com> (https://www.opensourcelearning.co.uk/)
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package format_topicsactivitycards
+ * @author Andrew Hancox <andrewdchancox@googlemail.com>
+ * @author Open Source Learning <enquiries@opensourcelearning.co.uk>
+ * @link https://opensourcelearning.co.uk
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright 2021, Andrew Hancox
  */
 
 defined('MOODLE_INTERNAL') || die();
 require_once($CFG->dirroot . '/course/format/topics/lib.php');
 
-/**
- * Main class for the Topics course format
- *
- * @package    format_topicsactivitycards
- * @copyright  2012 Marina Glancy
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
 class format_topicsactivitycards extends format_topics {
 }
 
@@ -50,6 +46,8 @@ function format_topicsactivitycards_inplace_editable($itemtype, $itemid, $newval
                 'SELECT s.* FROM {course_sections} s JOIN {course} c ON s.course = c.id WHERE s.id = ? AND c.format = ?',
                 array($itemid, 'topicsactivitycards'), MUST_EXIST);
         return course_get_format($section->course)->inplace_editable_update_section_name($section, $itemtype, $newvalue);
+    } else {
+        return null;
     }
 }
 
@@ -84,7 +82,7 @@ function format_topicsactivitycards_override_webservice_execution($externalfunct
     // Validate access to the course (note, this is html for the course view page, we don't validate access to the module).
     list($course, $cm) = get_course_and_cm_from_cmid($id);
 
-    if($course->format !== 'topicsactivitycards') {
+    if ($course->format !== 'topicsactivitycards') {
         return false;
     }
 
@@ -93,4 +91,8 @@ function format_topicsactivitycards_override_webservice_execution($externalfunct
     $courserenderer = new \format_topicsactivitycards\course_renderer($PAGE, null);
     $completioninfo = new completion_info($course);
     return $courserenderer->course_section_cm_list_item($course, $completioninfo, $cm, $sectionreturn);
+}
+
+
+function format_topicsactivitycards_coursemodule_standard_elements($formwrapper, $mform) {
 }
