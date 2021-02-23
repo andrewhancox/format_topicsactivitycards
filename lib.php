@@ -23,6 +23,9 @@
  * @copyright 2021, Andrew Hancox
  */
 
+use format_topicsactivitycards\metadata;
+use local_commerce\product;
+
 defined('MOODLE_INTERNAL') || die();
 require_once($CFG->dirroot . '/course/format/topics/lib.php');
 
@@ -93,6 +96,108 @@ function format_topicsactivitycards_override_webservice_execution($externalfunct
     return $courserenderer->course_section_cm_list_item($course, $completioninfo, $cm, $sectionreturn);
 }
 
+function format_topicsactivitycards_cardbackgroundimage_filemanageroptions() {
+    global $COURSE;
+    return [
+            'maxbytes'       => $COURSE->maxbytes,
+            'subdirs'        => 1,
+            'accepted_types' => 'image',
+            'maxfiles'       => 1
+    ];
+}
 
-function format_topicsactivitycards_coursemodule_standard_elements($formwrapper, $mform) {
+/**
+ * Inject the competencies elements into all moodle module settings forms.
+ *
+ * @param moodleform $formwrapper The moodle quickforms wrapper object.
+ * @param MoodleQuickForm $form The actual form object (required to modify the form).
+ */
+function format_topicsactivitycards_coursemodule_standard_elements($formwrapper, $form) {
+    if ($formwrapper->get_course()->format !== 'topicsactivitycards') {
+        return;
+    }
+
+    $cmid = null;
+    if ($cm = $formwrapper->get_coursemodule()) {
+        $cmid = $cm->id;
+        $metadata = metadata::get_record(['cmid' => $cmid]);
+    }
+
+    if (!$metadata) {
+        $metadata = new metadata();
+    }
+
+    $form->addElement('header', 'format_topicsactivitycards', get_string('pluginname', 'format_topicsactivitycards'));
+
+    $form->addElement('duration', 'duration', get_string('duration', 'format_topicsactivitycards'));
+    $form->setDefault('duration', 0);
+    $form->setType('duration', PARAM_INT);
+
+    $widthoptions = [
+            metadata::RENDERWIDTH_NORMAL => get_string('normalwidth', 'format_topicsactivitycards'),
+            metadata::RENDERWIDTH_DOUBLE => get_string('doublewidth', 'format_topicsactivitycards'),
+            metadata::RENDERWIDTH_FULL => get_string('fullwidth', 'format_topicsactivitycards')
+    ];
+    $form->addElement('select', 'renderwidth', get_string('renderwidth', 'local_commerce'), $widthoptions);
+
+    $form->addElement('filemanager', 'cardbackgroundimage_filemanager', get_string('cardimage', 'format_topicsactivitycards'), '',
+            format_topicsactivitycards_cardbackgroundimage_filemanageroptions());
+
+    $values = $metadata->to_record();
+    $values = file_prepare_standard_filemanager($values,
+            'cardbackgroundimage',
+            format_topicsactivitycards_cardbackgroundimage_filemanageroptions(),
+            $formwrapper->get_context(),
+            'format_topicsactivitycards',
+            'cardbackgroundimage',
+            $cmid);
+
+    $formwrapper->set_data($values);
+}
+
+function format_topicsactivitycards_coursemodule_edit_post_actions($data, $course) {
+    if ($course->format !== 'topicsactivitycards') {
+        return;
+    }
+
+    $metadata = metadata::get_record(['cmid' => $data->coursemodule]);
+
+    if (!$metadata) {
+        $metadata = new metadata();
+        $metadata->set('cmid', $data->coursemodule);
+    }
+
+    $metadata->set('duration', $data->duration);
+    $metadata->set('renderwidth', $data->renderwidth);
+
+    if (empty($metadata->get('id'))) {
+        $metadata->save();
+    } else {
+        $metadata->update();
+    }
+
+    file_postupdate_standard_filemanager(
+            $data,
+            'cardbackgroundimage',
+            format_topicsactivitycards_cardbackgroundimage_filemanageroptions(),
+            context_module::instance($data->coursemodule),
+            'format_topicsactivitycards',
+            'cardbackgroundimage',
+            $data->coursemodule);
+
+    return $data;
+}
+
+function format_topicsactivitycards_pluginfile($course, $cm, context $context, $filearea, $args, $forcedownload) {
+    $itemid = array_shift($args); // Ignore revision - designed to prevent caching problems only...
+
+    $relativepath = implode('/', $args);
+    $fullpath = "/{$context->id}/format_topicsactivitycards/$filearea/$itemid/$relativepath";
+    $fs = get_file_storage();
+    if (!($file = $fs->get_file_by_hash(sha1($fullpath))) || $file->is_directory()) {
+        return false;
+    }
+
+    // Force download.
+    send_stored_file($file, 0, 0, true);
 }

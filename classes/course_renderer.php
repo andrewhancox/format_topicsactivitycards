@@ -67,39 +67,29 @@ class course_renderer extends \core_course_renderer {
             $strmovefull = strip_tags(get_string("movefull", "", "'$USER->activitycopyname'"));
         }
 
-        $displayoptions['durations'] = [];
-        if ($field = $DB->get_record('local_metadata_field', ['shortname' => 'duration', 'contextlevel' => CONTEXT_MODULE])) {
-            $displayoptions['durationfield'] = $field;
-            $cm_infos = $modinfo->get_cms();
-            if (!empty($cm_infos)) {
-                list($insql, $params) = $DB->get_in_or_equal(array_keys($cm_infos), SQL_PARAMS_NAMED);
-                $sql = "instanceid $insql AND fieldid = :fieldid";
-                $params['fieldid'] = $field->id;;
-                $durationsraw = $DB->get_records_select('local_metadata', $sql, $params);
-
-                foreach ($durationsraw as $durationraw) {
-                    $displayoptions['durations'][$durationraw->instanceid] = $durationraw;
-                }
-            }
+        $displayoptions['metadatas'] = [];
+        $cm_infos = $modinfo->get_cms();
+        list($insql, $params) = $DB->get_in_or_equal(array_keys($cm_infos), SQL_PARAMS_NAMED);
+        $sql = "cmid $insql";
+        foreach (metadata::get_records_select($sql, $params) as $metadata) {
+            $displayoptions['metadatas'][$metadata->get('cmid')] = $metadata->to_record();
         }
 
         $displayoptions['cardimages'] = [];
-        if ($field = $DB->get_record('local_metadata_field', ['shortname' => 'cardimage', 'contextlevel' => CONTEXT_MODULE])) {
-            $contexts = context_course::instance($course->id)->get_child_contexts();
-            $contextids = array_keys($contexts);
-            $filerecords = $this->get_area_files($contextids, 'metadatafieldtype_file', 'cardimage');
+        $contexts = context_course::instance($course->id)->get_child_contexts();
+        $contextids = array_keys($contexts);
+        $filerecords = $this->get_area_files($contextids, 'format_topicsactivitycards', 'cardbackgroundimage');
 
-            foreach ($filerecords as $file) {
-                if ($file->get_filesize() == 0) {
-                    continue;
-                }
-                $imageurl = moodle_url::make_pluginfile_url($file->get_contextid(),
-                        $file->get_component(), $file->get_filearea(), $file->get_itemid(), $file->get_filepath(),
-                        $file->get_filename());
-                $imageurl = $imageurl->out();
-
-                $displayoptions['cardimages'][$file->get_itemid()] = $imageurl;
+        foreach ($filerecords as $file) {
+            if ($file->get_filesize() == 0) {
+                continue;
             }
+            $imageurl = moodle_url::make_pluginfile_url($file->get_contextid(),
+                    $file->get_component(), $file->get_filearea(), $file->get_itemid(), $file->get_filepath(),
+                    $file->get_filename());
+            $imageurl = $imageurl->out();
+
+            $displayoptions['cardimages'][$file->get_itemid()] = $imageurl;
         }
 
         // Get the list of modules visible to user (excluding the module being moved if there is one)
@@ -214,7 +204,7 @@ class course_renderer extends \core_course_renderer {
             $template->moveicons = course_get_cm_move($mod, $sectionreturn);
         }
 
-        if (!empty($displayoptions['durations'][$mod->id])) {
+        if (!empty($displayoptions['metadatas'][$mod->id])) {
 
             $class = 'durationfield_timeunit';
             $str = new stdClass();
@@ -229,8 +219,26 @@ class course_renderer extends \core_course_renderer {
             $str->year = html_writer::span(get_string('year'), $class);
             $str->years = html_writer::span(get_string('years'), $class);
 
-            $template->duration = html_writer::span($displayoptions['durationfield']->name . ": ", 'durationfield_fieldname') .
-                    format_time($displayoptions['durations'][$mod->id]->data, $str);
+            $template->duration = html_writer::span(get_string('duration', 'format_topicsactivitycards') . ": ", 'durationfield_fieldname') .
+                    format_time($displayoptions['metadatas'][$mod->id]->duration, $str);
+
+            switch ($displayoptions['metadatas'][$mod->id]->renderwidth) {
+                case metadata::RENDERWIDTH_NORMAL:
+                    $template->widthclass = 'normalwidth';
+                    break;
+                case metadata::RENDERWIDTH_DOUBLE:
+                    $template->widthclass = 'doublewidth';
+                    break;
+                case metadata::RENDERWIDTH_FULL:
+                    $template->widthclass = 'fullwidth';
+                    break;
+                default:
+                    $template->widthclass = 'normalwidth';
+                    break;
+
+            }
+        } else {
+            $template->widthclass = 'normalwidth';
         }
 
         if (!empty($displayoptions['cardimages'][$mod->id])) {

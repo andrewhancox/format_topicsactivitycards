@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package format_topicsactivitycards
+ * @package local_commerce
  * @author Andrew Hancox <andrewdchancox@googlemail.com>
  * @author Open Source Learning <enquiries@opensourcelearning.co.uk>
  * @link https://opensourcelearning.co.uk
@@ -23,10 +23,34 @@
  * @copyright 2021, Andrew Hancox
  */
 
-define('CLI_SCRIPT', true);
+namespace format_topicsactivitycards;
 
-require_once(__DIR__ . '/../../../../config.php');
-global $DB, $CFG;
-require_once($CFG->libdir . '/clilib.php');
+class metadata extends \core\persistent {
+    const TABLE = 'topicsactivitycards_metadata';
 
-\format_topicsactivitycards\upgradelib::add_custom_user_fields();;
+    const RENDERWIDTH_NORMAL = 10;
+    const RENDERWIDTH_DOUBLE = 20;
+    const RENDERWIDTH_FULL = 30;
+
+    /**
+     * Return the definition of the properties of this model.
+     *
+     * @return array
+     */
+    protected static function define_properties() {
+        return array(
+                'renderwidth'       => array(
+                        'type'    => PARAM_INT,
+                        'default' => 0,
+                ),
+                'duration'   => array(
+                        'type'        => PARAM_INT,
+                        'description' => 'duration',
+                ),
+                'cmid'   => array(
+                        'type'        => PARAM_INT,
+                        'description' => 'duration',
+                )
+        );
+    }
+}

@@ -31,3 +31,6 @@ $string['sectionname'] = 'Topic';
 $string['cardimage'] = 'Card image';
 $string['duration'] = 'Duration';
 $string['cardimagedescription'] = 'An image 398px by 174px';
+$string['normalwidth'] = 'Normal';
+$string['doublewidth'] = 'Double width';
+$string['fullwidth'] = 'Full width';
