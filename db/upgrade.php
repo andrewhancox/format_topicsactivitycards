@@ -44,7 +44,7 @@ function xmldb_format_topicsactivitycards_upgrade($oldversion) {
         }
 
         // Popup savepoint reached.
-        upgrade_plugin_savepoint(true, 2020061515, 'local', 'commerce');
+        upgrade_plugin_savepoint(true, 2020061515, 'format', 'topicsactivitycards');
     }
 
     if ($oldversion < 2020061516) {
@@ -54,7 +54,17 @@ function xmldb_format_topicsactivitycards_upgrade($oldversion) {
             $dbman->add_field($table, $field);
         }
 
-        upgrade_plugin_savepoint(true, 2020061516, 'local', 'commerce');
+        upgrade_plugin_savepoint(true, 2020061516, 'format', 'topicsactivitycards');
+    }
+
+    if ($oldversion < 2020061530) {
+        $table = new xmldb_table('topicsactivitycards_metadata');
+        $field = new xmldb_field('overlaycardimage', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, 0, 0);
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        upgrade_plugin_savepoint(true, 2020061530, 'format', 'topicsactivitycards');
     }
 
     return true;

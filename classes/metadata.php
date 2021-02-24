@@ -43,6 +43,10 @@ class metadata extends \core\persistent {
                         'type'    => PARAM_INT,
                         'default' => 0,
                 ),
+                'overlaycardimage'       => array(
+                        'type'    => PARAM_INT,
+                        'default' => 0,
+                ),
                 'duration'   => array(
                         'type'        => PARAM_INT,
                         'description' => 'duration',

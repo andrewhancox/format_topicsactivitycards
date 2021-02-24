@@ -1,5 +1,5 @@
 .format-topicsactivitycards.path-course-view .course-content ul li.section.main {
-    border-bottom: none;
+    border: none;
 }
 
 .format-topicsactivitycards.path-course-view #region-main {
@@ -15,6 +15,63 @@
     margin: 0;
     padding: 0;
 }
+
+
+.format-topicsactivitycards .card.activity {
+    margin: 0;
+    padding: 3px;
+    border: none;
+}
+
+.format-topicsactivitycards .card.activity .menubar {
+    padding: 10px;
+}
+
+.format-topicsactivitycards .card.activity .activityinfo {
+    clear: both;
+    padding-top: 15px;
+}
+
+.format-topicsactivitycards .card.activity .availabilityinfo {
+    margin: 0;
+}
+
+.format-topicsactivitycards .card.activity .card-body {
+    padding: 1.25rem 1.25rem 0 1.25rem;
+}
+
+.format-topicsactivitycards .card.activity .card-footer {
+    font-size: 80%;
+    font-weight: 400;
+    border: none;
+    padding: 4px;
+}
+
+.format-topicsactivitycards .card.activity .card-header {
+    border: none;
+}
+
+.format-topicsactivitycards .card.activity .duration {
+    font-weight: bolder;
+}
+
+.format-topicsactivitycards .card.activity .durationfield_timeunit {
+    font-weight: 400;
+}
+
+.card-img-overlay {
+    position: absolute !important;
+    padding: 1.25rem !important;
+}
+
+.card.borderdouble {
+    border: 5px solid #fff!important;
+}
+
+.fadeopacity {
+    opacity: 15%;
+}
+/* Card widths */
 
 .format-topicsactivitycards .card.activity.fullwidth {
     flex: 0 0 100%;
@@ -155,48 +212,4 @@
         flex: 0 0 50%;
         max-width: 50%;
     }
-}
-
-.format-topicsactivitycards .card.activity {
-    margin: 0;
-    padding: 3px;
-    border: 0;
-}
-
-.format-topicsactivitycards .card.activity .menubar {
-    padding: 10px;
-}
-
-.format-topicsactivitycards .card.activity .activityinfo {
-    clear: both;
-    padding-top: 15px;
-}
-
-.format-topicsactivitycards .card.activity .availabilityinfo {
-    margin: 0;
-}
-
-.format-topicsactivitycards .card.activity .card-body {
-    padding: 1.25rem 1.25rem 0 1.25rem;
-    border: 2px solid rgba(0,0,0,.03);
-    background-color: rgba(0,0,0,0.01);
-}
-
-.format-topicsactivitycards .card.activity .card-footer {
-    font-size: 80%;
-    font-weight: 400;
-    border-top: 0;
-    padding: 4px;
-}
-
-.format-topicsactivitycards .card.activity .card-header {
-    border-bottom: none;
-}
-
-.format-topicsactivitycards .card.activity .duration {
-    font-weight: bolder;
-}
-
-.format-topicsactivitycards .card.activity .durationfield_timeunit {
-    font-weight: 400;
 }

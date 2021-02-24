@@ -219,8 +219,16 @@ class course_renderer extends \core_course_renderer {
             $str->year = html_writer::span(get_string('year'), $class);
             $str->years = html_writer::span(get_string('years'), $class);
 
-            $template->duration = html_writer::span(get_string('duration', 'format_topicsactivitycards') . ": ", 'durationfield_fieldname') .
-                    format_time($displayoptions['metadatas'][$mod->id]->duration, $str);
+            $totalsecs = $displayoptions['metadatas'][$mod->id]->duration;
+            if (!empty($totalsecs)) {
+                $template->duration =
+                        html_writer::span(get_string('duration', 'format_topicsactivitycards') . ": ", 'durationfield_fieldname') .
+                        format_time($totalsecs, $str);
+            }
+
+            if(!empty($displayoptions['metadatas'][$mod->id]->overlaycardimage)) {
+                $template->overlaycardimage = true;
+            }
 
             switch ($displayoptions['metadatas'][$mod->id]->renderwidth) {
                 case metadata::RENDERWIDTH_NORMAL:

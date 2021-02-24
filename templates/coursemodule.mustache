@@ -1,23 +1,18 @@
 <li id="module-{{mod.id}}"
     data-region="module"
     data-module="{{mod.id}}"
-    class="{{widthclass}} card {{^mod.uservisible}} notavailable bg-gray020 {{/mod.uservisible}} activity {{mod.modname}} modtype_{{mod.modname}} {{mod.extraclasses}}">
-
-    {{#showheader}}
-        <div class="card-header" style="min-height:40px; {{#cardimage}}background-size: contain;
-                background-position: center;
-                background-repeat: no-repeat;
-                height: 175px;
-                background-image: url({{{cardimage}}});{{/cardimage}}">
-            {{#editing}}
-                {{{moveicons}}}
-                <span class="float-right editoptions actions">
-                    {{{editoptions}}}
-                </span>
-            {{/editing}}
-        </div>
-    {{/showheader}}
-    <div class="card-body">
+    class="{{widthclass}} borderdouble border-white rounded bg-light card {{^mod.uservisible}} notavailable bg-gray020 {{/mod.uservisible}} activity {{mod.modname}} modtype_{{mod.modname}} {{mod.extraclasses}}">
+    {{#editing}}
+        <div style="min-height: 25px;"></div>
+        {{{moveicons}}}
+        <span class="float-right editoptions actions">
+            {{{editoptions}}}
+        </span>
+    {{/editing}}
+    {{#cardimage}}
+        <img class="bg-light card-img-top {{#overlaycardimage}}fadeopacity{{/overlaycardimage}}" src="{{{cardimage}}}">
+    {{/cardimage}}
+    <div class="{{#overlaycardimage}}card-img-overlay{{/overlaycardimage}}{{^overlaycardimage}}card-body{{/overlaycardimage}}">
         {{#cmname}}
             <div class="cmname">
                 <div class="float-left">{{{cmname}}}</div>
@@ -50,7 +45,7 @@
         {{/mod.afterlink}}
     </div>
     {{#showfooter}}
-        <div class="card-footer">
+        <div class="card-footer rounded">
             {{#duration}}
                 <span class="duration">
                     {{{duration}}}

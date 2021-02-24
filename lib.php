@@ -138,7 +138,9 @@ function format_topicsactivitycards_coursemodule_standard_elements($formwrapper,
             metadata::RENDERWIDTH_DOUBLE => get_string('doublewidth', 'format_topicsactivitycards'),
             metadata::RENDERWIDTH_FULL => get_string('fullwidth', 'format_topicsactivitycards')
     ];
-    $form->addElement('select', 'renderwidth', get_string('renderwidth', 'local_commerce'), $widthoptions);
+    $form->addElement('select', 'renderwidth', get_string('renderwidth', 'format_topicsactivitycards'), $widthoptions);
+
+    $form->addElement('advcheckbox', 'overlaycardimage', '', get_string('overlaycardimage', 'format_topicsactivitycards'));
 
     $form->addElement('filemanager', 'cardbackgroundimage_filemanager', get_string('cardimage', 'format_topicsactivitycards'), '',
             format_topicsactivitycards_cardbackgroundimage_filemanageroptions());
@@ -169,6 +171,7 @@ function format_topicsactivitycards_coursemodule_edit_post_actions($data, $cours
 
     $metadata->set('duration', $data->duration);
     $metadata->set('renderwidth', $data->renderwidth);
+    $metadata->set('overlaycardimage', $data->overlaycardimage);
 
     if (empty($metadata->get('id'))) {
         $metadata->save();
