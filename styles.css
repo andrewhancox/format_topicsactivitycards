@@ -60,8 +60,13 @@
 }
 
 .card-img-overlay {
-    position: absolute !important;
-    padding: 1.25rem !important;
+    position: absolute !important; /* reassert bootstrap style over Moodle */
+    padding: 1.25rem !important; /* reassert bootstrap style over Moodle */
+    pointer-events: none;
+}
+
+.card-img-overlay .activityicon {
+    display: none;
 }
 
 .card.borderdouble {
@@ -70,6 +75,10 @@
 
 .fadeopacity {
     opacity: 15%;
+}
+
+.editoptions, .editing_move {
+    z-index: 999;
 }
 /* Card widths */
 
