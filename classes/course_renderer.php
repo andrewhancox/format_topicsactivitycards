@@ -191,6 +191,12 @@ class course_renderer extends \core_course_renderer {
             $template->unstyled = true;
         }
 
+        $template->cmlink = $mod->url;
+        $onclick = $mod->onclick;
+        if (!empty($onclick)) {
+            $template->onclick = $onclick;
+        }
+
         $template->text = $mod->get_formatted_content(array('overflowdiv' => false, 'noclean' => true));
         $template->completion = $this->course_section_cm_completion($course, $completioninfo, $mod, $displayoptions);
         $template->cmname = $this->course_section_cm_name($mod, $displayoptions);

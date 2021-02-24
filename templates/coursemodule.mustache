@@ -10,7 +10,9 @@
         </span>
     {{/editing}}
     {{#cardimage}}
+        <a href="{{cmlink}}" {{#onclick}}onclick="{{{onclick}}}"{{/onclick}}>
         <img class="bg-light card-img-top {{#overlaycardimage}}fadeopacity{{/overlaycardimage}}" src="{{{cardimage}}}">
+        </a>
     {{/cardimage}}
     <div class="{{#overlaycardimage}}card-img-overlay{{/overlaycardimage}}{{^overlaycardimage}}card-body{{/overlaycardimage}}">
         {{#cmname}}
