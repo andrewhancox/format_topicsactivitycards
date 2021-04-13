@@ -11,35 +11,36 @@
     {{/editing}}
     {{#cardimage}}
         <a href="{{cmlink}}" {{#onclick}}onclick="{{{onclick}}}"{{/onclick}}>
-        <img class="bg-light card-img-top {{#overlaycardimage}}fadeopacity{{/overlaycardimage}}" src="{{{cardimage}}}">
+            <img class="bg-light card-img-top" src="{{{cardimage}}}">
         </a>
     {{/cardimage}}
-    <div class="{{#overlaycardimage}}card-img-overlay{{/overlaycardimage}}{{^overlaycardimage}}card-body{{/overlaycardimage}}">
-        {{#cmname}}
-            <div class="cmname">
-                <div class="float-left">{{{cmname}}}</div>
-                {{#completion}}
-                    <div class="float-right completion">
-                        {{{completion}}}
-                    </div>
-                {{/completion}}
-            </div>
-        {{/cmname}}
-        <div class="activityinfo">
-            {{#text}}
-                <div class="text {{^mod.uservisible}} contentwithoutlink dimmed dimmed_text {{/mod.uservisible}}">
-                    {{{text}}}
-                </div>
-                {{^cmname}}
+    <div class="card-body">
+        <div class="">
+            {{#cmname}}
+                <div class="cmname">
+                    <div class="float-left">{{{cmname}}}</div>
                     {{#completion}}
-                        <div class="completion">
+                        <div class="float-right completion">
                             {{{completion}}}
                         </div>
                     {{/completion}}
-                {{/cmname}}
-            {{/text}}
+                </div>
+            {{/cmname}}
+            <div class="activityinfo">
+                {{#text}}
+                    <div class="text {{^mod.uservisible}} contentwithoutlink dimmed dimmed_text {{/mod.uservisible}}">
+                        {{{text}}}
+                    </div>
+                    {{^cmname}}
+                        {{#completion}}
+                            <div class="completion">
+                                {{{completion}}}
+                            </div>
+                        {{/completion}}
+                    {{/cmname}}
+                {{/text}}
+            </div>
         </div>
-
         {{#mod.afterlink}}
             <span class="afterlink">
                 {{{mod.afterlink}}}
