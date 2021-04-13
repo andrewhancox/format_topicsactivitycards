@@ -1,0 +1,71 @@
+<li id="module-{{mod.id}}"
+    data-region="module"
+    data-module="{{mod.id}}"
+    class="{{widthclass}} {{tagclasses}} coursemoduleoverlay collapse show borderdouble border-white rounded bg-light card {{^mod.uservisible}} notavailable bg-gray020 {{/mod.uservisible}} activity {{mod.modname}} modtype_{{mod.modname}} {{mod.extraclasses}}">
+    {{#editing}}
+        <div style="min-height: 25px;"></div>
+        {{{moveicons}}}
+        <span class="float-right editoptions actions">
+            {{{editoptions}}}
+        </span>
+    {{/editing}}
+    {{#cardimage}}
+        <a href="{{cmlink}}" {{#onclick}}onclick="{{{onclick}}}"{{/onclick}}>
+            <img class="bg-light card-img-top" src="{{{cardimage}}}">
+        </a>
+    {{/cardimage}}
+    {{#cmname}}
+        <div class="card-img-overlay">
+            <div class="float-left bg-dark rounded row activityoverlaycontents">
+                <div class="col-12 bg-light rounded">
+                    <div class="cmname">
+                        <div class="float-left activityoverlaycontentsheading">{{{cmname}}}</div>
+                        {{#completion}}
+                            <div class="float-left activityoverlaycontentsheading completion">
+                                {{{completion}}}
+                            </div>
+                        {{/completion}}
+                    </div>
+                    {{#mod.afterlink}}
+                        <span class="afterlink float-right">
+                            {{{mod.afterlink}}}
+                        </span>
+                    {{/mod.afterlink}}
+                </div>
+            </div>
+        {{#text}}
+            <div class="float-left bg-dark rounded row activityoverlaycontents activityinfo">
+                <div class="col-12 bg-light rounded activityinfoinner">
+                        <div class="text {{^mod.uservisible}} contentwithoutlink dimmed dimmed_text {{/mod.uservisible}}">
+                            {{{text}}}
+                        </div>
+                        {{^cmname}}
+                            {{#completion}}
+                                <div class="completion">
+                                    {{{completion}}}
+                                </div>
+                            {{/completion}}
+                        {{/cmname}}
+                </div>
+            </div>
+        {{/text}}
+        </div>
+    {{/cmname}}
+    <div class="card-footer rounded">
+        {{#duration}}
+            <span class="duration">
+                {{{duration}}}
+            </span>
+        {{/duration}}
+        {{#availability}}
+            <span class="availability">
+                {{{availability}}}
+            </span>
+        {{/availability}}
+        <div class="tags">
+            {{#tags}}
+                <a href="#tagid-{{{id}}}" class='badge badge-pill badge-success format_topicsactivitycards_tagfilter' data-tagid="{{{id}}}">{{{name}}}</a>
+            {{/tags}}
+        </div>
+    </div>
+</li>

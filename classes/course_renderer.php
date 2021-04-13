@@ -232,10 +232,6 @@ class course_renderer extends \core_course_renderer {
                         format_time($totalsecs, $str);
             }
 
-            if(!empty($displayoptions['metadatas'][$mod->id]->overlaycardimage)) {
-                $template->overlaycardimage = true;
-            }
-
             switch ($displayoptions['metadatas'][$mod->id]->renderwidth) {
                 case metadata::RENDERWIDTH_NORMAL:
                     $template->widthclass = 'normalwidth';
@@ -260,9 +256,14 @@ class course_renderer extends \core_course_renderer {
         }
 
         $template->showheader = (!empty($template->editing) || !empty($template->cardimage));
-        $template->showfooter = (!empty($template->availability) || !empty($template->duration));
+        $template->showfooter = (!empty($template->availability) || !empty($template->duration) || !empty($template->tags));
 
-        return $this->render_from_template('format_topicsactivitycards/coursemodule', $template);
+        if(empty($displayoptions['metadatas'][$mod->id]->overlaycardimage)) {
+            $templatename = 'format_topicsactivitycards/coursemodule';
+        } else {
+            $templatename = 'format_topicsactivitycards/coursemoduleoverlay';
+        }
+        return $this->render_from_template($templatename, $template);
     }
 
     public function get_area_files($contextids, $component, $filearea) {

@@ -29,11 +29,14 @@
 
 .format-topicsactivitycards .card.activity .activityinfo {
     clear: both;
-    padding-top: 15px;
 }
 
 .format-topicsactivitycards .card.activity .availabilityinfo {
     margin: 0;
+}
+
+.activityinfoinner {
+    padding: 15px;
 }
 
 .format-topicsactivitycards .card.activity .card-body {
@@ -95,6 +98,14 @@
 .format-topicsactivitycards .card.activity.doublewidth {
     flex: 0 0 100%;
     max-width: 100%;
+}
+
+.activityoverlaycontents {
+    margin: 10px;
+    padding: 10px;
+}
+.activityoverlaycontentsheading {
+    padding-right: 15px;
 }
 
 @media (min-width: 900px) {
