@@ -1,4 +1,4 @@
-.format-topicsactivitycards.path-course-view .course-content ul li.section.main {
+.format-topicsactivitycards-card-section li.section.main {
     border: none;
 }
 
@@ -7,31 +7,31 @@
     padding: 0;
 }
 
-.format-topicsactivitycards #section-0 .content {
+.format-topicsactivitycards-card-section #section-0 .content {
     clear: both;
 }
 
-.format-topicsactivitycards .section .card-deck {
+.format-topicsactivitycards-card-section .card-deck {
     margin: 0;
     padding: 0;
 }
 
 
-.format-topicsactivitycards .card.activity {
+..format-topicsactivitycards-card-section .card.activity {
     margin: 0;
     padding: 3px;
     border: none;
 }
 
-.format-topicsactivitycards .card.activity .menubar {
+.format-topicsactivitycards-card-section .card.activity .menubar {
     padding: 10px;
 }
 
-.format-topicsactivitycards .card.activity .activityinfo {
+.format-topicsactivitycards-card-section .card.activity .activityinfo {
     clear: both;
 }
 
-.format-topicsactivitycards .card.activity .availabilityinfo {
+.format-topicsactivitycards-card-section .card.activity .availabilityinfo {
     margin: 0;
 }
 
@@ -39,26 +39,26 @@
     padding: 15px;
 }
 
-.format-topicsactivitycards .card.activity .card-body {
+.format-topicsactivitycards-card-section .card.activity .card-body {
     padding: 1.25rem 1.25rem 0 1.25rem;
 }
 
-.format-topicsactivitycards .card.activity .card-footer {
+.format-topicsactivitycards-card-section .card.activity .card-footer {
     font-size: 80%;
     font-weight: 400;
     border: none;
     padding: 4px;
 }
 
-.format-topicsactivitycards .card.activity .card-header {
+.format-topicsactivitycards-card-section .card.activity .card-header {
     border: none;
 }
 
-.format-topicsactivitycards .card.activity .duration {
+.format-topicsactivitycards-card-section .card.activity .duration {
     font-weight: bolder;
 }
 
-.format-topicsactivitycards .card.activity .durationfield_timeunit {
+.format-topicsactivitycards-card-section .card.activity .durationfield_timeunit {
     font-weight: 400;
 }
 
@@ -72,7 +72,7 @@
     display: none;
 }
 
-.card.borderdouble {
+.format-topicsactivitycards-card-section .card.borderdouble {
     border: 5px solid #fff!important;
 }
 
@@ -85,17 +85,17 @@
 }
 /* Card widths */
 
-.format-topicsactivitycards .card.activity.fullwidth {
+.format-topicsactivitycards-card-section .card.activity.fullwidth {
     flex: 0 0 100%;
     max-width: 100%;
 }
 
-.format-topicsactivitycards .card.activity.normalwidth {
+.format-topicsactivitycards-card-section .card.activity.normalwidth {
     flex: 0 0 100%;
     max-width: 100%;
 }
 
-.format-topicsactivitycards .card.activity.doublewidth {
+.format-topicsactivitycards-card-section .card.activity.doublewidth {
     flex: 0 0 100%;
     max-width: 100%;
 }
@@ -109,126 +109,126 @@
 }
 
 @media (min-width: 900px) {
-    .drawer-open-left.used-region-side-pre.format-topicsactivitycards .card.activity.normalwidth {
+    .drawer-open-left.used-region-side-pre.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.normalwidth {
         flex: 0 0 50%;
         max-width: 50%;
     }
 
-    .drawer-open-left.used-region-side-pre.format-topicsactivitycards .card.activity.doublewidth {
+    .drawer-open-left.used-region-side-pre.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.doublewidth {
         flex: 0 0 100%;
         max-width: 100%;
     }
 }
 
 @media (min-width: 1150px) {
-    .drawer-open-left.used-region-side-pre.format-topicsactivitycards .card.activity.normalwidth {
+    .drawer-open-left.used-region-side-pre.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.normalwidth {
         flex: 0 0 50%;
         max-width: 50%;
     }
 
-    .drawer-open-left.used-region-side-pre.format-topicsactivitycards .card.activity.doublewidth {
+    .drawer-open-left.used-region-side-pre.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.doublewidth {
         flex: 0 0 100%;
         max-width: 100%;
     }
 }
 
 @media (min-width: 1450px) {
-    .drawer-open-left.used-region-side-pre.format-topicsactivitycards .card.activity.normalwidth {
+    .drawer-open-left.used-region-side-pre.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.normalwidth {
         flex: 0 0 33%;
         max-width: 33%;
     }
 
-    .drawer-open-left.used-region-side-pre.format-topicsactivitycards .card.activity.doublewidth {
+    .drawer-open-left.used-region-side-pre.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.doublewidth {
         flex: 0 0 50%;
         max-width: 50%;
     }
 }
 
 @media (min-width: 1050px) {
-    .drawer-open-left.format-topicsactivitycards .card.activity.normalwidth,
-    .used-region-side-pre.format-topicsactivitycards .card.activity.normalwidth {
+    .drawer-open-left.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.normalwidth,
+    .used-region-side-pre.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.normalwidth {
         flex: 0 0 50%;
         max-width: 50%;
     }
 
-    .drawer-open-left.format-topicsactivitycards .card.activity.doublewidth,
-    .used-region-side-pre.format-topicsactivitycards .card.activity.doublewidth {
+    .drawer-open-left.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.doublewidth,
+    .used-region-side-pre.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.doublewidth {
         flex: 0 0 100%;
         max-width: 100%;
     }
 }
 
 @media (min-width: 1300px) {
-    .drawer-open-left.format-topicsactivitycards .card.activity.normalwidth,
-    .used-region-side-pre.format-topicsactivitycards .card.activity.normalwidth {
+    .drawer-open-left.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.normalwidth,
+    .used-region-side-pre.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.normalwidth {
         flex: 0 0 50%;
         max-width: 50%;
     }
 
-    .drawer-open-left.format-topicsactivitycards .card.activity.doublewidth,
-    .used-region-side-pre.format-topicsactivitycards .card.activity.doublewidth {
+    .drawer-open-left.format-topicsactivitycards .format-topicsactivitycards-card-section.card.activity.doublewidth,
+    .used-region-side-pre.format-topicsactivitycards .format-topicsactivitycards-card-section.card.activity.doublewidth {
         flex: 0 0 100%;
         max-width: 100%;
     }
 }
 
 @media (min-width: 1600px) {
-    .drawer-open-left.format-topicsactivitycards .card.activity.normalwidth,
-    .used-region-side-pre.format-topicsactivitycards .card.activity.normalwidth {
+    .drawer-open-left.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.normalwidth,
+    .used-region-side-pre.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.normalwidth {
         flex: 0 0 33%;
         max-width: 33%;
     }
 
-    .drawer-open-left.format-topicsactivitycards .card.activity.doublewidth,
-    .used-region-side-pre.format-topicsactivitycards .card.activity.doublewidth {
+    .drawer-open-left.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.doublewidth,
+    .used-region-side-pre.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.doublewidth {
         flex: 0 0 50%;
         max-width: 50%;
     }
 }
 
 @media (min-width: 750px) {
-    .format-topicsactivitycards .card.activity.normalwidth {
+    .format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.normalwidth {
         flex: 0 0 50%;
         max-width: 50%;
     }
 
-    .format-topicsactivitycards .card.activity.doublewidth {
+    .format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.doublewidth {
         flex: 0 0 100%;
         max-width: 100%;
     }
 }
 
 @media (min-width: 900px) {
-    .format-topicsactivitycards .card.activity.normalwidth {
+    .format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.normalwidth {
         flex: 0 0 50%;
         max-width: 50%;
     }
 
-    .format-topicsactivitycards .card.activity.doublewidth {
+    .format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.doublewidth {
         flex: 0 0 100%;
         max-width: 100%;
     }
 }
 
 @media (min-width: 1100px) {
-    .format-topicsactivitycards .card.activity.normalwidth {
+    .format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.normalwidth {
         flex: 0 0 33%;
         max-width: 33%;
     }
 
-    .format-topicsactivitycards .card.activity.doublewidth {
+    .format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.doublewidth {
         flex: 0 0 50%;
         max-width: 50%;
     }
 }
 
 @media (min-width: 1600px) {
-    .format-topicsactivitycards .card.activity.normalwidth {
+    .format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.normalwidth {
         flex: 0 0 25%;
         max-width: 25%;
     }
 
-    .format-topicsactivitycards .card.activity.doublewidth {
+    .format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.doublewidth {
         flex: 0 0 50%;
         max-width: 50%;
     }

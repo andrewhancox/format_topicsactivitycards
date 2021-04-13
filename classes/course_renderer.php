@@ -29,13 +29,28 @@ use CFPropertyList\PListException;
 use cm_info;
 use completion_info;
 use context_course;
+use core_tag_tag;
+use format_base;
+use format_topicsactivitycards;
 use html_writer;
+use moodle_page;
 use moodle_url;
 use pix_icon;
 use section_info;
 use stdClass;
 
 class course_renderer extends \core_course_renderer {
+    /**
+     * @var format_base
+     */
+    private $format;
+
+    public function __construct(moodle_page $page, $target) {
+        $this->format = course_get_format($page->course->id);
+
+        parent::__construct($page, $target);
+    }
+
     /**
      * Renders HTML to display a list of course modules in a course section
      * Also displays "move here" controls in Javascript-disabled mode
@@ -50,6 +65,10 @@ class course_renderer extends \core_course_renderer {
      */
     public function course_section_cm_list($course, $section, $sectionreturn = null, $displayoptions = array()) {
         global $USER, $DB;
+        $sectionlayout = $this->format->get_format_options($section)['sectionlayout'];
+        if ($sectionlayout == format_topicsactivitycards::SECTIONLAYOUT_LIST) {
+            return parent::course_section_cm_list($course, $section, $sectionreturn, $displayoptions);
+        }
 
         $output = '';
         $modinfo = get_fast_modinfo($course);
@@ -111,7 +130,7 @@ class course_renderer extends \core_course_renderer {
         }
 
         $sectionoutput = '';
-        $sectionoutput .= '<ul class="img-text section card-deck" data-draggroups="resource">';
+        $sectionoutput .= '<ul class="format-topicsactivitycards-card-section img-text section card-deck" data-draggroups="resource">';
         if (!empty($moduleshtml) || $ismoving) {
             foreach ($moduleshtml as $modnumber => $modulehtml) {
                 if ($ismoving) {
@@ -154,6 +173,12 @@ class course_renderer extends \core_course_renderer {
      */
     public function course_section_cm_list_item($course, &$completioninfo, cm_info $mod, $sectionreturn,
             $displayoptions = array()) {
+
+        $sectionlayout = $this->format->get_format_options((int)$mod->sectionnum)['sectionlayout'];
+        if ($sectionlayout == \format_topicsactivitycards::SECTIONLAYOUT_LIST) {
+            return parent::course_section_cm_list_item($course, $completioninfo, $mod, $sectionreturn, $displayoptions);
+        }
+
         $output = '';
         if ($modulehtml = $this->course_section_cm($course, $completioninfo, $mod, $sectionreturn, $displayoptions)) {
             $output = $modulehtml;
@@ -177,6 +202,11 @@ class course_renderer extends \core_course_renderer {
     public function course_section_cm($course, &$completioninfo, cm_info $mod, $sectionreturn,
             $displayoptions = array()) {
         global $PAGE;
+
+        $sectionlayout = $this->format->get_format_options((int)$mod->sectionnum)['sectionlayout'];
+        if ($sectionlayout == format_topicsactivitycards::SECTIONLAYOUT_LIST) {
+            return parent::course_section_cm($course, $completioninfo, $mod, $sectionreturn, $displayoptions);
+        }
 
         $unstyledmodules = ['label'];
 

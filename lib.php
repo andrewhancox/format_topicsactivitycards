@@ -30,6 +30,27 @@ defined('MOODLE_INTERNAL') || die();
 require_once($CFG->dirroot . '/course/format/topics/lib.php');
 
 class format_topicsactivitycards extends format_topics {
+    public const SECTIONLAYOUT_CARDS = 10;
+    public const SECTIONLAYOUT_LIST = 20;
+
+    public function section_format_options($foreditform = false) {
+        $retval = parent::section_format_options($foreditform);
+
+        $retval['sectionlayout'] = [
+                'default'            => 0,
+                'type'               => PARAM_TEXT,
+                'label'              => get_string('sectionlayout', 'format_topicsactivitycards'),
+                'element_type'       => 'select',
+                'element_attributes' => [
+                        [
+                                self::SECTIONLAYOUT_CARDS => get_string('sectionlayout_cards', 'format_topicsactivitycards'),
+                                self::SECTIONLAYOUT_LIST  => get_string('sectionlayout_list', 'format_topicsactivitycards')
+                        ]
+                ]
+        ];
+
+        return $retval;
+    }
 }
 
 /**

@@ -36,3 +36,7 @@ $string['doublewidth'] = 'Double width';
 $string['fullwidth'] = 'Full width';
 $string['renderwidth'] = 'Width';
 $string['overlaycardimage'] = 'Overlay card image';
+$string['sectionlayout'] = 'Section layout';
+$string['sectionlayout_cards'] = 'Cards';
+$string['sectionlayout_list'] = 'List';
+
