@@ -65,6 +65,10 @@ class course_renderer extends \core_course_renderer {
      */
     public function course_section_cm_list($course, $section, $sectionreturn = null, $displayoptions = array()) {
         global $USER, $DB;
+
+        $displayoptions['metadatas'] = [];
+        $displayoptions['cardimages'] = [];
+
         $sectionlayout = $this->format->get_format_options($section)['sectionlayout'];
         if ($sectionlayout == format_topicsactivitycards::SECTIONLAYOUT_LIST) {
             return parent::course_section_cm_list($course, $section, $sectionreturn, $displayoptions);
@@ -85,16 +89,15 @@ class course_renderer extends \core_course_renderer {
             $movingpix = new pix_icon('movehere', get_string('movehere'), 'moodle', array('class' => 'movetarget'));
             $strmovefull = strip_tags(get_string("movefull", "", "'$USER->activitycopyname'"));
         }
-
-        $displayoptions['metadatas'] = [];
         $cm_infos = $modinfo->get_cms();
-        list($insql, $params) = $DB->get_in_or_equal(array_keys($cm_infos), SQL_PARAMS_NAMED);
-        $sql = "cmid $insql";
-        foreach (metadata::get_records_select($sql, $params) as $metadata) {
-            $displayoptions['metadatas'][$metadata->get('cmid')] = $metadata->to_record();
+        if (!empty($cm_infos)) {
+            list($insql, $params) = $DB->get_in_or_equal(array_keys($cm_infos), SQL_PARAMS_NAMED);
+            $sql = "cmid $insql";
+            foreach (metadata::get_records_select($sql, $params) as $metadata) {
+                $displayoptions['metadatas'][$metadata->get('cmid')] = $metadata->to_record();
+            }
         }
 
-        $displayoptions['cardimages'] = [];
         $contexts = context_course::instance($course->id)->get_child_contexts();
         $contextids = array_keys($contexts);
         $filerecords = $this->get_area_files($contextids, 'format_topicsactivitycards', 'cardbackgroundimage');
