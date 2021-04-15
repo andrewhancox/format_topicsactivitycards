@@ -157,7 +157,7 @@ function format_topicsactivitycards_coursemodule_standard_elements($formwrapper,
     $widthoptions = [
             metadata::RENDERWIDTH_NORMAL => get_string('normalwidth', 'format_topicsactivitycards'),
             metadata::RENDERWIDTH_DOUBLE => get_string('doublewidth', 'format_topicsactivitycards'),
-            metadata::RENDERWIDTH_FULL => get_string('fullwidth', 'format_topicsactivitycards')
+            metadata::RENDERWIDTH_FULL   => get_string('fullwidth', 'format_topicsactivitycards')
     ];
     $form->addElement('select', 'renderwidth', get_string('renderwidth', 'format_topicsactivitycards'), $widthoptions);
 
