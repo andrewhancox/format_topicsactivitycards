@@ -177,7 +177,7 @@ class course_renderer extends \core_course_renderer {
     public function course_section_cm_list_item($course, &$completioninfo, cm_info $mod, $sectionreturn,
             $displayoptions = array()) {
 
-        $sectionlayout = $this->format->get_format_options((int)$mod->sectionnum)['sectionlayout'];
+        $sectionlayout = $this->format->get_format_options((int) $mod->sectionnum)['sectionlayout'];
         if ($sectionlayout == \format_topicsactivitycards::SECTIONLAYOUT_LIST) {
             return parent::course_section_cm_list_item($course, $completioninfo, $mod, $sectionreturn, $displayoptions);
         }
@@ -206,7 +206,7 @@ class course_renderer extends \core_course_renderer {
             $displayoptions = array()) {
         global $PAGE;
 
-        $sectionlayout = $this->format->get_format_options((int)$mod->sectionnum)['sectionlayout'];
+        $sectionlayout = $this->format->get_format_options((int) $mod->sectionnum)['sectionlayout'];
         if ($sectionlayout == format_topicsactivitycards::SECTIONLAYOUT_LIST) {
             return parent::course_section_cm($course, $completioninfo, $mod, $sectionreturn, $displayoptions);
         }
