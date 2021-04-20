@@ -62,10 +62,10 @@
                 {{{availability}}}
             </span>
         {{/availability}}
-        <div class="tags">
-            {{#tags}}
-                <a href="#tagid-{{{id}}}" class='badge badge-pill badge-success format_topicsactivitycards_tagfilter' data-tagid="{{{id}}}">{{{name}}}</a>
-            {{/tags}}
-        </div>
+        {{#taglist}}
+            <div class="tags">
+                {{{taglist}}}
+            </div>
+        {{/taglist}}
     </div>
 </li>

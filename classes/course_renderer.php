@@ -288,6 +288,8 @@ class course_renderer extends \core_course_renderer {
             $template->cardimage = $displayoptions['cardimages'][$mod->id];
         }
 
+        $template->taglist = $this->output->tag_list(core_tag_tag::get_item_tags('core', 'course_modules', $mod->id));
+
         $template->showheader = (!empty($template->editing) || !empty($template->cardimage));
         $template->showfooter = (!empty($template->availability) || !empty($template->duration) || !empty($template->tags));
 
