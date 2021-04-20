@@ -144,7 +144,7 @@ function format_topicsactivitycards_coursemodule_standard_elements($formwrapper,
         $metadata = metadata::get_record(['cmid' => $cmid]);
     }
 
-    if (!$metadata) {
+    if (empty($metadata)) {
         $metadata = new metadata();
     }
 
