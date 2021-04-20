@@ -291,7 +291,7 @@ class course_renderer extends \core_course_renderer {
         $template->showheader = (!empty($template->editing) || !empty($template->cardimage));
         $template->showfooter = (!empty($template->availability) || !empty($template->duration) || !empty($template->tags));
 
-        if(empty($displayoptions['metadatas'][$mod->id]->overlaycardimage)) {
+        if (empty($displayoptions['metadatas'][$mod->id]->overlaycardimage)) {
             $templatename = 'format_topicsactivitycards/coursemodule';
         } else {
             $templatename = 'format_topicsactivitycards/coursemoduleoverlay';
