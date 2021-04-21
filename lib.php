@@ -175,7 +175,7 @@ function format_topicsactivitycards_coursemodule_standard_elements($formwrapper,
             'cardbackgroundimage',
             $cmid);
 
-    $formwrapper->set_data($values);
+    $form->setDefaults((array)$values);
 }
 
 function format_topicsactivitycards_coursemodule_edit_post_actions($data, $course) {
