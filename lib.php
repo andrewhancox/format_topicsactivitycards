@@ -173,7 +173,7 @@ function format_topicsactivitycards_coursemodule_standard_elements($formwrapper,
             $formwrapper->get_context(),
             'format_topicsactivitycards',
             'cardbackgroundimage',
-            $cmid);
+            0);
 
     $form->setDefaults((array)$values);
 }
@@ -207,7 +207,7 @@ function format_topicsactivitycards_coursemodule_edit_post_actions($data, $cours
             context_module::instance($data->coursemodule),
             'format_topicsactivitycards',
             'cardbackgroundimage',
-            $data->coursemodule);
+            0);
 
     return $data;
 }

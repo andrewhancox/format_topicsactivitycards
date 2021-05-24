@@ -67,5 +67,24 @@ function xmldb_format_topicsactivitycards_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2020061530, 'format', 'topicsactivitycards');
     }
 
+    if ($oldversion < 2020061542) {
+        $fs = new file_storage();
+        $filestoshiftcontext = $DB->get_records('files', ['component' => 'format_topicsactivitycards']);
+        $contextidstopurge = [];
+        foreach ($filestoshiftcontext as $file) {
+            $fileobj = $fs->get_file_by_id($file->id);
+            $contextidstopurge[] = $fileobj->get_contextid();
+
+            $context = context::instance_by_id($fileobj->get_contextid());
+
+            $file_record = new stdClass();
+            $file_record->itemid = 0;
+            $fs->create_file_from_storedfile($file_record, $fileobj);
+            $fileobj->delete();
+        }
+
+        upgrade_plugin_savepoint(true, 2020061542, 'format', 'topicsactivitycards');
+    }
+
     return true;
 }

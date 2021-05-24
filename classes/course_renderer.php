@@ -111,7 +111,7 @@ class course_renderer extends \core_course_renderer {
                     $file->get_filename());
             $imageurl = $imageurl->out();
 
-            $displayoptions['cardimages'][$file->get_itemid()] = $imageurl;
+            $displayoptions['cardimages'][$file->get_contextid()] = $imageurl;
         }
 
         // Get the list of modules visible to user (excluding the module being moved if there is one)
@@ -284,8 +284,8 @@ class course_renderer extends \core_course_renderer {
             $template->widthclass = 'normalwidth';
         }
 
-        if (!empty($displayoptions['cardimages'][$mod->id])) {
-            $template->cardimage = $displayoptions['cardimages'][$mod->id];
+        if (!empty($displayoptions['cardimages'][$mod->context->id])) {
+            $template->cardimage = $displayoptions['cardimages'][$mod->context->id];
         }
 
         $template->taglist = $this->output->tag_list(core_tag_tag::get_item_tags('core', 'course_modules', $mod->id));
