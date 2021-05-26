@@ -180,7 +180,7 @@ function format_topicsactivitycards_coursemodule_standard_elements($formwrapper,
 
 function format_topicsactivitycards_coursemodule_edit_post_actions($data, $course) {
     if ($course->format !== 'topicsactivitycards') {
-        return;
+        return $data;
     }
 
     $metadata = metadata::get_record(['cmid' => $data->coursemodule]);
