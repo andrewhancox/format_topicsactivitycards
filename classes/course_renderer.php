@@ -133,7 +133,7 @@ class course_renderer extends \core_course_renderer {
         }
 
         $sectionoutput = '';
-        $sectionoutput .= '<ul class="format-topicsactivitycards-card-section img-text section card-deck" data-draggroups="resource">';
+        $sectionoutput .= '<ul class="row format-topicsactivitycards-card-section img-text section" data-draggroups="resource">';
         if (!empty($moduleshtml) || $ismoving) {
             foreach ($moduleshtml as $modnumber => $modulehtml) {
                 if ($ismoving) {
@@ -219,6 +219,7 @@ class course_renderer extends \core_course_renderer {
 
         $template = new stdClass();
         $template->mod = $mod;
+        $template->name = format_string($mod->name);
 
         if (in_array($mod->modname, $unstyledmodules)) {
             $template->unstyled = true;
@@ -231,6 +232,10 @@ class course_renderer extends \core_course_renderer {
         }
 
         $template->text = $mod->get_formatted_content(array('overflowdiv' => false, 'noclean' => true));
+        // For none label activities, strip html from the description.
+        if ($mod->modname !== 'label') {
+            $template->text = strip_tags($template->text);
+        }
         $template->completion = $this->course_section_cm_completion($course, $completioninfo, $mod, $displayoptions);
         $template->cmname = $this->course_section_cm_name($mod, $displayoptions);
         $template->editing = $PAGE->user_is_editing();
@@ -245,7 +250,7 @@ class course_renderer extends \core_course_renderer {
 
         if (!empty($displayoptions['metadatas'][$mod->id])) {
 
-            $class = 'durationfield_timeunit';
+            $class = 'tac-time-unit small';
             $str = new stdClass();
             $str->day = html_writer::span(get_string('day'), $class);
             $str->days = html_writer::span(get_string('days'), $class);
@@ -260,28 +265,26 @@ class course_renderer extends \core_course_renderer {
 
             $totalsecs = $displayoptions['metadatas'][$mod->id]->duration;
             if (!empty($totalsecs)) {
-                $template->duration =
-                        html_writer::span(get_string('duration', 'format_topicsactivitycards') . ": ", 'durationfield_fieldname') .
-                        format_time($totalsecs, $str);
+                $template->duration = format_time($totalsecs, $str);
             }
 
             switch ($displayoptions['metadatas'][$mod->id]->renderwidth) {
                 case metadata::RENDERWIDTH_NORMAL:
-                    $template->widthclass = 'normalwidth';
+                    $template->widthclass = 'col-md-6 col-lg-4';
                     break;
                 case metadata::RENDERWIDTH_DOUBLE:
-                    $template->widthclass = 'doublewidth';
+                    $template->widthclass = 'col-md-6';
                     break;
                 case metadata::RENDERWIDTH_FULL:
-                    $template->widthclass = 'fullwidth';
+                    $template->widthclass = '';
                     break;
                 default:
-                    $template->widthclass = 'normalwidth';
+                    $template->widthclass = 'col-md-6 col-lg-4';
                     break;
 
             }
         } else {
-            $template->widthclass = 'normalwidth';
+            $template->widthclass = 'col-md-6 col-lg-4';
         }
 
         if (!empty($displayoptions['cardimages'][$mod->context->id])) {
@@ -290,8 +293,12 @@ class course_renderer extends \core_course_renderer {
 
         $template->taglist = $this->output->tag_list(core_tag_tag::get_item_tags('core', 'course_modules', $mod->id));
 
-        $template->showheader = (!empty($template->editing) || !empty($template->cardimage));
-        $template->showfooter = (!empty($template->availability) || !empty($template->duration) || !empty($template->tags));
+        // Show the header by default.
+        $template->showheader = true;
+        // Labels can have no header when they have no image or duration.
+        if ($mod->modname === 'label') {
+            $template->showheader = (!empty($template->cardimage) || !empty($template->duration));
+        }
 
         if (empty($displayoptions['metadatas'][$mod->id]->overlaycardimage)) {
             $templatename = 'format_topicsactivitycards/coursemodule';

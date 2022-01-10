@@ -1,235 +1,94 @@
-.format-topicsactivitycards-card-section li.section.main {
-    border: none;
+/* Format topics activity cards styles. */
+
+/* Card. */
+.tac-card,
+.tac-container {
+    transition: all .5s;
 }
 
-.format-topicsactivitycards.path-course-view #region-main {
-    border: none;
-    padding: 0;
-}
-
-.format-topicsactivitycards-card-section #section-0 .content {
-    clear: both;
-}
-
-.format-topicsactivitycards-card-section .card-deck {
-    margin: 0;
-    padding: 0;
-}
-
-
-..format-topicsactivitycards-card-section .card.activity {
-    margin: 0;
-    padding: 3px;
-    border: none;
-}
-
-.format-topicsactivitycards-card-section .card.activity .menubar {
-    padding: 10px;
-}
-
-.format-topicsactivitycards-card-section .card.activity .activityinfo {
-    clear: both;
-}
-
-.format-topicsactivitycards-card-section .card.activity .availabilityinfo {
-    margin: 0;
-}
-
-.activityinfoinner {
-    padding: 15px;
-}
-
-.format-topicsactivitycards-card-section .card.activity .card-body {
-    padding: 1.25rem 1.25rem 0 1.25rem;
-}
-
-.format-topicsactivitycards-card-section .card.activity .card-footer {
-    font-size: 80%;
-    font-weight: 400;
-    border: none;
-    padding: 4px;
-}
-
-.format-topicsactivitycards-card-section .card.activity .card-header {
-    border: none;
-}
-
-.format-topicsactivitycards-card-section .card.activity .duration {
-    font-weight: bolder;
-}
-
-.format-topicsactivitycards-card-section .card.activity .durationfield_timeunit {
-    font-weight: 400;
-}
-
-.card-img-overlay {
-    position: absolute !important; /* reassert bootstrap style over Moodle */
-    padding: 1.25rem !important; /* reassert bootstrap style over Moodle */
-    pointer-events: none;
-}
-
-.card-img-overlay .activityicon {
+.tac-card .activityicon {
+    /* Cards have images, so we hide activity icon. */
     display: none;
 }
-
-.format-topicsactivitycards-card-section .card.borderdouble {
-    border: 5px solid #fff!important;
+/* Remove default margin from link name & availability. */
+.tac-card .instancename,
+.tac-card .availabilityinfo {
+    margin: 0 !important;
 }
 
-.fadeopacity {
-    opacity: 15%;
+/* Cards that are links. */
+.tac-card-link:hover {
+    /* Grow/scale on hover. */
+    transform: scale(1.03);
 }
 
-.editoptions, .editing_move {
-    z-index: 999;
-}
-/* Card widths */
-
-.format-topicsactivitycards-card-section .card.activity.fullwidth {
-    flex: 0 0 100%;
-    max-width: 100%;
+/* Card image. */
+.tac-card-img-link:hover,
+.tac-card-img-link:focus {
+    /* Remove link styles for text inside the image. */
+    text-decoration: none !important;
 }
 
-.format-topicsactivitycards-card-section .card.activity.normalwidth {
-    flex: 0 0 100%;
-    max-width: 100%;
+.tac-card-img {
+    height: 150px;
+    background-size: cover;
+    background-position: center;
 }
 
-.format-topicsactivitycards-card-section .card.activity.doublewidth {
-    flex: 0 0 100%;
-    max-width: 100%;
+/* Activity Duration/time. */
+.tac-card-duration-circle {
+    height: 3.5rem;
+    width: 3.5rem;
+    line-height: 1;
 }
 
-.activityoverlaycontents {
-    margin: 10px;
-    padding: 10px;
-}
-.activityoverlaycontentsheading {
-    padding-right: 15px;
+/* Card name. */
+.tac-card-name .instancename {
+    font-size: 1rem !important;
 }
 
-@media (min-width: 900px) {
-    .drawer-open-left.used-region-side-pre.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.normalwidth {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
-
-    .drawer-open-left.used-region-side-pre.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.doublewidth {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
+/* Card description. */
+.tac-card-text.tac-card-text-truncate {
+    display: block;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
-@media (min-width: 1150px) {
-    .drawer-open-left.used-region-side-pre.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.normalwidth {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
-
-    .drawer-open-left.used-region-side-pre.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.doublewidth {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
+/* Tags & Availability - normalise styles. */
+.tac-card-tags b,
+.tac-card-availability .availabilityinfo  {
+    font-weight: normal;
+    font-size: small;
+}
+.tac-card-availability .availabilityinfo .badge {
+    font-size: 12px;
+}
+.tac-card-tags .badge {
+    background: #d9dde0;
+    color: #212529;
 }
 
-@media (min-width: 1450px) {
-    .drawer-open-left.used-region-side-pre.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.normalwidth {
-        flex: 0 0 33%;
-        max-width: 33%;
-    }
-
-    .drawer-open-left.used-region-side-pre.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.doublewidth {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
+/* Editing. */
+.tac-card-editing .editing_move.moodle-core-dragdrop-draghandle,
+.tac-card-editing .action-menu.moodle-actionmenu.section-cm-edit-actions {
+    /* Make edit links look like buttons. */
+    background: #d9dde0;
+    padding: .5rem .75rem;
+    border-radius: .3rem;
+}
+.tac-card-editing .editing_move.moodle-core-dragdrop-draghandle .icon {
+    margin-right: 0;
 }
 
-@media (min-width: 1050px) {
-    .drawer-open-left.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.normalwidth,
-    .used-region-side-pre.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.normalwidth {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
+/* Moodle core fixes. */
 
-    .drawer-open-left.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.doublewidth,
-    .used-region-side-pre.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.doublewidth {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
+/* SHAME -  Remove empty div. */
+.tac-card-editing .filler {
+    display: none !important;
 }
-
-@media (min-width: 1300px) {
-    .drawer-open-left.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.normalwidth,
-    .used-region-side-pre.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.normalwidth {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
-
-    .drawer-open-left.format-topicsactivitycards .format-topicsactivitycards-card-section.card.activity.doublewidth,
-    .used-region-side-pre.format-topicsactivitycards .format-topicsactivitycards-card-section.card.activity.doublewidth {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-}
-
-@media (min-width: 1600px) {
-    .drawer-open-left.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.normalwidth,
-    .used-region-side-pre.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.normalwidth {
-        flex: 0 0 33%;
-        max-width: 33%;
-    }
-
-    .drawer-open-left.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.doublewidth,
-    .used-region-side-pre.format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.doublewidth {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
-}
-
-@media (min-width: 750px) {
-    .format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.normalwidth {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
-
-    .format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.doublewidth {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-}
-
-@media (min-width: 900px) {
-    .format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.normalwidth {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
-
-    .format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.doublewidth {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
-}
-
-@media (min-width: 1100px) {
-    .format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.normalwidth {
-        flex: 0 0 33%;
-        max-width: 33%;
-    }
-
-    .format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.doublewidth {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
-}
-
-@media (min-width: 1600px) {
-    .format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.normalwidth {
-        flex: 0 0 25%;
-        max-width: 25%;
-    }
-
-    .format-topicsactivitycards .format-topicsactivitycards-card-section .card.activity.doublewidth {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
+/* SHAME - Remove editing hover colour. */
+#page-course-view-topicsactivitycards.editing .section .activity:hover {
+    background-color: transparent;
 }
