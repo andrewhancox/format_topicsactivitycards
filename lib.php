@@ -163,6 +163,8 @@ function format_topicsactivitycards_coursemodule_standard_elements($formwrapper,
 
     $form->addElement('advcheckbox', 'overlaycardimage', '', get_string('overlaycardimage', 'format_topicsactivitycards'));
 
+    $form->addElement('advcheckbox', 'cleanandtruncatedescription', '', get_string('cleanandtruncatedescription', 'format_topicsactivitycards'));
+
     $form->addElement('filemanager', 'cardbackgroundimage_filemanager', get_string('cardimage', 'format_topicsactivitycards'), '',
             format_topicsactivitycards_cardbackgroundimage_filemanageroptions());
 
@@ -192,6 +194,7 @@ function format_topicsactivitycards_coursemodule_edit_post_actions($data, $cours
 
     $metadata->set('duration', $data->duration);
     $metadata->set('renderwidth', $data->renderwidth);
+    $metadata->set('cleanandtruncatedescription', $data->cleanandtruncatedescription);
     $metadata->set('overlaycardimage', $data->overlaycardimage);
 
     if (empty($metadata->get('id'))) {

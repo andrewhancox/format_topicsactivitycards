@@ -86,5 +86,15 @@ function xmldb_format_topicsactivitycards_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2020061542, 'format', 'topicsactivitycards');
     }
 
+    if ($oldversion < 2020061543) {
+        $table = new xmldb_table('topicsactivitycards_metadata');
+        $field = new xmldb_field('cleanandtruncatedescription', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, 0, 0);
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+        upgrade_plugin_savepoint(true, 2020061543, 'format', 'topicsactivitycards');
+    }
+
     return true;
 }

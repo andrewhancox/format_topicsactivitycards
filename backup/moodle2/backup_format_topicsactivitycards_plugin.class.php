@@ -37,7 +37,7 @@ class backup_format_topicsactivitycards_plugin extends backup_format_plugin {
         // Create one standard named plugin element (the visible container).
         // The courseid not required as populated on restore.
         $pluginwrapper = new backup_nested_element($this->get_recommended_name());
-        $metadatarecords = new backup_nested_element('metadata', ['cmid'], ['duration', 'renderwidth', 'overlaycardimage']);
+        $metadatarecords = new backup_nested_element('metadata', ['cmid'], ['duration', 'renderwidth', 'overlaycardimage', 'cleanandtruncatedescription']);
 
         // Connect the visible container ASAP.
         $plugin->add_child($pluginwrapper);

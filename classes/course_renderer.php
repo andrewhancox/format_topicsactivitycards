@@ -231,11 +231,16 @@ class course_renderer extends \core_course_renderer {
             $template->onclick = $onclick;
         }
 
+        if (isset($displayoptions['metadatas'][$mod->id])) {
+            $moddisplayoptions = $displayoptions['metadatas'][$mod->id];
+        }
+
         $template->text = $mod->get_formatted_content(array('overflowdiv' => false, 'noclean' => true));
         // For none label activities, strip html from the description.
-        if ($mod->modname !== 'label') {
-            $template->text = strip_tags($template->text);
+        if (!empty($moddisplayoptions->cleanandtruncatedescription)) {//width!
+            $template->text = shorten_text(strip_tags($template->text), 1000);
         }
+
         $template->completion = $this->course_section_cm_completion($course, $completioninfo, $mod, $displayoptions);
         $template->cmname = $this->course_section_cm_name($mod, $displayoptions);
         $template->editing = $PAGE->user_is_editing();
@@ -248,7 +253,7 @@ class course_renderer extends \core_course_renderer {
             $template->moveicons = course_get_cm_move($mod, $sectionreturn);
         }
 
-        if (!empty($displayoptions['metadatas'][$mod->id])) {
+        if (!empty($moddisplayoptions)) {
 
             $class = 'tac-time-unit small';
             $str = new stdClass();
@@ -263,12 +268,12 @@ class course_renderer extends \core_course_renderer {
             $str->year = html_writer::span(get_string('year'), $class);
             $str->years = html_writer::span(get_string('years'), $class);
 
-            $totalsecs = $displayoptions['metadatas'][$mod->id]->duration;
+            $totalsecs = $moddisplayoptions->duration;
             if (!empty($totalsecs)) {
                 $template->duration = format_time($totalsecs, $str);
             }
 
-            switch ($displayoptions['metadatas'][$mod->id]->renderwidth) {
+            switch ($moddisplayoptions->renderwidth) {
                 case metadata::RENDERWIDTH_NORMAL:
                     $template->widthclass = 'col-md-6 col-lg-4';
                     break;
@@ -300,7 +305,7 @@ class course_renderer extends \core_course_renderer {
             $template->showheader = (!empty($template->cardimage) || !empty($template->duration));
         }
 
-        if (empty($displayoptions['metadatas'][$mod->id]->overlaycardimage)) {
+        if (empty($moddisplayoptions->overlaycardimage)) {
             $templatename = 'format_topicsactivitycards/coursemodule';
         } else {
             $templatename = 'format_topicsactivitycards/coursemoduleoverlay';

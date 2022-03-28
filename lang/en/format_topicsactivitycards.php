@@ -34,6 +34,7 @@ $string['cardimagedescription'] = 'An image 398px by 174px';
 $string['normalwidth'] = 'Normal';
 $string['doublewidth'] = 'Double width';
 $string['fullwidth'] = 'Full width';
+$string['cleanandtruncatedescription'] = 'Clean and truncate description';
 $string['renderwidth'] = 'Width';
 $string['overlaycardimage'] = 'Overlay card image';
 $string['sectionlayout'] = 'Section layout';
