@@ -31,6 +31,7 @@ class metadata extends \core\persistent {
     const RENDERWIDTH_NORMAL = 10;
     const RENDERWIDTH_DOUBLE = 20;
     const RENDERWIDTH_FULL = 30;
+    const RENDERWIDTH_TWOTHIRD = 40;
 
     /**
      * Return the definition of the properties of this model.
