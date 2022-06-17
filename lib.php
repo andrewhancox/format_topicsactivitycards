@@ -24,7 +24,6 @@
  */
 
 use format_topicsactivitycards\metadata;
-use local_commerce\product;
 
 defined('MOODLE_INTERNAL') || die();
 require_once($CFG->dirroot . '/course/format/topics/lib.php');
@@ -134,6 +133,8 @@ function format_topicsactivitycards_cardbackgroundimage_filemanageroptions() {
  * @param MoodleQuickForm $form The actual form object (required to modify the form).
  */
 function format_topicsactivitycards_coursemodule_standard_elements($formwrapper, $form) {
+    global $SITE;
+
     if ($formwrapper->get_course()->format !== 'topicsactivitycards') {
         return;
     }
@@ -178,13 +179,30 @@ function format_topicsactivitycards_coursemodule_standard_elements($formwrapper,
             'cardbackgroundimage',
             0);
 
+    $editoroptions = ['maxfiles' => EDITOR_UNLIMITED_FILES,
+        'maxbytes' => $SITE->maxbytes, 'context' => $formwrapper->get_context()];
+    $form->addElement('editor', 'activitydescription_editor', get_string('activitydescription', 'format_topicsactivitycards'), null, $editoroptions);
+    $form->setType('activitydescription_editor', PARAM_CLEANHTML);
+
+    $values = file_prepare_standard_editor($values, 'activitydescription', $editoroptions, $formwrapper->get_context(), 'format_topicsactivitycards', 'activitydescription',
+        0);
+
     $form->setDefaults((array)$values);
 }
 
 function format_topicsactivitycards_coursemodule_edit_post_actions($data, $course) {
+    global $SITE;
+
     if ($course->format !== 'topicsactivitycards') {
         return $data;
     }
+
+    $context = context_module::instance($data->coursemodule);
+
+    $editoroptions = ['maxfiles' => EDITOR_UNLIMITED_FILES,
+        'maxbytes' => $SITE->maxbytes, 'context' => $context];
+    $data = file_postupdate_standard_editor($data, 'activitydescription', $editoroptions, $context, 'format_topicsactivitycards',
+        'activitydescription', 0);
 
     $metadata = metadata::get_record(['cmid' => $data->coursemodule]);
 
@@ -197,18 +215,19 @@ function format_topicsactivitycards_coursemodule_edit_post_actions($data, $cours
     $metadata->set('renderwidth', $data->renderwidth);
     $metadata->set('cleanandtruncatedescription', $data->cleanandtruncatedescription);
     $metadata->set('overlaycardimage', $data->overlaycardimage);
+    $metadata->set('activitydescription', $data->activitydescription);
+    $metadata->set('activitydescriptionformat', $data->activitydescriptionformat);
 
     if (empty($metadata->get('id'))) {
         $metadata->save();
     } else {
         $metadata->update();
     }
-
     file_postupdate_standard_filemanager(
             $data,
             'cardbackgroundimage',
             format_topicsactivitycards_cardbackgroundimage_filemanageroptions(),
-            context_module::instance($data->coursemodule),
+            $context,
             'format_topicsactivitycards',
             'cardbackgroundimage',
             0);

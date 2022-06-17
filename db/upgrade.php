@@ -96,5 +96,21 @@ function xmldb_format_topicsactivitycards_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2020061543, 'format', 'topicsactivitycards');
     }
 
+    if ($oldversion < 2020061544) {
+        $table = new xmldb_table('topicsactivitycards_metadata');
+
+        $fields = [
+            new xmldb_field('activitydescription', XMLDB_TYPE_TEXT, null, null, null, null, null),
+            new xmldb_field('activitydescriptionformat', XMLDB_TYPE_INTEGER, '10', null, null, null, 1)
+        ];
+
+        foreach ($fields as $field) {
+            if (!$dbman->field_exists($table, $field)) {
+                $dbman->add_field($table, $field);
+            }
+        }
+        upgrade_plugin_savepoint(true, 2020061544, 'format', 'topicsactivitycards');
+    }
+
     return true;
 }

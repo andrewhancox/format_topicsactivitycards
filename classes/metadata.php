@@ -59,7 +59,18 @@ class metadata extends \core\persistent {
                 'cmid'   => array(
                         'type'        => PARAM_INT,
                         'description' => 'duration',
-                )
+                ),
+                'activitydescription' => array(
+                    'type' => PARAM_RAW,
+                    'description' => 'The product description.',
+                    'null' => NULL_ALLOWED,
+                    'default' => '',
+                ),
+                'activitydescriptionformat' => array(
+                    'choices' => array(FORMAT_HTML, FORMAT_MOODLE, FORMAT_PLAIN, FORMAT_MARKDOWN),
+                    'type' => PARAM_INT,
+                    'default' => FORMAT_HTML
+                ),
         );
     }
 }

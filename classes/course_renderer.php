@@ -235,10 +235,24 @@ class course_renderer extends \core_course_renderer {
             $moddisplayoptions = $displayoptions['metadatas'][$mod->id];
         }
 
-        $template->text = $mod->get_formatted_content(array('overflowdiv' => false, 'noclean' => true));
-        // For none label activities, strip html from the description.
-        if (!empty($moddisplayoptions->cleanandtruncatedescription)) {//width!
-            $template->text = shorten_text(strip_tags($template->text), 1000);
+        if (empty($moddisplayoptions->activitydescription)) {
+            $template->text = $mod->get_formatted_content(array('overflowdiv' => false, 'noclean' => true));
+            // For none label activities, strip html from the description.
+            if (!empty($moddisplayoptions->cleanandtruncatedescription)) {//width!
+                $template->text = shorten_text(strip_tags($template->text), 1000);
+            }
+        } else {
+
+            $template->text = file_rewrite_pluginfile_urls(
+                $moddisplayoptions->activitydescription,
+                'pluginfile.php',
+                $mod->context->id,
+                'format_topicsactivitycards',
+                'activitydescription',
+                0
+            );
+
+            $template->text = format_text($template->text, $moddisplayoptions->activitydescriptionformat);
         }
 
         $template->completion = $this->course_section_cm_completion($course, $completioninfo, $mod, $displayoptions);
