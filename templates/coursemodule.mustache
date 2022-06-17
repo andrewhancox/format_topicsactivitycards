@@ -14,7 +14,12 @@
             {{#cmlink}}
             <a class="tac-card-img-link b-block" href="{{cmlink}}" {{#onclick}} onclick="{{{onclick}}}" {{/onclick}} title="{{name}}">
             {{/cmlink}}
+            {{#cardimage}}
                 <div class="tac-card-img rounded-top {{^cardimage}} bg-light {{/cardimage}}" style="background-image: url('{{{cardimage}}}');">
+            {{/cardimage}}
+            {{^cardimage}}
+                <div>
+            {{/cardimage}}
                     {{#duration}}
                         <div class="tac-card-duration text-right p-2">
                             <div class="tac-card-duration-circle bg-primary text-white border shadow rounded-circle p-3 d-inline-flex justify-content-center align-items-center flex-column">
