@@ -291,11 +291,17 @@ class course_renderer extends \core_course_renderer {
                 case metadata::RENDERWIDTH_NORMAL:
                     $template->widthclass = 'col-md-6 col-lg-4';
                     break;
+                case metadata::RENDERWIDTH_QUARTER:
+                    $template->widthclass = 'col-sm-6 col-md-3';
+                    break;
                 case metadata::RENDERWIDTH_DOUBLE:
                     $template->widthclass = 'col-md-6';
                     break;
                 case metadata::RENDERWIDTH_TWOTHIRD:
                     $template->widthclass = 'col-md-6 col-lg-8';
+                    break;
+                case metadata::RENDERWIDTH_THREEQUARTER:
+                    $template->widthclass = 'col-md-9 col-lg-9';
                     break;
                 case metadata::RENDERWIDTH_FULL:
                     $template->widthclass = '';
