@@ -165,6 +165,8 @@ function format_topicsactivitycards_coursemodule_standard_elements($formwrapper,
     ];
     $form->addElement('select', 'renderwidth', get_string('renderwidth', 'format_topicsactivitycards'), $widthoptions);
 
+    $form->addElement('text', 'additionalcssclasses', get_string('additionalcssclasses', 'format_topicsactivitycards'));
+
     $form->addElement('advcheckbox', 'overlaycardimage', '', get_string('overlaycardimage', 'format_topicsactivitycards'));
 
     $form->addElement('advcheckbox', 'cleanandtruncatedescription', '', get_string('cleanandtruncatedescription', 'format_topicsactivitycards'));
@@ -219,6 +221,7 @@ function format_topicsactivitycards_coursemodule_edit_post_actions($data, $cours
     $metadata->set('overlaycardimage', $data->overlaycardimage);
     $metadata->set('activitydescription', $data->activitydescription);
     $metadata->set('activitydescriptionformat', $data->activitydescriptionformat);
+    $metadata->set('additionalcssclasses', $data->additionalcssclasses);
 
     if (empty($metadata->get('id'))) {
         $metadata->save();
@@ -235,6 +238,20 @@ function format_topicsactivitycards_coursemodule_edit_post_actions($data, $cours
             0);
 
     return $data;
+}
+
+function format_topicsactivitycards_coursemodule_validation($form, $data) {
+    $errors = [];
+
+    if (!empty($data['additionalcssclasses'])) {
+        foreach (explode(' ', $data['additionalcssclasses']) as $class) {
+            if (empty(preg_match('/^-?[_a-zA-Z]+[_a-zA-Z0-9-]*$/', $class))) {
+                $errors['additionalcssclasses'] = get_string('invalidcss', 'format_topicsactivitycards');
+            }
+        }
+    }
+
+    return $errors;
 }
 
 function format_topicsactivitycards_pluginfile($course, $cm, context $context, $filearea, $args, $forcedownload) {

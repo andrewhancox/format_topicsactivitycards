@@ -6,7 +6,7 @@
     {{! Card. }}
     <div class="tac-card m-2 p-0 rounded shadow h-100 d-flex flex-column bg-white
             {{! Add class if card is a link, and we are not editing. }}
-            {{#cmlink}} {{^editing}} tac-card-link {{/editing}} {{/cmlink}}">
+            {{#cmlink}} {{^editing}} tac-card-link {{/editing}} {{/cmlink}} {{{additionalcssclasses}}}">
         {{! Used by moodle js. }}
         <span class="sr-only">{{mod.modname}} {{name}}</span>
         {{! Card header. }}
