@@ -235,7 +235,6 @@ class course_renderer extends \core_course_renderer {
             $moddisplayoptions = $displayoptions['metadatas'][$mod->id];
         }
 
-        $template->additionalcssclasses = $moddisplayoptions->additionalcssclasses;
 
         if (empty($moddisplayoptions->activitydescription)) {
             $template->text = $mod->get_formatted_content(array('overflowdiv' => false, 'noclean' => true));
@@ -270,6 +269,7 @@ class course_renderer extends \core_course_renderer {
         }
 
         if (!empty($moddisplayoptions)) {
+            $template->additionalcssclasses = $moddisplayoptions->additionalcssclasses;
 
             $class = 'tac-time-unit small';
             $str = new stdClass();
