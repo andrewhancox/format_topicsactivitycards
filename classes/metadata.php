@@ -73,6 +73,17 @@ class metadata extends \core\persistent {
                     'type' => PARAM_INT,
                     'default' => FORMAT_HTML
                 ),
+                'cardfooter' => array(
+                    'type' => PARAM_RAW,
+                    'description' => 'The product description.',
+                    'null' => NULL_ALLOWED,
+                    'default' => '',
+                ),
+                'cardfooterformat' => array(
+                    'choices' => array(FORMAT_HTML, FORMAT_MOODLE, FORMAT_PLAIN, FORMAT_MARKDOWN),
+                    'type' => PARAM_INT,
+                    'default' => FORMAT_HTML
+                ),
                 'additionalcssclasses' => array(
                     'type' => PARAM_TEXT,
                 ),

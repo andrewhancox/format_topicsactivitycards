@@ -224,6 +224,12 @@ function format_topicsactivitycards_coursemodule_standard_elements($formwrapper,
     $values = file_prepare_standard_editor($values, 'activitydescription', $editoroptions, $formwrapper->get_context(), 'format_topicsactivitycards', 'activitydescription',
         0);
 
+    $form->addElement('editor', 'cardfooter_editor', get_string('cardfooter', 'format_topicsactivitycards'), null, $editoroptions);
+    $form->setType('cardfooter_editor', PARAM_CLEANHTML);
+
+    $values = file_prepare_standard_editor($values, 'cardfooter', $editoroptions, $formwrapper->get_context(), 'format_topicsactivitycards', 'cardfooter',
+        0);
+
     $form->setDefaults((array)$values);
 }
 
@@ -240,6 +246,8 @@ function format_topicsactivitycards_coursemodule_edit_post_actions($data, $cours
         'maxbytes' => $SITE->maxbytes, 'context' => $context];
     $data = file_postupdate_standard_editor($data, 'activitydescription', $editoroptions, $context, 'format_topicsactivitycards',
         'activitydescription', 0);
+    $data = file_postupdate_standard_editor($data, 'cardfooter', $editoroptions, $context, 'format_topicsactivitycards',
+        'cardfooter', 0);
 
     $metadata = metadata::get_record(['cmid' => $data->coursemodule]);
 
@@ -254,6 +262,8 @@ function format_topicsactivitycards_coursemodule_edit_post_actions($data, $cours
     $metadata->set('overlaycardimage', $data->overlaycardimage);
     $metadata->set('activitydescription', $data->activitydescription);
     $metadata->set('activitydescriptionformat', $data->activitydescriptionformat);
+    $metadata->set('cardfooter', $data->cardfooter);
+    $metadata->set('cardfooterformat', $data->cardfooterformat);
     $metadata->set('additionalcssclasses', $data->additionalcssclasses);
 
     if (empty($metadata->get('id'))) {

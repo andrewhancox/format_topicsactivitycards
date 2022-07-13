@@ -271,6 +271,19 @@ class course_renderer extends \core_course_renderer {
             $template->text = format_text($template->text, $moddisplayoptions->activitydescriptionformat);
         }
 
+        if (!empty($moddisplayoptions->cardfooter)) {
+            $template->cardfooter = file_rewrite_pluginfile_urls(
+                $moddisplayoptions->cardfooter,
+                'pluginfile.php',
+                $mod->context->id,
+                'format_topicsactivitycards',
+                'cardfooter',
+                0
+            );
+
+            $template->cardfooter = format_text($template->cardfooter, $moddisplayoptions->cardfooterformat);
+        }
+
         $template->completion = $this->course_section_cm_completion($course, $completioninfo, $mod, $displayoptions);
         $template->cmname = $this->course_section_cm_name($mod, $displayoptions);
         $template->editing = $PAGE->user_is_editing();
