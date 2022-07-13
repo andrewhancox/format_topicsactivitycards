@@ -32,6 +32,39 @@ class format_topicsactivitycards extends format_topics {
     public const SECTIONLAYOUT_CARDS = 10;
     public const SECTIONLAYOUT_LIST = 20;
 
+    public function course_format_options($foreditform = false) {
+        static $courseformatoptionsforedit = false;
+        static $courseformatoptions = false;
+
+        if ($foreditform ) {
+            if ($courseformatoptionsforedit === false) {
+                $courseformatoptionsforedit = parent::course_format_options(true);
+
+                $courseconfig = get_config('moodlecourse');
+                $courseformatoptionsforedit['collapsible'] = array(
+                    'default' => !empty($courseconfig->collapsible),
+                    'type' => PARAM_BOOL,
+                    'label' => new lang_string('collapsible', 'format_topicsactivitycards'),
+                    'element_type' => 'advcheckbox'
+                );
+            }
+
+            return $courseformatoptionsforedit;
+        } else {
+            if ($courseformatoptions === false) {
+                $courseformatoptions = parent::course_format_options(false);
+
+                $courseconfig = get_config('moodlecourse');
+                $courseformatoptions['collapsible'] = array(
+                    'default' => !empty($courseconfig->collapsible),
+                    'type' => PARAM_BOOL,
+                );
+            }
+
+            return $courseformatoptions;
+        }
+    }
+
     public function section_format_options($foreditform = false) {
         $retval = parent::section_format_options($foreditform);
 

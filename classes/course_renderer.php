@@ -64,7 +64,7 @@ class course_renderer extends \core_course_renderer {
      * @return String
      */
     public function course_section_cm_list($course, $section, $sectionreturn = null, $displayoptions = array()) {
-        global $USER, $DB;
+        global $USER, $DB, $PAGE;
 
         $displayoptions['metadatas'] = [];
         $displayoptions['cardimages'] = [];
@@ -132,8 +132,23 @@ class course_renderer extends \core_course_renderer {
             }
         }
 
+        $classes = '';
+        if (!empty($course->collapsible) && $section->section != 0) {
+            $classes .= ' collapse';
+            $preferencename = "format-topicsactivitycards-card-section-open_$section->id";
+            user_preference_allow_ajax_update($preferencename, PARAM_BOOL);
+
+            if (!empty(get_user_preferences($preferencename))) {
+                $classes .= ' show';
+            }
+            $PAGE->requires->js_call_amd('format_topicsactivitycards/collapse', 'init', [
+                'sectionid' => $section->section,
+                'preferencename' => $preferencename
+            ]);
+        }
+
         $sectionoutput = '';
-        $sectionoutput .= '<ul class="row format-topicsactivitycards-card-section img-text section" data-draggroups="resource">';
+        $sectionoutput .= '<ul class="row format-topicsactivitycards-card-section img-text section ' . $classes . ' " data-draggroups="resource">';
         if (!empty($moduleshtml) || $ismoving) {
             foreach ($moduleshtml as $modnumber => $modulehtml) {
                 if ($ismoving) {

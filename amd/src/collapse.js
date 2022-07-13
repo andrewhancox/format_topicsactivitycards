@@ -1,4 +1,6 @@
-<?php
+//M.util.set_user_preference(preference, 'false');
+
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -15,7 +17,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * @package format_topicsactivitycards
+ * @package local_atmention
  * @author Andrew Hancox <andrewdchancox@googlemail.com>
  * @author Open Source Learning <enquiries@opensourcelearning.co.uk>
  * @link https://opensourcelearning.co.uk
@@ -23,8 +25,20 @@
  * @copyright 2021, Andrew Hancox
  */
 
-defined('MOODLE_INTERNAL') || die();
+define(['jquery'], function ($) {
+    return {
+        'init': function (sectionid, preferencename) {
+            $('li#section-' + sectionid + ' h3').click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
 
-$plugin->version = 2020061548;        // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires = 2020060900;        // Requires this Moodle version.
-$plugin->component = 'format_topicsactivitycards';    // Full name of the plugin (used for diagnostics).
+                M.util.set_user_preference(
+                    preferencename,
+                    !$('li#section-' + sectionid + ' .format-topicsactivitycards-card-section').hasClass('show')
+                );
+
+                $('li#section-' + sectionid + ' .format-topicsactivitycards-card-section').collapse('toggle');
+            });
+        },
+    };
+});

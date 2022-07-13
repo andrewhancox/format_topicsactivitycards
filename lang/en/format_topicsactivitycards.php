@@ -46,4 +46,4 @@ $string['sectionlayout'] = 'Section layout';
 $string['sectionlayout_cards'] = 'Cards';
 $string['sectionlayout_list'] = 'List';
 $string['activitydescription'] = 'Override activity description';
-
+$string['collapsible'] = 'Collapsible sections';
