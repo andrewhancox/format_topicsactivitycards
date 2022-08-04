@@ -199,6 +199,7 @@ function format_topicsactivitycards_coursemodule_standard_elements($formwrapper,
     $form->addElement('select', 'renderwidth', get_string('renderwidth', 'format_topicsactivitycards'), $widthoptions);
 
     $form->addElement('text', 'additionalcssclasses', get_string('additionalcssclasses', 'format_topicsactivitycards'));
+    $form->setType('additionalcssclasses', PARAM_TEXT);
 
     $form->addElement('advcheckbox', 'overlaycardimage', '', get_string('overlaycardimage', 'format_topicsactivitycards'));
 
