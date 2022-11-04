@@ -140,5 +140,20 @@ function xmldb_format_topicsactivitycards_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2020061549, 'format', 'topicsactivitycards');
     }
 
+    if ($oldversion < 2020061550) {
+        foreach ([
+                     'update {topicsactivitycards_metadata} set renderwidth = 4 where renderwidth = 10',
+                     'update {topicsactivitycards_metadata} set renderwidth = 6 where renderwidth = 20',
+                     'update {topicsactivitycards_metadata} set renderwidth = 12  where renderwidth = 30',
+                     'update {topicsactivitycards_metadata} set renderwidth = 8 where renderwidth = 40',
+                     'update {topicsactivitycards_metadata} set renderwidth = 3 where renderwidth = 50',
+                     'update {topicsactivitycards_metadata} set renderwidth = 9 where renderwidth = 60'
+                 ] as $sql) {
+            $DB->execute($sql);
+        }
+
+        upgrade_plugin_savepoint(true, 2020061550, 'format', 'topicsactivitycards');
+    }
+
     return true;
 }

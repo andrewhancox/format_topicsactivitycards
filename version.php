@@ -25,6 +25,6 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2020061549;        // The current plugin version (Date: YYYYMMDDXX).
+$plugin->version = 2020061550;        // The current plugin version (Date: YYYYMMDDXX).
 $plugin->requires = 2020060900;        // Requires this Moodle version.
 $plugin->component = 'format_topicsactivitycards';    // Full name of the plugin (used for diagnostics).

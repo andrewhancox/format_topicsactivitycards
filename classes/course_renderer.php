@@ -316,34 +316,9 @@ class course_renderer extends \core_course_renderer {
             if (!empty($totalsecs)) {
                 $template->duration = format_time($totalsecs, $str);
             }
-
-            switch ($moddisplayoptions->renderwidth) {
-                case metadata::RENDERWIDTH_NORMAL:
-                    $template->widthclass = 'col-md-6 col-lg-4';
-                    break;
-                case metadata::RENDERWIDTH_QUARTER:
-                    $template->widthclass = 'col-sm-6 col-md-3';
-                    break;
-                case metadata::RENDERWIDTH_DOUBLE:
-                    $template->widthclass = 'col-md-6';
-                    break;
-                case metadata::RENDERWIDTH_TWOTHIRD:
-                    $template->widthclass = 'col-md-6 col-lg-8';
-                    break;
-                case metadata::RENDERWIDTH_THREEQUARTER:
-                    $template->widthclass = 'col-md-9 col-lg-9';
-                    break;
-                case metadata::RENDERWIDTH_FULL:
-                    $template->widthclass = '';
-                    break;
-                default:
-                    $template->widthclass = 'col-md-6 col-lg-4';
-                    break;
-
-            }
-        } else {
-            $template->widthclass = 'col-md-6 col-lg-4';
         }
+        $renderwidth = $moddisplayoptions->renderwidth ?? 4;
+        $template->widthclass = "col-12 col-sm-6 col-md-$renderwidth col-xl-4";
 
         if (!empty($displayoptions['cardimages'][$mod->context->id])) {
             $template->cardimage = $displayoptions['cardimages'][$mod->context->id];

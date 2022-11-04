@@ -188,15 +188,11 @@ function format_topicsactivitycards_coursemodule_standard_elements($formwrapper,
     $form->setDefault('duration', 0);
     $form->setType('duration', PARAM_INT);
 
-    $widthoptions = [
-            metadata::RENDERWIDTH_NORMAL => get_string('normalwidth', 'format_topicsactivitycards'),
-            metadata::RENDERWIDTH_QUARTER => get_string('quarrterwidth', 'format_topicsactivitycards'),
-            metadata::RENDERWIDTH_DOUBLE => get_string('doublewidth', 'format_topicsactivitycards'),
-            metadata::RENDERWIDTH_TWOTHIRD   => get_string('twothirdwidth', 'format_topicsactivitycards'),
-            metadata::RENDERWIDTH_THREEQUARTER   => get_string('threequarterwidth', 'format_topicsactivitycards'),
-            metadata::RENDERWIDTH_FULL   => get_string('fullwidth', 'format_topicsactivitycards')
-    ];
-    $form->addElement('select', 'renderwidth', get_string('renderwidth', 'format_topicsactivitycards'), $widthoptions);
+    $options = range(1, 12);
+    $options = array_combine($options, $options);
+    $form->addElement('select', 'renderwidth', get_string('renderwidth', 'format_topicsactivitycards'), $options);
+    $form->setType('renderwidth', PARAM_INT);
+    $form->setDefault('renderwidth', 4);
 
     $form->addElement('text', 'additionalcssclasses', get_string('additionalcssclasses', 'format_topicsactivitycards'));
     $form->setType('additionalcssclasses', PARAM_TEXT);
