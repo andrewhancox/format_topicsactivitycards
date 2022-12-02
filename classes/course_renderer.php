@@ -318,7 +318,7 @@ class course_renderer extends \core_course_renderer {
             }
         }
         $renderwidth = $moddisplayoptions->renderwidth ?? 4;
-        $template->widthclass = "col-12 col-sm-6 col-md-$renderwidth col-xl-4";
+        $template->widthclass = "col-12 col-sm-6 col-md-$renderwidth";
 
         if (!empty($displayoptions['cardimages'][$mod->context->id])) {
             $template->cardimage = $displayoptions['cardimages'][$mod->context->id];
