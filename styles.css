@@ -92,3 +92,8 @@
 #page-course-view-topicsactivitycards.editing .section .activity:hover {
     background-color: transparent;
 }
+
+ul.format-topicsactivitycards-card-sectioncards {
+    list-style: none;
+    padding-left: 0;
+}

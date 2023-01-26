@@ -54,4 +54,14 @@ class backup_format_topicsactivitycards_plugin extends backup_format_plugin {
         return $plugin;
     }
 
+    protected function define_course_plugin_structure() {
+        $plugin = $this->get_plugin_element();
+
+        $pluginwrapper = new backup_nested_element($this->get_recommended_name());
+        $pluginwrapper->annotate_files('format_topicsactivitycards', 'sectioncardbackgroundimage', null, $this->task->get_contextid());
+
+        $plugin->add_child($pluginwrapper);
+
+        return $plugin;
+    }
 }

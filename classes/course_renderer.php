@@ -167,8 +167,8 @@ class course_renderer extends \core_course_renderer {
                         html_writer::link($movingurl, $this->output->render($movingpix), array('title' => $strmovefull)),
                         array('class' => 'movehere'));
             }
-            $sectionoutput .= "</ul>";
         }
+        $sectionoutput .= "</ul>";
 
         // Always output the section module list.
         $output .= $sectionoutput;

@@ -39,6 +39,7 @@ $string['overlaycardimage'] = 'Overlay card image';
 $string['sectionlayout'] = 'Section layout';
 $string['sectionlayout_cards'] = 'Cards';
 $string['sectionlayout_list'] = 'List';
+$string['sectionlayout_linkedcard'] = 'Linked card';
 $string['activitydescription'] = 'Override activity description';
 $string['cardfooter'] = 'Card footer';
 $string['collapsible'] = 'Collapsible sections';

@@ -31,6 +31,7 @@ require_once($CFG->dirroot . '/course/format/topics/lib.php');
 class format_topicsactivitycards extends format_topics {
     public const SECTIONLAYOUT_CARDS = 10;
     public const SECTIONLAYOUT_LIST = 20;
+    public const SECTIONLAYOUT_LINKEDCARD = 30;
 
     public function course_format_options($foreditform = false) {
         static $courseformatoptionsforedit = false;
@@ -76,12 +77,85 @@ class format_topicsactivitycards extends format_topics {
                 'element_attributes' => [
                         [
                                 self::SECTIONLAYOUT_CARDS => get_string('sectionlayout_cards', 'format_topicsactivitycards'),
-                                self::SECTIONLAYOUT_LIST  => get_string('sectionlayout_list', 'format_topicsactivitycards')
+                                self::SECTIONLAYOUT_LIST  => get_string('sectionlayout_list', 'format_topicsactivitycards'),
+                                self::SECTIONLAYOUT_LINKEDCARD  => get_string('sectionlayout_linkedcard', 'format_topicsactivitycards'),
                         ]
                 ]
         ];
 
+        $options = range(1, 12);
+        $options = array_combine($options, $options);
+        $retval['renderwidth'] = [
+                'default'            => 4,
+                'type'               => PARAM_INT,
+                'label'              => get_string('renderwidth', 'format_topicsactivitycards'),
+                'element_type'       => 'select',
+                'element_attributes' => [
+                    $options
+                ]
+        ];
+
+        $retval['sectioncardbackgroundimage_filemanager'] = [
+                'default'            => 4,
+                'label'              => get_string('cardimage', 'format_topicsactivitycards'),
+                'element_type'       => 'filemanager',
+                'element_attributes' => [
+                    format_topicsactivitycards_cardbackgroundimage_filemanageroptions()
+                ]
+        ];
+
         return $retval;
+    }
+
+    public function create_edit_form_elements(&$mform, $forsection = false) {
+        $elements = parent::create_edit_form_elements($mform, $forsection);
+
+        if ($forsection) {
+            $values = new stdClass();
+            $values = file_prepare_standard_filemanager($values,
+                'sectioncardbackgroundimage',
+                format_topicsactivitycards_cardbackgroundimage_filemanageroptions(),
+                context_course::instance($this->courseid),
+                'format_topicsactivitycards',
+                'sectioncardbackgroundimage',
+                required_param('id', PARAM_INT));
+
+            $mform->setDefaults((array)$values);
+        }
+
+        return $elements;
+    }
+
+    public function update_section_format_options($data) {
+        file_postupdate_standard_filemanager(
+            (object)$data,
+            'sectioncardbackgroundimage',
+            format_topicsactivitycards_cardbackgroundimage_filemanageroptions(),
+            context_course::instance($this->courseid),
+            'format_topicsactivitycards',
+            'sectioncardbackgroundimage',
+            required_param('id', PARAM_INT));
+
+        return parent::update_section_format_options($data);
+    }
+
+    public function get_view_url($section, $options = array()) {
+        if (is_object($section)){
+            $sectionnum = $section->section;
+        } else {
+            $sectionnum = $section;
+        }
+
+        $url = parent::get_view_url($sectionnum, $options);
+
+        $format_options = $this->get_format_options($sectionnum);
+
+        if (isset($format_options['sectionlayout']) && $format_options['sectionlayout'] == self::SECTIONLAYOUT_LINKEDCARD) {
+            $url->param('section', $sectionnum);
+            $url->set_anchor(null);
+        }
+
+        return $url;
     }
 }
 
