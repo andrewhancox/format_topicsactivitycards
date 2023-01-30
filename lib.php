@@ -67,6 +67,8 @@ class format_topicsactivitycards extends format_topics {
     }
 
     public function section_format_options($foreditform = false) {
+        global $SITE;
+
         $retval = parent::section_format_options($foreditform);
 
         $retval['sectionlayout'] = [
@@ -110,21 +112,45 @@ class format_topicsactivitycards extends format_topics {
             'element_type'       => 'text'
         ];
 
+        $retval['overridesectionsummary_editor'] = [
+            'default'            => '',
+            'type'               => PARAM_CLEANHTML,
+            'label'              => get_string('overridesectionsummary', 'format_topicsactivitycards'),
+            'element_type'       => 'editor',
+            'element_attributes' => [
+                '',
+                $this->texteditoroptions()
+            ]
+        ];
+
         return $retval;
     }
 
     public function create_edit_form_elements(&$mform, $forsection = false) {
+        global $DB;
+
         $elements = parent::create_edit_form_elements($mform, $forsection);
 
         if ($forsection) {
+            $coursecontext = context_course::instance($this->get_courseid());
+
+
+            $sectionid = required_param('id', PARAM_INT);
+            $format_options = $this->get_format_options((int)$DB->get_field('course_sections', 'section', ['id' => $sectionid]));
+
             $values = new stdClass();
             $values = file_prepare_standard_filemanager($values,
                 'sectioncardbackgroundimage',
                 format_topicsactivitycards_cardbackgroundimage_filemanageroptions(),
-                context_course::instance($this->courseid),
+                $coursecontext,
                 'format_topicsactivitycards',
                 'sectioncardbackgroundimage',
-                required_param('id', PARAM_INT));
+                $sectionid);
+
+            $values->overridesectionsummary = $format_options['overridesectionsummary_editor'] ?? '';
+            $values->overridesectionsummaryformat = FORMAT_HTML;
+            $values = file_prepare_standard_editor($values, 'overridesectionsummary', $this->texteditoroptions(), $coursecontext, 'format_topicsactivitycards', 'overridesectionsummary',
+                $sectionid);
 
             $mform->setDefaults((array)$values);
         }
@@ -133,16 +159,28 @@ class format_topicsactivitycards extends format_topics {
     }
 
     public function update_section_format_options($data) {
+        $context = context_course::instance($this->courseid);
+        $sectionid = required_param('id', PARAM_INT);
+
+        $data = (object)$data;
+
         file_postupdate_standard_filemanager(
-            (object)$data,
+            $data,
             'sectioncardbackgroundimage',
             format_topicsactivitycards_cardbackgroundimage_filemanageroptions(),
-            context_course::instance($this->courseid),
+            $context,
             'format_topicsactivitycards',
             'sectioncardbackgroundimage',
-            required_param('id', PARAM_INT));
+            $sectionid);
+        unset($data->sectioncardbackgroundimage_filemanager);
 
-        unset($data['sectioncardbackgroundimage_filemanager']);
+        $data = file_postupdate_standard_editor($data, 'overridesectionsummary', $this->texteditoroptions(), $context, 'format_topicsactivitycards',
+            'overridesectionsummary', $sectionid);
+        $data->overridesectionsummary_editor = $data->overridesectionsummary;
+
+        unset($data->overridesectionsummary);
+        unset($data->overridesectionsummarytrust);
+        unset($data->overridesectionsummaryformat);
 
         return parent::update_section_format_options($data);
     }
@@ -164,6 +202,19 @@ class format_topicsactivitycards extends format_topics {
         }
 
         return $url;
+    }
+
+    /**
+     * @return array
+     */
+    public function texteditoroptions(): array {
+        global $SITE, $CFG;
+
+        require_once("$CFG->dirroot/lib/formslib.php");
+
+        return ['maxfiles' => EDITOR_UNLIMITED_FILES,
+            'maxbytes' => $SITE->maxbytes,
+            'context' => context_course::instance($this->get_courseid())];
     }
 }
 

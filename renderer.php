@@ -85,13 +85,31 @@ class format_topicsactivitycards_renderer extends format_topics_renderer {
             $imageurl = '';
         }
 
+        if (!empty($format_options['overridesectionsummary_editor'])) {
+            $text = file_rewrite_pluginfile_urls(
+                $format_options['overridesectionsummary_editor'],
+                'pluginfile.php',
+                context_course::instance($section->course)->id,
+                'format_topicsactivitycards',
+                'overridesectionsummary',
+                $section->id
+            );
+
+            $options = new stdClass();
+            $options->noclean = true;
+            $options->overflowdiv = true;
+            $text = format_text($text, FORMAT_HTML, $options);
+        } else {
+            $text = $this->format_summary_text($section);
+        }
+
         $model = [
             'sectionid' => $section->id,
             'widthclass' => "col-12 col-sm-6 col-md-$renderwidth",
             'uservisible' => $section->uservisible,
             'additionalcssclasses' => $format_options['additionalcssclasses'] ?? '',
             'name' => $this->section_title($section, $course),
-            'text' => $this->format_summary_text($section),
+            'text' => $text,
             'sectionlink' => $section->uservisible ? $sectionurl->out(false) : '',
             'cardimage' => $imageurl,
             'availability' => $this->section_availability($section),
