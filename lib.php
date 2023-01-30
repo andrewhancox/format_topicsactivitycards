@@ -96,7 +96,6 @@ class format_topicsactivitycards extends format_topics {
         ];
 
         $retval['sectioncardbackgroundimage_filemanager'] = [
-                'default'            => 4,
                 'label'              => get_string('cardimage', 'format_topicsactivitycards'),
                 'element_type'       => 'filemanager',
                 'element_attributes' => [
@@ -135,6 +134,8 @@ class format_topicsactivitycards extends format_topics {
             'format_topicsactivitycards',
             'sectioncardbackgroundimage',
             required_param('id', PARAM_INT));
+
+        unset($data['sectioncardbackgroundimage_filemanager']);
 
         return parent::update_section_format_options($data);
     }
