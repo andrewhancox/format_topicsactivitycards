@@ -103,6 +103,13 @@ class format_topicsactivitycards extends format_topics {
                 ]
         ];
 
+        $retval['additionalcssclasses'] = [
+            'default'            => '',
+            'type'               => PARAM_TEXT,
+            'label'              => get_string('additionalcssclasses', 'format_topicsactivitycards'),
+            'element_type'       => 'text'
+        ];
+
         return $retval;
     }
 

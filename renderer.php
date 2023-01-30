@@ -89,7 +89,7 @@ class format_topicsactivitycards_renderer extends format_topics_renderer {
             'sectionid' => $section->id,
             'widthclass' => "col-12 col-sm-6 col-md-$renderwidth",
             'uservisible' => $section->uservisible,
-            'additionalcssclasses' => '',
+            'additionalcssclasses' => $format_options['additionalcssclasses'] ?? '',
             'name' => $this->section_title($section, $course),
             'text' => $this->format_summary_text($section),
             'sectionlink' => $section->uservisible ? $sectionurl->out(false) : '',
