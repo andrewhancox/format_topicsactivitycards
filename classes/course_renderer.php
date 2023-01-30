@@ -317,8 +317,11 @@ class course_renderer extends \core_course_renderer {
                 $template->duration = format_time($totalsecs, $str);
             }
         }
-        $renderwidth = $moddisplayoptions->renderwidth ?? 4;
-        $template->widthclass = "col-12 col-sm-6 col-md-$renderwidth";
+
+        $renderwidth = $moddisplayoptions->renderwidth ?? 3;
+        $renderwidthsm = $renderwidth * 2 > 12 ? 12 : $renderwidth * 2;
+        $renderwidthxs = $renderwidth * 4 > 12 ? 12 : $renderwidth * 4;
+        $template->widthclass = "col-$renderwidthxs col-sm-$renderwidthsm col-md-$renderwidth";
 
         if (!empty($displayoptions['cardimages'][$mod->context->id])) {
             $template->cardimage = $displayoptions['cardimages'][$mod->context->id];
