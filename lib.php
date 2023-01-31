@@ -31,7 +31,9 @@ require_once($CFG->dirroot . '/course/format/topics/lib.php');
 class format_topicsactivitycards extends format_topics {
     public const SECTIONLAYOUT_CARDS = 10;
     public const SECTIONLAYOUT_LIST = 20;
-    public const SECTIONLAYOUT_LINKEDCARD = 30;
+
+    public const SECTIONHEADING_HEADER = 10;
+    public const SECTIONHEADING_LINKEDCARD = 20;
 
     public function course_format_options($foreditform = false) {
         static $courseformatoptionsforedit = false;
@@ -67,9 +69,20 @@ class format_topicsactivitycards extends format_topics {
     }
 
     public function section_format_options($foreditform = false) {
-        global $SITE;
-
         $retval = parent::section_format_options($foreditform);
+
+        $retval['sectionheading'] = [
+                'default'            => self::SECTIONHEADING_HEADER,
+                'type'               => PARAM_TEXT,
+                'label'              => get_string('sectionheading', 'format_topicsactivitycards'),
+                'element_type'       => 'select',
+                'element_attributes' => [
+                        [
+                                self::SECTIONHEADING_HEADER => get_string('sectionheading_header', 'format_topicsactivitycards'),
+                                self::SECTIONHEADING_LINKEDCARD  => get_string('sectionheading_linkedcard', 'format_topicsactivitycards'),
+                        ]
+                ]
+        ];
 
         $retval['sectionlayout'] = [
                 'default'            => 0,
@@ -80,7 +93,6 @@ class format_topicsactivitycards extends format_topics {
                         [
                                 self::SECTIONLAYOUT_CARDS => get_string('sectionlayout_cards', 'format_topicsactivitycards'),
                                 self::SECTIONLAYOUT_LIST  => get_string('sectionlayout_list', 'format_topicsactivitycards'),
-                                self::SECTIONLAYOUT_LINKEDCARD  => get_string('sectionlayout_linkedcard', 'format_topicsactivitycards'),
                         ]
                 ]
         ];
@@ -194,11 +206,13 @@ class format_topicsactivitycards extends format_topics {
 
         $url = parent::get_view_url($sectionnum, $options);
 
-        $format_options = $this->get_format_options($sectionnum);
+        if (isset($url)) {
+            $format_options = $this->get_format_options($sectionnum);
 
-        if (isset($format_options['sectionlayout']) && $format_options['sectionlayout'] == self::SECTIONLAYOUT_LINKEDCARD) {
-            $url->param('section', $sectionnum);
-            $url->set_anchor(null);
+            if (isset($format_options['sectionheading']) && $format_options['sectionheading'] == self::SECTIONHEADING_LINKEDCARD) {
+                $url->param('section', $sectionnum);
+                $url->set_anchor(null);
+            }
         }
 
         return $url;

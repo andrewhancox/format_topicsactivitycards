@@ -46,8 +46,8 @@ class format_topicsactivitycards_renderer extends format_topics_renderer {
     protected function section_header($section, $course, $onsectionpage, $sectionreturn=null) {
         $format = course_get_format($course);
         $format_options = $format->get_format_options((int)$section->section);
-        $this->sectionlayoutinprogress = $format_options['sectionlayout'];
-        if ($this->page->user_is_editing() || $this->sectionlayoutinprogress != format_topicsactivitycards::SECTIONLAYOUT_LINKEDCARD || $section->section == $sectionreturn) {
+        $this->sectionlayoutinprogress = $format_options['sectionheading'];
+        if ($this->page->user_is_editing() || $this->sectionlayoutinprogress == format_topicsactivitycards::SECTIONHEADING_HEADER || $section->section == $sectionreturn) {
             $sectionoutput = '';
 
             if ($this->sectioncardsopen) {
@@ -121,7 +121,7 @@ class format_topicsactivitycards_renderer extends format_topics_renderer {
     }
 
     protected function section_footer() {
-        if ($this->sectionlayoutinprogress != format_topicsactivitycards::SECTIONLAYOUT_LINKEDCARD) {
+        if ($this->sectionlayoutinprogress == format_topicsactivitycards::SECTIONHEADING_HEADER) {
             $footer = parent::section_footer();
         } else {
             $footer = "";
