@@ -172,27 +172,29 @@ class format_topicsactivitycards extends format_topics {
 
     public function update_section_format_options($data) {
         $context = context_course::instance($this->courseid);
-        $sectionid = required_param('id', PARAM_INT);
-
         $data = (object)$data;
 
-        file_postupdate_standard_filemanager(
-            $data,
-            'sectioncardbackgroundimage',
-            format_topicsactivitycards_cardbackgroundimage_filemanageroptions(),
-            $context,
-            'format_topicsactivitycards',
-            'sectioncardbackgroundimage',
-            $sectionid);
-        unset($data->sectioncardbackgroundimage_filemanager);
+        if (isset($data->sectioncardbackgroundimage_filemanager)) {
+            file_postupdate_standard_filemanager(
+                $data,
+                'sectioncardbackgroundimage',
+                format_topicsactivitycards_cardbackgroundimage_filemanageroptions(),
+                $context,
+                'format_topicsactivitycards',
+                'sectioncardbackgroundimage',
+                $data->id);
+            unset($data->sectioncardbackgroundimage_filemanager);
+        }
 
-        $data = file_postupdate_standard_editor($data, 'overridesectionsummary', $this->texteditoroptions(), $context, 'format_topicsactivitycards',
-            'overridesectionsummary', $sectionid);
-        $data->overridesectionsummary_editor = $data->overridesectionsummary;
+        if (isset($data->overridesectionsummary_editor)) {
+            $data = file_postupdate_standard_editor($data, 'overridesectionsummary', $this->texteditoroptions(), $context, 'format_topicsactivitycards',
+                'overridesectionsummary', $data->id);
+            $data->overridesectionsummary_editor = $data->overridesectionsummary;
 
-        unset($data->overridesectionsummary);
-        unset($data->overridesectionsummarytrust);
-        unset($data->overridesectionsummaryformat);
+            unset($data->overridesectionsummary);
+            unset($data->overridesectionsummarytrust);
+            unset($data->overridesectionsummaryformat);
+        }
 
         return parent::update_section_format_options($data);
     }
