@@ -1,0 +1,103 @@
+<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * @package format_topicsactivitycards
+ * @author Andrew Hancox <andrewdchancox@googlemail.com>
+ * @author Open Source Learning <enquiries@opensourcelearning.co.uk>
+ * @link https://opensourcelearning.co.uk
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @copyright 2021, Andrew Hancox
+ */
+
+namespace format_topicsactivitycards\output\courseformat\content;
+
+use core_courseformat\output\local\content\section as section_base;
+use renderer_base;
+use stdClass;
+
+class section extends section_base {
+
+    public function export_for_template(\renderer_base $output): \stdClass {
+        $model = parent::export_for_template($output);
+        $format = $this->format;
+        $section = $this->section;
+
+        $sectionoptions = $this->format->get_format_options($this->section);
+        if ($format->show_editor() || !isset($sectionoptions['sectionheading']) || $sectionoptions['sectionheading'] != \format_topicsactivitycards::SECTIONHEADING_LINKEDCARD) {
+            return $model;
+        }
+
+        if ($section->section != $format->get_section_number()) {
+            $model->widthclass = $this->format->normalise_render_width($sectionoptions->renderwidth ?? null);
+        }
+
+        return $model;
+    }
+
+    protected function add_cm_data(stdClass &$data, renderer_base $output): bool {
+        $sectionoptions = $this->format->get_format_options($this->section);
+        $section = $this->section;
+        $format = $this->format;
+
+        if ($format->show_editor() || !isset($sectionoptions['sectionheading']) || $sectionoptions['sectionheading'] != \format_topicsactivitycards::SECTIONHEADING_LINKEDCARD) {
+            return parent::add_cm_data($data, $output);
+        }
+
+        $result = false;
+
+
+        $showsummary = ($section->section != 0 && $section->section != $format->get_section_number());
+
+        $showcmlist = $section->uservisible;
+
+        // Add activities summary if necessary.
+        if ($showsummary) {
+            $cmsummary = new $this->cmsummaryclass($format, $section);
+            $data->cmsummary = $cmsummary->export_for_template($output);
+            $data->onlysummary = true;
+            $result = true;
+
+            if (!$format->is_section_current($section)) {
+                // In multipage, only the current section (and the section zero) has elements.
+                $showcmlist = false;
+            }
+        }
+        // Add the cm list.
+        if ($showcmlist) {
+            $cmlist = new $this->cmlistclass($format, $section);
+            $data->cmlist = $cmlist->export_for_template($output);
+            $result = true;
+        }
+        return $result;
+    }
+
+    /**
+     * Returns the output class template path.
+     *
+     * This method redirects the default template when the course section is rendered.
+     */
+    public function get_template_name(\renderer_base $renderer): string {
+        $format = $this->format;
+        $sectionoptions = $this->format->get_format_options($this->section);
+
+        if ($format->show_editor() || isset($sectionoptions['sectionheading']) && $sectionoptions['sectionheading'] == \format_topicsactivitycards::SECTIONHEADING_LINKEDCARD) {
+            return 'format_topicsactivitycards/local/content/section';
+        } else {
+            return parent::get_template_name($renderer);
+        }
+    }
+}

@@ -1,0 +1,18 @@
+.tac-card,
+.tac-container {
+    transition: all .5s;
+}
+
+.tac-container .activity-basis .align-self-start.flex-md-row {
+    flex-direction: column!important;
+}
+
+li.section.tac-container {
+    border: none;
+}
+
+li.section.tac-container .section-inner-wrapper {
+    border-radius: .5rem;
+    border: 1px solid #dee2e6;
+    padding: 1.5rem;
+}
