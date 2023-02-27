@@ -277,6 +277,88 @@ class format_topicsactivitycards extends format_topics {
         return $this->cm_metadatas;
     }
 
+    private $cm_cardimages = null;
+
+    public function get_cm_cardimages() {
+        if (isset($this->cm_cardimages)) {
+            return $this->cm_cardimages;
+        }
+
+        $this->cm_cardimages = [];
+        $contexts = context_course::instance($this->course->id)->get_child_contexts();
+        $contextids = array_keys($contexts);
+        $filerecords = $this->get_area_files($contextids, 'format_topicsactivitycards', 'cardbackgroundimage');
+
+        foreach ($filerecords as $file) {
+            if ($file->get_filesize() == 0) {
+                continue;
+            }
+            $imageurl = moodle_url::make_pluginfile_url($file->get_contextid(),
+                $file->get_component(), $file->get_filearea(), $file->get_itemid(), $file->get_filepath(),
+                $file->get_filename());
+            $imageurl = $imageurl->out();
+
+            $this->cm_cardimages[$contexts[$file->get_contextid()]->instanceid] = $imageurl;
+        }
+
+        return $this->cm_cardimages;
+    }
+
+
+    public function get_area_files($contextids, $component, $filearea) {
+        global $DB;
+        $result = [];
+
+        if (empty($contextids)) {
+            return $result;
+        }
+
+        $fs = get_file_storage();
+
+        list($contextidsql, $params) = $DB->get_in_or_equal($contextids, SQL_PARAMS_NAMED);
+        $params['filearea'] = $filearea;
+        $params['component'] = $component;
+
+        $sql = "SELECT " . self::instance_sql_fields('f', 'r') . "
+                  FROM {files} f
+             LEFT JOIN {files_reference} r
+                       ON f.referencefileid = r.id
+                 WHERE f.contextid $contextidsql
+                       AND f.component = :component
+                       AND f.filearea  = :filearea";
+
+        $filerecords = $DB->get_records_sql($sql, $params);
+        foreach ($filerecords as $filerecord) {
+            $result[$filerecord->pathnamehash] = $fs->get_file_instance($filerecord);
+        }
+        return $result;
+    }
+
+    private static function instance_sql_fields($filesprefix, $filesreferenceprefix) {
+        // Note, these fieldnames MUST NOT overlap between the two tables,
+        // else problems like MDL-33172 occur.
+        $filefields = array('contenthash', 'pathnamehash', 'contextid', 'component', 'filearea',
+            'itemid', 'filepath', 'filename', 'userid', 'filesize', 'mimetype', 'status', 'source',
+            'author', 'license', 'timecreated', 'timemodified', 'sortorder', 'referencefileid');
+
+        $referencefields = array('repositoryid' => 'repositoryid',
+            'reference'    => 'reference',
+            'lastsync'     => 'referencelastsync');
+
+        // id is specifically named to prevent overlaping between the two tables.
+        $fields = array();
+        $fields[] = $filesprefix . '.id AS id';
+        foreach ($filefields as $field) {
+            $fields[] = "{$filesprefix}.{$field}";
+        }
+
+        foreach ($referencefields as $field => $alias) {
+            $fields[] = "{$filesreferenceprefix}.{$field} AS {$alias}";
+        }
+
+        return implode(', ', $fields);
+    }
+
     public function normalise_render_width($renderwidth) {
         $renderwidth = $renderwidth ?? 4;
         $renderwidthsm = $renderwidth * 2 > 12 ? 12 : $renderwidth * 2;

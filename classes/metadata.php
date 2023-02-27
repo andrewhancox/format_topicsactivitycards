@@ -25,6 +25,9 @@
 
 namespace format_topicsactivitycards;
 
+use html_writer;
+use stdClass;
+
 class metadata extends \core\persistent {
     const TABLE = 'topicsactivitycards_metadata';
 
@@ -81,5 +84,26 @@ class metadata extends \core\persistent {
                     'type' => PARAM_TEXT,
                 ),
         );
+    }
+
+    public function formattedduration() {
+        if (empty($this->get('duration'))) {
+            return '';
+        }
+
+        $class = 'tac-time-unit small';
+        $str = new stdClass();
+        $str->day = html_writer::span(get_string('day'), $class);
+        $str->days = html_writer::span(get_string('days'), $class);
+        $str->hour = html_writer::span(get_string('hour'), $class);
+        $str->hours = html_writer::span(get_string('hours'), $class);
+        $str->min = html_writer::span(get_string('min'), $class);
+        $str->mins = html_writer::span(get_string('mins'), $class);
+        $str->sec = html_writer::span(get_string('sec'), $class);
+        $str->secs = html_writer::span(get_string('secs'), $class);
+        $str->year = html_writer::span(get_string('year'), $class);
+        $str->years = html_writer::span(get_string('years'), $class);
+
+        return format_time($this->get('duration'), $str);
     }
 }

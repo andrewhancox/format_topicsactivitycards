@@ -44,6 +44,34 @@
     data-for="cmitem"
     data-id="{{id}}"
 >
+
+{{#cardimage}}
+{{#cmformat.activityinfo.uservisible}}
+    <a href="{{cmformat.url}}" class="{{cmformat.linkclasses}} aalink stretched-link" onclick="{{{cmformat.onclick}}}">
+{{/cmformat.activityinfo.uservisible}}
+
+<div class="tac-card-img rounded-top {{^cardimage}} bg-light {{/cardimage}}" style="background-image: url('{{{cardimage}}}');">
+{{/cardimage}}
+{{^cardimage}}
+<div>
+{{/cardimage}}
+
+    {{#duration}}
+        <div class="tac-card-duration text-right p-2">
+            <div class="tac-card-duration-circle bg-primary text-white border shadow rounded-circle p-3 d-inline-flex justify-content-center align-items-center flex-column">
+                {{{duration}}}
+            </div>
+        </div>
+    {{/duration}}
+
+</div>
+
+{{#cardimage}}
+    {{#cmformat.activityinfo.uservisible}}
+    </a>
+    {{/cmformat.activityinfo.uservisible}}
+{{/cardimage}}
+
 {{#cmformat}}
     {{$ core_courseformat/local/content/cm}}
         {{> core_courseformat/local/content/cm}}
