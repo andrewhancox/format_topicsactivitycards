@@ -39,3 +39,8 @@ li.section.tac-container .section-inner-wrapper {
 .tac-container.section .card-content-wrapper {
     padding: 1.5rem;
 }
+
+.topicsactivitycards .course-content-item-content ul.section {
+    display: flex!important;
+    flex-wrap: wrap;
+}
