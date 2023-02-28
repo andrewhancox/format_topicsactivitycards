@@ -304,6 +304,33 @@ class format_topicsactivitycards extends format_topics {
         return $this->cm_cardimages;
     }
 
+    private $section_cardimages = null;
+
+    public function get_section_cardimages() {
+        if (isset($this->section_cardimages)) {
+            return $this->section_cardimages;
+        }
+
+        $this->section_cardimages = [];
+
+        $fs = get_file_storage();
+        $filerecords = $fs->get_area_files(context_course::instance($this->course->id)->id, 'format_topicsactivitycards', 'sectioncardbackgroundimage', false, 'itemid', false);
+
+        foreach ($filerecords as $file) {
+            if ($file->get_filesize() == 0) {
+                continue;
+            }
+            $imageurl = moodle_url::make_pluginfile_url($file->get_contextid(),
+                $file->get_component(), $file->get_filearea(), $file->get_itemid(), $file->get_filepath(),
+                $file->get_filename());
+            $imageurl = $imageurl->out();
+
+            $this->section_cardimages[$file->get_itemid()] = $imageurl;
+        }
+
+        return $this->section_cardimages;
+    }
+
 
     public function get_area_files($contextids, $component, $filearea) {
         global $DB;

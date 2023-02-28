@@ -89,7 +89,7 @@
 <li id="section-{{num}}"
     class="section course-section main {{#onlysummary}} section-summary {{/onlysummary}} clearfix
             {{#ishidden}} hidden {{/ishidden}} {{#iscurrent}} current {{/iscurrent}}
-            {{#widthclass}} tac-container float-left  {{widthclass}} p-1 {{/widthclass}}
+            {{extraclasses}} {{#widthclass}} tac-container float-left  {{widthclass}} p-1 {{/widthclass}}
             {{^widthclass}} col-12 pull-left p-0 {{/widthclass}}
             {{#isstealth}} orphaned {{/isstealth}}"
     data-sectionid="{{num}}"
@@ -99,14 +99,22 @@
     data-number="{{num}}"
 >
     <div class="section-inner-wrapper">
-        <div class="course-section-header d-flex"
-            data-for="section_title"
-            data-id="{{id}}"
-            data-number="{{num}}"
-        >
-            {{$ core_courseformat/local/content/section/content }}
-                {{> core_courseformat/local/content/section/content }}
-            {{/ core_courseformat/local/content/section/content }}
+        {{#cardimage}}
+        <a class="tac-card-img-link b-block" href="{{{sectionlink}}}" title="{{header.name}}">
+        <div class="tac-card-img rounded-top {{^cardimage}} bg-light {{/cardimage}}" style="background-image: url('{{{cardimage}}}');"></div>
+        </a>
+        {{/cardimage}}
+
+        <div class="card-content-wrapper">
+            <div class="course-section-header d-flex"
+                data-for="section_title"
+                data-id="{{id}}"
+                data-number="{{num}}"
+            >
+                {{$ core_courseformat/local/content/section/content }}
+                    {{> core_courseformat/local/content/section/content }}
+                {{/ core_courseformat/local/content/section/content }}
+            </div>
         </div>
     </div>
 </li>

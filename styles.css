@@ -14,7 +14,6 @@ li.section.tac-container {
 li.section.tac-container .section-inner-wrapper {
     border-radius: .5rem;
     border: 1px solid #dee2e6;
-    padding: 1.5rem;
 }
 .tac-card-img {
     height: 150px;
@@ -35,4 +34,8 @@ li.section.tac-container .section-inner-wrapper {
 .tac-card-tags .badge {
     background: #d9dde0;
     color: #212529;
+}
+
+.tac-container.section .card-content-wrapper {
+    padding: 1.5rem;
 }
