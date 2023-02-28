@@ -3,6 +3,12 @@
     transition: all .5s;
 }
 
+.topicsactivitycards li.section-summary:hover,
+.topicsactivitycards li.activity:hover {
+     /* Grow/scale on hover. */
+     transform: scale(1.03);
+}
+
 .tac-container .activity-basis .align-self-start.flex-md-row {
     flex-direction: column!important;
 }
@@ -44,4 +50,15 @@ ul.topicsactivitycards,
 .topicsactivitycards .course-content-item-content ul.section {
     display: flex!important;
     flex-wrap: wrap;
+}
+
+
+
+
+.tac-card-text.tac-card-text-truncate {
+    display: block;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
