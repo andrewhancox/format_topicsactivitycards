@@ -6,7 +6,7 @@
 .topicsactivitycards li.section-summary:hover,
 .topicsactivitycards li.activity:hover {
      /* Grow/scale on hover. */
-     transform: scale(1.03);
+     transform: scale(1.015);
 }
 
 .tac-container .activity-basis .align-self-start.flex-md-row {
@@ -17,9 +17,24 @@ li.section.tac-container {
     border: none;
 }
 
-li.section.tac-container .section-inner-wrapper {
+.topicsactivitycards li.section li .activity-inner-wrapper {
     border-radius: .5rem;
     border: 1px solid #dee2e6;
+    padding: 0!important;
+}
+
+.topicsactivitycards .activity-item {
+    border: 0!important;
+}
+
+li.section .section-inner-wrapper {
+    padding: 0.75em;
+}
+
+li.section-summary.tac-container .section-inner-wrapper {
+    border-radius: .5rem;
+    border: 1px solid #dee2e6;
+    padding: 0;
 }
 .tac-card-img {
     height: 150px;
@@ -51,6 +66,8 @@ ul.topicsactivitycards,
     display: flex!important;
     flex-wrap: wrap;
 }
+
+
 
 
 
