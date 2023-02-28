@@ -40,6 +40,7 @@ li.section.tac-container .section-inner-wrapper {
     padding: 1.5rem;
 }
 
+ul.topicsactivitycards,
 .topicsactivitycards .course-content-item-content ul.section {
     display: flex!important;
     flex-wrap: wrap;
