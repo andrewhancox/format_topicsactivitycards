@@ -124,6 +124,13 @@ class format_topicsactivitycards extends format_topics {
             'element_type' => 'text'
         ];
 
+        $retval['cleanandtruncatedescription'] = array(
+            'default' => false,
+            'type' => PARAM_BOOL,
+            'label' => new lang_string('cleanandtruncatedescription', 'format_topicsactivitycards'),
+            'element_type' => 'advcheckbox'
+        );
+
         $retval['overridesectionsummary_editor'] = [
             'default' => '',
             'type' => PARAM_CLEANHTML,

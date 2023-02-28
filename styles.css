@@ -66,16 +66,3 @@ ul.topicsactivitycards,
     display: flex!important;
     flex-wrap: wrap;
 }
-
-
-
-
-
-
-.tac-card-text.tac-card-text-truncate {
-    display: block;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
