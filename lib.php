@@ -85,7 +85,7 @@ class format_topicsactivitycards extends format_topics {
         ];
 
         $retval['sectionlayout'] = [
-                'default'            => 0,
+                'default'            => self::SECTIONLAYOUT_CARDS,
                 'type'               => PARAM_TEXT,
                 'label'              => get_string('sectionlayout', 'format_topicsactivitycards'),
                 'element_type'       => 'select',
