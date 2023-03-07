@@ -1,33 +1,29 @@
-.tac-card,
-.tac-container {
+.topicsactivitycards li.section-summary:hover,
+.topicsactivitycards li.activity:hover {
+    /* Grow/scale on hover. */
+    transform: scale(1.015);
     transition: all .5s;
 }
 
-.topicsactivitycards li.section-summary:hover,
-.topicsactivitycards li.activity:hover {
-     /* Grow/scale on hover. */
-     transform: scale(1.015);
-}
-
-.tac-container .activity-basis .align-self-start.flex-md-row {
-    flex-direction: column!important;
+.topicsactivitycards li.section.layoutcards .activity-basis .align-self-start.flex-md-row {
+    flex-direction: column !important;
 }
 
 li.section.tac-container {
     border: none;
 }
 
-.topicsactivitycards li.section li .activity-inner-wrapper {
+.topicsactivitycards li.section.layoutcards .activity-inner-wrapper {
     border-radius: .5rem;
     border: 1px solid #dee2e6;
-    padding: 0!important;
+    padding: 0 !important;
 }
 
-.topicsactivitycards .activity-item {
-    border: 0!important;
+.topicsactivitycards .tac-container .activity-item {
+    border: 0 !important;
 }
 
-li.section .section-inner-wrapper {
+li.section.layoutcards .section-inner-wrapper {
     padding: 0.75em;
 }
 
@@ -36,11 +32,13 @@ li.section-summary.tac-container .section-inner-wrapper {
     border: 1px solid #dee2e6;
     padding: 0;
 }
+
 .tac-card-img {
     height: 150px;
     background-size: cover;
     background-position: center;
 }
+
 .tac-card-duration-circle {
     height: 3.5rem;
     width: 3.5rem;
@@ -48,10 +46,11 @@ li.section-summary.tac-container .section-inner-wrapper {
 }
 
 /* Tags & Availability - normalise styles. */
-.tac-card-tags b  {
+.tac-card-tags b {
     font-weight: normal;
     font-size: small;
 }
+
 .tac-card-tags .badge {
     background: #d9dde0;
     color: #212529;
@@ -62,7 +61,7 @@ li.section-summary.tac-container .section-inner-wrapper {
 }
 
 ul.topicsactivitycards,
-.topicsactivitycards .course-content-item-content ul.section {
-    display: flex!important;
+.topicsactivitycards .layoutcards .course-content-item-content ul.section {
+    display: flex !important;
     flex-wrap: wrap;
 }

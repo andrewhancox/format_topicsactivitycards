@@ -35,7 +35,9 @@ class cmitem extends cmitem_base {
 
         $sectionoptions = $this->format->get_format_options($this->section);
 
-        if ($format->show_editor() || $sectionoptions['sectionlayout'] != \format_topicsactivitycards::SECTIONLAYOUT_CARDS) {
+        $model->layoutlist = $sectionoptions['sectionlayout'] == \format_topicsactivitycards::SECTIONLAYOUT_LIST;
+
+        if ($format->show_editor() || $model->layoutlist) {
             return $model;
         }
 

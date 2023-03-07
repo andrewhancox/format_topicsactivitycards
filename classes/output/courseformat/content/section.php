@@ -37,6 +37,9 @@ class section extends section_base {
         $section = $this->section;
 
         $sectionoptions = $this->format->get_format_options($this->section);
+
+        $model->layoutcards = $sectionoptions['sectionlayout'] == \format_topicsactivitycards::SECTIONLAYOUT_CARDS;
+
         if ($format->show_editor() || !isset($sectionoptions['sectionheading']) || $sectionoptions['sectionheading'] != \format_topicsactivitycards::SECTIONHEADING_LINKEDCARD) {
             return $model;
         }
