@@ -54,3 +54,7 @@ $string['collapsible'] = 'Collapsible sections';
 $string['sectionheading'] = 'Section layout';
 $string['sectionheading_header'] = 'Heading with activities';
 $string['sectionheading_linkedcard'] = 'Linked card';
+
+$string['fixedwidth'] = 'Fixed width';
+$string['fullwidth'] = 'Full width';
+$string['overridefixedwidthcoursepage'] = 'Width of course page';

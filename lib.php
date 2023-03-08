@@ -35,6 +35,15 @@ class format_topicsactivitycards extends format_topics {
     public const SECTIONHEADING_HEADER = 10;
     public const SECTIONHEADING_LINKEDCARD = 20;
 
+    public const PAGELAYOUT_FIXEDWIDTH = 10;
+    public const PAGELAYOUT_FULLWIDTH = 20;
+
+    public function page_set_course(moodle_page $page) {
+        if ($this->get_format_options()['overridefixedwidthcoursepage'] == self::PAGELAYOUT_FULLWIDTH) {
+            $page->add_body_class('overridefixedwidthcoursepage');
+        }
+    }
+
     public function course_format_options($foreditform = false) {
         static $courseformatoptionsforedit = false;
         static $courseformatoptions = false;
@@ -42,26 +51,30 @@ class format_topicsactivitycards extends format_topics {
         if ($foreditform) {
             if ($courseformatoptionsforedit === false) {
                 $courseformatoptionsforedit = parent::course_format_options(true);
+                unset($courseformatoptionsforedit['coursedisplay']);
 
-                $courseconfig = get_config('moodlecourse');
-                $courseformatoptionsforedit['collapsible'] = array(
-                    'default' => !empty($courseconfig->collapsible),
-                    'type' => PARAM_BOOL,
-                    'label' => new lang_string('collapsible', 'format_topicsactivitycards'),
-                    'element_type' => 'advcheckbox'
-                );
+                $courseformatoptionsforedit['overridefixedwidthcoursepage'] = [
+                    'label' => new lang_string('overridefixedwidthcoursepage', 'format_topicsactivitycards'),
+                    'element_type' => 'select',
+                    'element_attributes' => [
+                        [
+                            self::PAGELAYOUT_FIXEDWIDTH => new lang_string('fixedwidth', 'format_topicsactivitycards'),
+                            self::PAGELAYOUT_FULLWIDTH => new lang_string('fullwidth', 'format_topicsactivitycards')
+                        ]
+                    ]
+                ];
             }
 
             return $courseformatoptionsforedit;
         } else {
             if ($courseformatoptions === false) {
                 $courseformatoptions = parent::course_format_options(false);
+                unset($courseformatoptions['coursedisplay']);
 
-                $courseconfig = get_config('moodlecourse');
-                $courseformatoptions['collapsible'] = array(
-                    'default' => !empty($courseconfig->collapsible),
-                    'type' => PARAM_BOOL,
-                );
+                $courseformatoptions['overridefixedwidthcoursepage'] = [
+                    'default' => self::PAGELAYOUT_FULLWIDTH,
+                    'type' => PARAM_INT,
+                ];
             }
 
             return $courseformatoptions;
