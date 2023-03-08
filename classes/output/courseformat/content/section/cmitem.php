@@ -63,6 +63,7 @@ class cmitem extends cmitem_base {
                     0
                 );
 
+                $model->cmformat->hasname = true;
                 $model->cmformat->altcontent = format_text($model->cmformat->altcontent, $metadata->get('activitydescriptionformat'));
             }
 
