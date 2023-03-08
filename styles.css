@@ -23,10 +23,6 @@ li.section.tac-container {
     border: 0 !important;
 }
 
-li.section.layoutcards .section-inner-wrapper {
-    padding: 0.75em;
-}
-
 li.section-summary.tac-container .section-inner-wrapper {
     border-radius: .5rem;
     border: 1px solid #dee2e6;
