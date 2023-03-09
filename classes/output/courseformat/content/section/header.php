@@ -37,11 +37,15 @@ class header extends header_base {
             return $model;
         }
 
+        $sectionoptions = $this->format->get_format_options($this->section);
+
         $format = $this->format;
         $section = $this->section;
         $course = $format->get_course();
 
-        $model->headerdisplaymultipage = true;
+        $model->headerdisplaymultipage = empty($sectionoptions['collapsible']);
+        $model->contentcollapsed = !empty($sectionoptions['collapsedefault']);
+
         $model->title = $output->section_title($section, $course);
 
         return $model;

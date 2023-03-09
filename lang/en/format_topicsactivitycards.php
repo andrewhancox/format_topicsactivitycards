@@ -58,3 +58,5 @@ $string['sectionheading_linkedcard'] = 'Linked card';
 $string['fixedwidth'] = 'Fixed width';
 $string['fullwidth'] = 'Full width';
 $string['overridefixedwidthcoursepage'] = 'Width of course page';
+$string['collapsible'] = 'Collapsible';
+$string['collapsedefault'] = 'Collapsed by default';

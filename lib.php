@@ -122,6 +122,20 @@ class format_topicsactivitycards extends format_topics {
             ]
         ];
 
+        $retval['collapsible'] = array(
+            'default' => false,
+            'type' => PARAM_BOOL,
+            'label' => new lang_string('collapsible', 'format_topicsactivitycards'),
+            'element_type' => 'advcheckbox'
+        );
+
+        $retval['collapsedefault'] = array(
+            'default' => false,
+            'type' => PARAM_BOOL,
+            'label' => new lang_string('collapsedefault', 'format_topicsactivitycards'),
+            'element_type' => 'advcheckbox'
+        );
+
         $retval['sectioncardbackgroundimage_filemanager'] = [
             'label' => get_string('cardimage', 'format_topicsactivitycards'),
             'element_type' => 'filemanager',
