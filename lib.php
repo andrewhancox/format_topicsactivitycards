@@ -333,9 +333,9 @@ function format_topicsactivitycards_coursemodule_standard_elements($formwrapper,
 
     $form->addElement('header', 'format_topicsactivitycards', get_string('pluginname', 'format_topicsactivitycards'));
 
-    $form->addElement('duration', 'duration', get_string('duration', 'format_topicsactivitycards'));
-    $form->setDefault('duration', 0);
-    $form->setType('duration', PARAM_INT);
+    $form->addElement('duration', 'tacduration', get_string('duration', 'format_topicsactivitycards'));
+    $form->setDefault('tacduration', 0);
+    $form->setType('tacduration', PARAM_INT);
 
     $options = range(1, 12);
     $options = array_combine($options, $options);
@@ -376,6 +376,9 @@ function format_topicsactivitycards_coursemodule_standard_elements($formwrapper,
     $values = file_prepare_standard_editor($values, 'cardfooter', $editoroptions, $formwrapper->get_context(), 'format_topicsactivitycards', 'cardfooter',
         0);
 
+    $values->tacduration = $values->duration;
+    unset($values->duration);
+
     $form->setDefaults((array)$values);
 }
 
@@ -402,7 +405,7 @@ function format_topicsactivitycards_coursemodule_edit_post_actions($data, $cours
         $metadata->set('cmid', $data->coursemodule);
     }
 
-    $metadata->set('duration', $data->duration);
+    $metadata->set('tacduration', $data->duration);
     $metadata->set('renderwidth', $data->renderwidth);
     $metadata->set('cleanandtruncatedescription', $data->cleanandtruncatedescription);
     $metadata->set('overlaycardimage', $data->overlaycardimage);
