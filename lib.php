@@ -560,7 +560,7 @@ function format_topicsactivitycards_coursemodule_edit_post_actions($data, $cours
         $metadata->set('cmid', $data->coursemodule);
     }
 
-    $metadata->set('tacduration', $data->duration);
+    $metadata->set('duration', $data->tacduration);
     $metadata->set('renderwidth', $data->renderwidth);
     $metadata->set('cleanandtruncatedescription', $data->cleanandtruncatedescription);
     $metadata->set('overlaycardimage', $data->overlaycardimage);
