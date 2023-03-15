@@ -34,6 +34,7 @@ class format_topicsactivitycards extends format_topics {
 
     public const SECTIONHEADING_HEADER = 10;
     public const SECTIONHEADING_LINKEDCARD = 20;
+    public const SECTIONHEADING_CARD_WITHCONTENTS = 30;
 
     public const PAGELAYOUT_FIXEDWIDTH = 10;
     public const PAGELAYOUT_FULLWIDTH = 20;
@@ -93,6 +94,7 @@ class format_topicsactivitycards extends format_topics {
                 [
                     self::SECTIONHEADING_HEADER => get_string('sectionheading_header', 'format_topicsactivitycards'),
                     self::SECTIONHEADING_LINKEDCARD => get_string('sectionheading_linkedcard', 'format_topicsactivitycards'),
+                    self::SECTIONHEADING_CARD_WITHCONTENTS => get_string('sectionheading_card_withcontents', 'format_topicsactivitycards'),
                 ]
             ]
         ];
@@ -245,7 +247,11 @@ class format_topicsactivitycards extends format_topics {
         if (isset($url)) {
             $format_options = $this->get_format_options($sectionnum);
 
-            if (isset($format_options['sectionheading']) && $format_options['sectionheading'] == self::SECTIONHEADING_LINKEDCARD) {
+            if (
+                isset($format_options['sectionheading'])
+                &&
+                in_array($format_options['sectionheading'], [self::SECTIONHEADING_LINKEDCARD, self::SECTIONHEADING_CARD_WITHCONTENTS])
+            ) {
                 $url->param('section', $sectionnum);
                 $url->set_anchor(null);
             }

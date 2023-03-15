@@ -26,6 +26,7 @@
 namespace format_topicsactivitycards\output\courseformat\content;
 
 use core_courseformat\output\local\content\section as section_base;
+use format_topicsactivitycards;
 use renderer_base;
 use stdClass;
 
@@ -40,8 +41,9 @@ class section extends section_base {
 
         $model->contentcollapsed = !empty($sectionoptions['collapsedefault']);
         $model->layoutcards = $sectionoptions['sectionlayout'] == \format_topicsactivitycards::SECTIONLAYOUT_CARDS;
+        $model->hidesummary = $sectionoptions['sectionheading'] != \format_topicsactivitycards::SECTIONHEADING_LINKEDCARD;
 
-        if ($format->show_editor() || !isset($sectionoptions['sectionheading']) || $sectionoptions['sectionheading'] != \format_topicsactivitycards::SECTIONHEADING_LINKEDCARD) {
+        if ($format->show_editor() || !isset($sectionoptions['sectionheading']) || $sectionoptions['sectionheading'] == \format_topicsactivitycards::SECTIONHEADING_HEADER) {
             return $model;
         }
 
@@ -85,12 +87,19 @@ class section extends section_base {
         $section = $this->section;
         $format = $this->format;
 
-        if ($format->show_editor() || !isset($sectionoptions['sectionheading']) || $sectionoptions['sectionheading'] != \format_topicsactivitycards::SECTIONHEADING_LINKEDCARD) {
-            return parent::add_cm_data($data, $output);
+        if (
+            $format->show_editor()
+            ||
+            $sectionoptions['sectionheading'] != \format_topicsactivitycards::SECTIONHEADING_LINKEDCARD
+        ) {
+            $hasdata = parent::add_cm_data($data, $output);
+
+            if ($sectionoptions['sectionheading'] == \format_topicsactivitycards::SECTIONHEADING_HEADER) {
+                return $hasdata;
+            }
         }
 
         $result = false;
-
 
         $showsummary = ($section->section != 0 && $section->section != $format->get_section_number());
 
@@ -115,21 +124,5 @@ class section extends section_base {
             $result = true;
         }
         return $result;
-    }
-
-    /**
-     * Returns the output class template path.
-     *
-     * This method redirects the default template when the course section is rendered.
-     */
-    public function get_template_name(\renderer_base $renderer): string {
-        $format = $this->format;
-        $sectionoptions = $this->format->get_format_options($this->section);
-
-        if ($format->show_editor() || isset($sectionoptions['sectionheading']) && $sectionoptions['sectionheading'] == \format_topicsactivitycards::SECTIONHEADING_LINKEDCARD) {
-            return 'format_topicsactivitycards/local/content/section';
-        } else {
-            return parent::get_template_name($renderer);
-        }
     }
 }

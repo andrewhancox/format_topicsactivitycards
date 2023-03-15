@@ -19,7 +19,7 @@ li.section.tac-container {
     padding: 0 !important;
 }
 
-.topicsactivitycards .tac-container .activity-item {
+.topicsactivitycards .activity.tac-container .activity-item {
     border: 0 !important;
 }
 
@@ -64,4 +64,8 @@ ul.topicsactivitycards,
 .format-topicsactivitycards.overridefixedwidthcoursepage #topofscroll,
 .format-topicsactivitycards.overridefixedwidthcoursepage .secondary-navigation .navigation .nav-tabs {
     max-width: none!important;
+}
+
+.format-topicsactivitycards .hidesummary .section-summary-activities {
+    display: none;
 }
