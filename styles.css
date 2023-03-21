@@ -62,6 +62,7 @@ ul.topicsactivitycards,
     flex-wrap: wrap;
 }
 .format-topicsactivitycards.overridefixedwidthcoursepage #topofscroll,
+.format-topicsactivitycards.overridefixedwidthcoursepage #page-header,
 .format-topicsactivitycards.overridefixedwidthcoursepage .secondary-navigation .navigation .nav-tabs {
     max-width: none!important;
 }
