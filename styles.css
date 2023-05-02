@@ -9,7 +9,7 @@
     flex-direction: column !important;
 }
 
-li.section.tac-container {
+body.format-topicsactivitycards #page .course-content ul.topicsactivitycards li.section.tac-container {
     border: none;
 }
 
