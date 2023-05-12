@@ -61,3 +61,6 @@ $string['fullwidth'] = 'Full width';
 $string['overridefixedwidthcoursepage'] = 'Width of course page';
 $string['collapsible'] = 'Collapsible';
 $string['collapsedefault'] = 'Collapsed by default';
+
+$string['defaultsectionheading'] = 'Default section layout';
+$string['defaultsectionlayout'] = 'Default activities layout';

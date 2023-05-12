@@ -64,6 +64,33 @@ class format_topicsactivitycards extends format_topics {
                         ]
                     ]
                 ];
+
+                $courseformatoptionsforedit['sectionheading'] = [
+                    'default' => self::SECTIONHEADING_HEADER,
+                    'type' => PARAM_TEXT,
+                    'label' => get_string('defaultsectionheading', 'format_topicsactivitycards'),
+                    'element_type' => 'select',
+                    'element_attributes' => [
+                        [
+                            self::SECTIONHEADING_HEADER => get_string('sectionheading_header', 'format_topicsactivitycards'),
+                            self::SECTIONHEADING_LINKEDCARD => get_string('sectionheading_linkedcard', 'format_topicsactivitycards'),
+                            self::SECTIONHEADING_CARD_WITHCONTENTS => get_string('sectionheading_card_withcontents', 'format_topicsactivitycards'),
+                        ]
+                    ]
+                ];
+
+                $courseformatoptionsforedit['sectionlayout'] = [
+                    'default' => self::SECTIONLAYOUT_CARDS,
+                    'type' => PARAM_TEXT,
+                    'label' => get_string('defaultsectionlayout', 'format_topicsactivitycards'),
+                    'element_type' => 'select',
+                    'element_attributes' => [
+                        [
+                            self::SECTIONLAYOUT_CARDS => get_string('sectionlayout_cards', 'format_topicsactivitycards'),
+                            self::SECTIONLAYOUT_LIST => get_string('sectionlayout_list', 'format_topicsactivitycards'),
+                        ]
+                    ]
+                ];
             }
 
             return $courseformatoptionsforedit;
@@ -76,6 +103,16 @@ class format_topicsactivitycards extends format_topics {
                     'default' => self::PAGELAYOUT_FULLWIDTH,
                     'type' => PARAM_INT,
                 ];
+
+                $courseformatoptions['sectionheading'] = [
+                    'default' => self::SECTIONHEADING_HEADER,
+                    'type' => PARAM_TEXT,
+                ];
+
+                $courseformatoptions['sectionlayout'] = [
+                    'default' => self::SECTIONLAYOUT_LIST,
+                    'type' => PARAM_TEXT,
+                ];
             }
 
             return $courseformatoptions;
@@ -84,9 +121,10 @@ class format_topicsactivitycards extends format_topics {
 
     public function section_format_options($foreditform = false): array {
         $retval = parent::section_format_options($foreditform);
+        $courseformatoptions = $this->get_format_options();
 
         $retval['sectionheading'] = [
-            'default' => self::SECTIONHEADING_HEADER,
+            'default' => $courseformatoptions['sectionheading'],
             'type' => PARAM_TEXT,
             'label' => get_string('sectionheading', 'format_topicsactivitycards'),
             'element_type' => 'select',
@@ -100,7 +138,7 @@ class format_topicsactivitycards extends format_topics {
         ];
 
         $retval['sectionlayout'] = [
-            'default' => self::SECTIONLAYOUT_CARDS,
+            'default' => $courseformatoptions['sectionlayout'],
             'type' => PARAM_TEXT,
             'label' => get_string('sectionlayout', 'format_topicsactivitycards'),
             'element_type' => 'select',
