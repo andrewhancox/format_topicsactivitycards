@@ -463,6 +463,20 @@ function format_topicsactivitycards_cardbackgroundimage_filemanageroptions() {
     ];
 }
 
+function format_topicsactivitycards_showcoursemoduleelements($course, $section) {
+    if ($course->format !== 'topicsactivitycards') {
+        return false;
+    }
+
+    $courseformat = course_get_format($course);
+    $sectionoptions = $courseformat->get_format_options((int)$section);
+    if ($sectionoptions['sectionlayout'] != \format_topicsactivitycards::SECTIONLAYOUT_CARDS) {
+        return false;
+    }
+
+    return true;
+}
+
 /**
  * Inject the competencies elements into all moodle module settings forms.
  *
@@ -472,11 +486,10 @@ function format_topicsactivitycards_cardbackgroundimage_filemanageroptions() {
 function format_topicsactivitycards_coursemodule_standard_elements($formwrapper, $form) {
     global $SITE;
 
-    if ($formwrapper->get_course()->format !== 'topicsactivitycards') {
+    if (!format_topicsactivitycards_showcoursemoduleelements($formwrapper->get_course(), $formwrapper->get_section())) {
         return;
     }
 
-    $cmid = null;
     if ($cm = $formwrapper->get_coursemodule()) {
         $cmid = $cm->id;
         $metadata = metadata::get_record(['cmid' => $cmid]);
@@ -540,7 +553,7 @@ function format_topicsactivitycards_coursemodule_standard_elements($formwrapper,
 function format_topicsactivitycards_coursemodule_edit_post_actions($data, $course) {
     global $SITE;
 
-    if ($course->format !== 'topicsactivitycards') {
+    if (!format_topicsactivitycards_showcoursemoduleelements($course, $data->section)) {
         return $data;
     }
 
@@ -587,7 +600,11 @@ function format_topicsactivitycards_coursemodule_edit_post_actions($data, $cours
     return $data;
 }
 
-function format_topicsactivitycards_coursemodule_validation($form, $data) {
+function format_topicsactivitycards_coursemodule_validation($formwrapper, $data) {
+    if (!format_topicsactivitycards_showcoursemoduleelements($formwrapper->get_course(), $formwrapper->get_section())) {
+        return [];
+    }
+
     $errors = [];
 
     if (!empty($data['additionalcssclasses'])) {
