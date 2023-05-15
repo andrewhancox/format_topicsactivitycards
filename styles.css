@@ -1,3 +1,8 @@
+#page-course-view-topicsactivitycards:not(.editing) li.section-summary:hover,
+#page-course-view-topicsactivitycards:not(.editing) li.activity:hover {
+  transform: scale(1.015);
+  transition: all .5s; }
+
 #page-course-view-topicsactivitycards #page #collapsesections {
   display: none; }
 
@@ -26,11 +31,6 @@
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-tags b {
   font-weight: normal;
   font-size: small; }
-
-#page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section-summary:hover,
-#page-course-view-topicsactivitycards #page ul.topicsactivitycards li.activity:hover {
-  transform: scale(1.015);
-  transition: all .5s; }
 
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.layoutcards .activity-basis .align-self-start.flex-md-row {
   flex-direction: column !important; }

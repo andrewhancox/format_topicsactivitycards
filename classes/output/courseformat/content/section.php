@@ -43,7 +43,7 @@ class section extends section_base {
         $model->layoutcards = $sectionoptions['sectionlayout'] == \format_topicsactivitycards::SECTIONLAYOUT_CARDS;
         $model->hidesummary = $sectionoptions['sectionheading'] != \format_topicsactivitycards::SECTIONHEADING_LINKEDCARD;
 
-        if ($format->show_editor() || !isset($sectionoptions['sectionheading']) || $sectionoptions['sectionheading'] == \format_topicsactivitycards::SECTIONHEADING_HEADER) {
+        if (!isset($sectionoptions['sectionheading']) || $sectionoptions['sectionheading'] == \format_topicsactivitycards::SECTIONHEADING_HEADER) {
             return $model;
         }
 
@@ -88,8 +88,6 @@ class section extends section_base {
         $format = $this->format;
 
         if (
-            $format->show_editor()
-            ||
             $sectionoptions['sectionheading'] != \format_topicsactivitycards::SECTIONHEADING_LINKEDCARD
         ) {
             $hasdata = parent::add_cm_data($data, $output);

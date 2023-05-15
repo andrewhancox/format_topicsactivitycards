@@ -32,11 +32,6 @@ class header extends header_base {
     public function export_for_template(\renderer_base $output): \stdClass {
         $model = parent::export_for_template($output);
 
-        $format = $this->format;
-        if ($format->show_editor()) {
-            return $model;
-        }
-
         $sectionoptions = $this->format->get_format_options($this->section);
 
         $format = $this->format;
