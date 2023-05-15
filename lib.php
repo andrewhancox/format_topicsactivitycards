@@ -288,7 +288,7 @@ class format_topicsactivitycards extends format_topics {
             if (
                 isset($format_options['sectionheading'])
                 &&
-                in_array($format_options['sectionheading'], [self::SECTIONHEADING_LINKEDCARD, self::SECTIONHEADING_CARD_WITHCONTENTS])
+                $format_options['sectionheading'] == self::SECTIONHEADING_LINKEDCARD
             ) {
                 $url->param('section', $sectionnum);
                 $url->set_anchor(null);
