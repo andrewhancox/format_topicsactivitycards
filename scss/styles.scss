@@ -1,5 +1,5 @@
 #page-course-view-topicsactivitycards:not(.editing) {
-  li.section-summary:hover, // Sections must have at least a summary before we're interested in grow on hover.
+  li.section:hover, // Sections must have at least a summary before we're interested in grow on hover.
   li.activity:hover {
     transform: scale(1.015);
     transition: all .5s;
@@ -45,6 +45,14 @@
       }
     }
 
+    .course-section {
+      border: 0;
+      padding: 0;
+      margin-bottom: .5rem;
+      margin-top: .5rem;
+      border-radius: .5rem;
+    }
+
     li.section.layoutcards {
       .activity-basis .align-self-start.flex-md-row {
         flex-direction: column !important;
@@ -81,15 +89,15 @@
       border: 0;
     }
 
-    li.section-summary.tac-container .section-inner-wrapper {
+    li.section.tac-container .section-inner-wrapper {
       border-radius: .5rem;
       border: 1px solid #dee2e6;
-      padding: 0;
     }
 
     .section-inner-wrapper {
       .course-section-header {
         padding: .5rem;
+        padding-bottom: 0;
       }
 
       .content {

@@ -47,35 +47,33 @@ class section extends section_base {
             return $model;
         }
 
-        if ($section->section != $format->get_section_number()) {
-            $model->widthclass = $this->format->normalise_render_width($sectionoptions['renderwidth'] ?? null);
-            $model->extraclasses = $sectionoptions['additionalcssclasses'] ?? null;
+        $model->widthclass = $this->format->normalise_render_width($sectionoptions['renderwidth'] ?? null);
+        $model->extraclasses = $sectionoptions['additionalcssclasses'] ?? null;
 
-            $cardimages = $format->get_section_cardimages();
-            if (isset($cardimages[$this->section->id])) {
-                $model->cardimage = $cardimages[$this->section->id];
-            }
+        $cardimages = $format->get_section_cardimages();
+        if (isset($cardimages[$this->section->id])) {
+            $model->cardimage = $cardimages[$this->section->id];
+        }
 
-            if ($section->uservisible) {
-                $model->sectionlink = course_get_url($this->format->get_course(), $section->section);
-            }
+        if ($section->uservisible) {
+            $model->sectionlink = course_get_url($this->format->get_course(), $section->section);
+        }
 
-            if (!empty($sectionoptions['overridesectionsummary_editor']['text'])) {
-                $model->summary->summarytext = file_rewrite_pluginfile_urls(
-                    $sectionoptions['overridesectionsummary_editor']['text'],
-                    'pluginfile.php',
-                    $this->section->id,
-                    'format_topicsactivitycards',
-                    'overridesectionsummary',
-                    0
-                );
+        if (!empty($sectionoptions['overridesectionsummary_editor']['text'])) {
+            $model->summary->summarytext = file_rewrite_pluginfile_urls(
+                $sectionoptions['overridesectionsummary_editor']['text'],
+                'pluginfile.php',
+                $this->section->id,
+                'format_topicsactivitycards',
+                'overridesectionsummary',
+                0
+            );
 
-                $model->summary->summarytext = format_text($model->summary->summarytext, $sectionoptions['overridesectionsummary_editor']['format']);
-            } else {
+            $model->summary->summarytext = format_text($model->summary->summarytext, $sectionoptions['overridesectionsummary_editor']['format']);
+        } else {
 
-                if (!empty($sectionoptions['cleanandtruncatedescription']) && strlen($model->summary->summarytext) > 250) {//width!
-                    $model->summary->summarytext = shorten_text(strip_tags($model->summary->summarytext), 250);
-                }
+            if (!empty($sectionoptions['cleanandtruncatedescription']) && strlen($model->summary->summarytext) > 250) {//width!
+                $model->summary->summarytext = shorten_text(strip_tags($model->summary->summarytext), 250);
             }
         }
 

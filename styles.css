@@ -1,4 +1,4 @@
-#page-course-view-topicsactivitycards:not(.editing) li.section-summary:hover,
+#page-course-view-topicsactivitycards:not(.editing) li.section:hover,
 #page-course-view-topicsactivitycards:not(.editing) li.activity:hover {
   transform: scale(1.015);
   transition: all .5s; }
@@ -32,6 +32,13 @@
   font-weight: normal;
   font-size: small; }
 
+#page-course-view-topicsactivitycards #page ul.topicsactivitycards .course-section {
+  border: 0;
+  padding: 0;
+  margin-bottom: .5rem;
+  margin-top: .5rem;
+  border-radius: .5rem; }
+
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.layoutcards .activity-basis .align-self-start.flex-md-row {
   flex-direction: column !important; }
 
@@ -58,13 +65,13 @@
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .activity:not(.tac-container):last-child .activity-item {
   border: 0; }
 
-#page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section-summary.tac-container .section-inner-wrapper {
+#page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .section-inner-wrapper {
   border-radius: .5rem;
-  border: 1px solid #dee2e6;
-  padding: 0; }
+  border: 1px solid #dee2e6; }
 
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .section-inner-wrapper .course-section-header {
-  padding: .5rem; }
+  padding: .5rem;
+  padding-bottom: 0; }
 
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .section-inner-wrapper .content {
   padding: .5rem; }
