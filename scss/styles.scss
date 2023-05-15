@@ -37,10 +37,6 @@
       }
     }
 
-    .course-section {
-      border: 0;
-    }
-
     li.section-summary:hover, // Sections must have at least a summary before we're interested in grow on hover.
     li.activity:hover {
       transform: scale(1.015);
@@ -91,13 +87,7 @@
 
     .section-inner-wrapper {
       .course-section-header {
-        background-color: red;
         padding: .5rem;
-        color: white;
-      }
-
-      .course-section-header h3 a {
-        color: white;
       }
 
       .content {

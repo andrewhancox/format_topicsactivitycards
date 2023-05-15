@@ -27,9 +27,6 @@
   font-weight: normal;
   font-size: small; }
 
-#page-course-view-topicsactivitycards #page ul.topicsactivitycards .course-section {
-  border: 0; }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section-summary:hover,
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.activity:hover {
   transform: scale(1.015);
@@ -67,12 +64,7 @@
   padding: 0; }
 
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .section-inner-wrapper .course-section-header {
-  background-color: red;
-  padding: .5rem;
-  color: white; }
-
-#page-course-view-topicsactivitycards #page ul.topicsactivitycards .section-inner-wrapper .course-section-header h3 a {
-  color: white; }
+  padding: .5rem; }
 
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .section-inner-wrapper .content {
   padding: .5rem; }
