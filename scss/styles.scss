@@ -1,0 +1,117 @@
+#page-course-view-topicsactivitycards #page {
+  #collapsesections {
+    display: none;
+  }
+  ul.topicsactivitycards,
+  .topicsactivitycards .layoutcards .course-content-item-content ul.section {
+    display: flex !important;
+    flex-wrap: wrap;
+  }
+
+  .hidesummary .section-summary-activities {
+    display: none;
+  }
+
+  ul.topicsactivitycards {
+    .tac-card-img {
+      height: 150px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .tac-card-duration-circle {
+      height: 3.5rem;
+      width: 3.5rem;
+      line-height: 1;
+    }
+
+    .tac-card-tags {
+      .badge {
+        background: #d9dde0;
+        color: #212529;
+      }
+
+      b {
+        font-weight: normal;
+        font-size: small;
+      }
+    }
+
+    .course-section {
+      border: 0;
+    }
+
+    li.section-summary:hover, // Sections must have at least a summary before we're interested in grow on hover.
+    li.activity:hover {
+      transform: scale(1.015);
+      transition: all .5s;
+    }
+
+    li.section.layoutcards {
+      .activity-basis .align-self-start.flex-md-row {
+        flex-direction: column !important;
+      }
+
+      .activity-inner-wrapper {
+        border-radius: .5rem;
+        border: 1px solid #dee2e6;
+        padding: 0 !important;
+      }
+    }
+
+    li.section.tac-container,
+    .activity.tac-container .activity-item {
+      border: 0 !important;
+      padding: 1em;
+    }
+
+    li.section.tac-container .activity:not(.tac-container) {
+      padding: 0.5em;
+
+      .activity-item {
+        padding: 0;
+      }
+    }
+
+    li.section.tac-container .activity:not(.tac-container):not(:last-child) .activity-item {
+      border: 0;
+      border-radius: 0;
+      border-bottom: 1px solid #dee2e6;
+    }
+
+    li.section.tac-container .activity:not(.tac-container):last-child .activity-item {
+      border: 0;
+    }
+
+    li.section-summary.tac-container .section-inner-wrapper {
+      border-radius: .5rem;
+      border: 1px solid #dee2e6;
+      padding: 0;
+    }
+
+    .section-inner-wrapper {
+      .course-section-header {
+        background-color: red;
+        padding: .5rem;
+        color: white;
+      }
+
+      .course-section-header h3 a {
+        color: white;
+      }
+
+      .content {
+        padding: .5rem;
+      }
+    }
+  }
+}
+
+
+#page-course-view-topicsactivitycards.overridefixedwidthcoursepage {
+  #topofscroll,
+  #page-header,
+  .secondary-navigation .navigation .nav-tabs {
+    max-width: none !important;
+  }
+}
