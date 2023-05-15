@@ -64,3 +64,4 @@ $string['collapsedefault'] = 'Collapsed by default';
 
 $string['defaultsectionheading'] = 'Default section layout';
 $string['defaultsectionlayout'] = 'Default activities layout';
+$string['coursedefault'] = 'Course default';

@@ -29,9 +29,11 @@ defined('MOODLE_INTERNAL') || die();
 require_once($CFG->dirroot . '/course/format/topics/lib.php');
 
 class format_topicsactivitycards extends format_topics {
+    public const SECTIONLAYOUT_COURSEDEFAULT = 0;
     public const SECTIONLAYOUT_CARDS = 10;
     public const SECTIONLAYOUT_LIST = 20;
 
+    public const SECTIONHEADING_COURSEDEFAULT = 0;
     public const SECTIONHEADING_HEADER = 10;
     public const SECTIONHEADING_LINKEDCARD = 20;
     public const SECTIONHEADING_CARD_WITHCONTENTS = 30;
@@ -121,15 +123,15 @@ class format_topicsactivitycards extends format_topics {
 
     public function section_format_options($foreditform = false): array {
         $retval = parent::section_format_options($foreditform);
-        $courseformatoptions = $this->get_format_options();
 
         $retval['sectionheading'] = [
-            'default' => $courseformatoptions['sectionheading'],
+            'default' => self::SECTIONHEADING_COURSEDEFAULT,
             'type' => PARAM_TEXT,
             'label' => get_string('sectionheading', 'format_topicsactivitycards'),
             'element_type' => 'select',
             'element_attributes' => [
                 [
+                    self::SECTIONHEADING_COURSEDEFAULT => get_string('coursedefault', 'format_topicsactivitycards'),
                     self::SECTIONHEADING_HEADER => get_string('sectionheading_header', 'format_topicsactivitycards'),
                     self::SECTIONHEADING_LINKEDCARD => get_string('sectionheading_linkedcard', 'format_topicsactivitycards'),
                     self::SECTIONHEADING_CARD_WITHCONTENTS => get_string('sectionheading_card_withcontents', 'format_topicsactivitycards'),
@@ -138,12 +140,13 @@ class format_topicsactivitycards extends format_topics {
         ];
 
         $retval['sectionlayout'] = [
-            'default' => $courseformatoptions['sectionlayout'],
+            'default' => self::SECTIONLAYOUT_COURSEDEFAULT,
             'type' => PARAM_TEXT,
             'label' => get_string('sectionlayout', 'format_topicsactivitycards'),
             'element_type' => 'select',
             'element_attributes' => [
                 [
+                    self::SECTIONLAYOUT_COURSEDEFAULT => get_string('coursedefault', 'format_topicsactivitycards'),
                     self::SECTIONLAYOUT_CARDS => get_string('sectionlayout_cards', 'format_topicsactivitycards'),
                     self::SECTIONLAYOUT_LIST => get_string('sectionlayout_list', 'format_topicsactivitycards'),
                 ]
@@ -469,6 +472,24 @@ class format_topicsactivitycards extends format_topics {
         $renderwidthsm = $renderwidth * 2 > 12 ? 12 : $renderwidth * 2;
         $renderwidthxs = $renderwidth * 4 > 12 ? 12 : $renderwidth * 4;
         return "col-$renderwidthxs col-sm-$renderwidthsm col-md-$renderwidth";
+    }
+
+    public function get_format_options($section = null) {
+        $options = parent::get_format_options($section);
+
+        if ($section !== null) {
+            $courseformatoptions = $this->get_format_options(null);
+
+            if ($options['sectionheading'] == self::SECTIONHEADING_COURSEDEFAULT) {
+                $options['sectionheading'] = $courseformatoptions['sectionheading'];
+            }
+
+            if ($options['sectionlayout'] == self::SECTIONLAYOUT_COURSEDEFAULT) {
+                $options['sectionlayout'] = $courseformatoptions['sectionlayout'];
+            }
+        }
+
+        return $options;
     }
 }
 
