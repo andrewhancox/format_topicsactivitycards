@@ -33,11 +33,9 @@
   font-size: small; }
 
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .course-section {
-  border: 0;
   padding: 0;
   margin-bottom: .5rem;
-  margin-top: .5rem;
-  border-radius: .5rem; }
+  margin-top: .5rem; }
 
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.layoutcards .activity-basis .align-self-start.flex-md-row {
   flex-direction: column !important; }
