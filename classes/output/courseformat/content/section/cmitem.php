@@ -93,4 +93,8 @@ class cmitem extends cmitem_base {
 
         return $model;
     }
+
+    public function get_template_name(\renderer_base $renderer): string {
+        return "format_topicsactivitycards/local/content/section/cmitem";
+    }
 }
