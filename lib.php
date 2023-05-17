@@ -236,8 +236,8 @@ class format_topicsactivitycards extends format_topics {
                 'sectioncardbackgroundimage',
                 $sectionid);
 
-            $values->overridesectionsummary = $format_options['overridesectionsummary_editor'] ?? '';
-            $values->overridesectionsummaryformat = FORMAT_HTML;
+            $values->overridesectionsummary = $format_options['overridesectionsummary_editor']['text'] ?? '';
+            $values->overridesectionsummaryformat = $format_options['overridesectionsummary_editor']['format'] ?? FORMAT_HTML;
             $values = file_prepare_standard_editor($values, 'overridesectionsummary', $this->texteditoroptions(), $coursecontext, 'format_topicsactivitycards', 'overridesectionsummary',
                 $sectionid);
 
