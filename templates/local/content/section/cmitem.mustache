@@ -61,7 +61,7 @@
     data-id="{{id}}"
 >
 
-    <div class="activity-inner-wrapper h-100">
+    <div class="activity-inner-wrapper card h-100">
         {{#cardimage}}
         {{#cmformat.activityinfo.uservisible}}
             <a href="{{cmformat.url}}" class="{{cmformat.linkclasses}} aalink" onclick="{{{cmformat.onclick}}}">
@@ -72,7 +72,6 @@
         {{^cardimage}}
         <div>
         {{/cardimage}}
-
             {{#duration}}
                 <div class="tac-card-duration text-right p-2">
                     <div class="tac-card-duration-circle bg-primary text-white border shadow rounded-circle p-3 d-inline-flex justify-content-center align-items-center flex-column">
@@ -80,7 +79,6 @@
                     </div>
                 </div>
             {{/duration}}
-
         </div>
 
         {{#cardimage}}
@@ -91,7 +89,7 @@
 
         {{#cmformat}}
             {{$ core_courseformat/local/content/cm}}
-                {{> core_courseformat/local/content/cm}}
+                {{> format_topicsactivitycards/local/content/cm}}
             {{/ core_courseformat/local/content/cm}}
         {{/cmformat}}
     </div>

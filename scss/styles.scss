@@ -1,5 +1,4 @@
 #page-course-view-topicsactivitycards:not(.editing) {
-  li.section:hover, // Sections must have at least a summary before we're interested in grow on hover.
   li.activity:hover {
     transform: scale(1.015);
     transition: all .5s;
@@ -43,6 +42,10 @@
         font-weight: normal;
         font-size: small;
       }
+    }
+
+    .card-footer p {
+      margin-bottom: 0;
     }
 
     .course-section {
