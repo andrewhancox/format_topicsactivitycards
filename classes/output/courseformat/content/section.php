@@ -47,7 +47,7 @@ class section extends section_base {
             return $model;
         }
 
-        if ($this->format->get_section_number() == $this->section->section) {
+        if (!empty($this->format->get_section_number()) && $this->format->get_section_number() == $this->section->section) {
             $sectionoptions['renderwidth'] = 12;
         }
 
