@@ -36,6 +36,7 @@ $string['pluginname'] = 'Topics activity cards format';
 $string['sectionname'] = 'Section';
 $string['showfromothers'] = 'Show section';
 
+$string['returntocourse'] = 'Back to course';
 $string['cardimage'] = 'Card image';
 $string['cardvideo'] = 'Card video';
 $string['duration'] = 'Duration';

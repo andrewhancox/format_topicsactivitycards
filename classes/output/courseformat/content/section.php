@@ -44,11 +44,13 @@ class section extends section_base {
         $model->layoutcards = $sectionoptions['sectionlayout'] == \format_topicsactivitycards::SECTIONLAYOUT_CARDS;
         $model->hidesummary = $sectionoptions['sectionheading'] != \format_topicsactivitycards::SECTIONHEADING_LINKEDCARD;
 
-        if (
-            $sectionoptions['sectionheading'] == \format_topicsactivitycards::SECTIONHEADING_HEADER
-            ||
-            !empty($this->format->get_section_number())
-        ) {
+        if (!empty($this->format->get_section_number())) {
+            $model->returntocourselink = course_get_url($this->format->get_course()->id);
+            return $model;
+
+        }
+
+        if ($sectionoptions['sectionheading'] == \format_topicsactivitycards::SECTIONHEADING_HEADER) {
             return $model;
         }
 
