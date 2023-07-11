@@ -44,7 +44,11 @@ class section extends section_base {
         $model->layoutcards = $sectionoptions['sectionlayout'] == \format_topicsactivitycards::SECTIONLAYOUT_CARDS;
         $model->hidesummary = $sectionoptions['sectionheading'] != \format_topicsactivitycards::SECTIONHEADING_LINKEDCARD;
 
-        if (!isset($sectionoptions['sectionheading']) || $sectionoptions['sectionheading'] == \format_topicsactivitycards::SECTIONHEADING_HEADER) {
+        if (
+            $sectionoptions['sectionheading'] == \format_topicsactivitycards::SECTIONHEADING_HEADER
+            ||
+            !empty($this->format->get_section_number())
+        ) {
             return $model;
         }
 
@@ -63,7 +67,7 @@ class section extends section_base {
         if (!empty($sectionoptions['sectioncardbackgroundvideo'])) {
             $model->cardvideo = core_media_manager::instance()->embed_alternatives([new \moodle_url($sectionoptions['sectioncardbackgroundvideo'])]);
         }
-        
+
         if ($section->uservisible) {
             $model->sectionlink = course_get_url($this->format->get_course(), $section->section);
         }
