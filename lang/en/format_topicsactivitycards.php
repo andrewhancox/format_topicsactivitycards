@@ -37,6 +37,7 @@ $string['sectionname'] = 'Section';
 $string['showfromothers'] = 'Show section';
 
 $string['cardimage'] = 'Card image';
+$string['cardvideo'] = 'Card video';
 $string['duration'] = 'Duration';
 $string['cardimagedescription'] = 'An image 398px by 174px';
 $string['additionalcssclasses'] = 'Additional CSS classes';

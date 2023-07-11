@@ -26,6 +26,7 @@
 namespace format_topicsactivitycards\output\courseformat\content;
 
 use core_courseformat\output\local\content\section as section_base;
+use core_media_manager;
 use format_topicsactivitycards;
 use renderer_base;
 use stdClass;
@@ -59,6 +60,10 @@ class section extends section_base {
             $model->cardimage = $cardimages[$this->section->id];
         }
 
+        if (!empty($sectionoptions['sectioncardbackgroundvideo'])) {
+            $model->cardvideo = core_media_manager::instance()->embed_alternatives([new \moodle_url($sectionoptions['sectioncardbackgroundvideo'])]);
+        }
+        
         if ($section->uservisible) {
             $model->sectionlink = course_get_url($this->format->get_course(), $section->section);
         }

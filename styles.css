@@ -19,6 +19,14 @@
   background-size: cover;
   background-position: center; }
 
+#page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-video {
+  height: 150px; }
+  #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-video .mediaplugin {
+    margin: 0; }
+  #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-video iframe {
+    height: 100%;
+    width: 100%; }
+
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-duration-circle {
   height: 3.5rem;
   width: 3.5rem;

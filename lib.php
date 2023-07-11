@@ -199,6 +199,12 @@ class format_topicsactivitycards extends format_topics {
             ]
         ];
 
+        $retval['sectioncardbackgroundvideo'] = [
+            'label' => get_string('cardvideo', 'format_topicsactivitycards'),
+            'element_type' => 'text',
+            'type' => PARAM_URL,
+        ];
+
         $retval['additionalcssclasses'] = [
             'default' => '',
             'type' => PARAM_TEXT,

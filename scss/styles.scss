@@ -10,6 +10,7 @@
   #collapsesections {
     display: none;
   }
+
   ul.topicsactivitycards,
   .topicsactivitycards .layoutcards .course-content-item-content ul.section {
     display: flex !important;
@@ -25,6 +26,17 @@
       height: 150px;
       background-size: cover;
       background-position: center;
+    }
+    .tac-card-video{
+      height: 150px;
+
+      .mediaplugin {
+        margin: 0;
+      }
+      iframe {
+        height: 100%;
+        width: 100%;
+      }
     }
 
     .tac-card-duration-circle {
