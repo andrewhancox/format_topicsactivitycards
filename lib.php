@@ -93,6 +93,13 @@ class format_topicsactivitycards extends format_topics {
                         ]
                     ]
                 ];
+
+                $courseformatoptionsforedit['section0_onsectionpages'] = array(
+                    'label' => get_string('section0_onsectionpageslabel', 'format_topicsactivitycards'),
+                    'element_type' => 'advcheckbox',
+                    'default' => false,
+                    'type' => PARAM_BOOL,
+                );
             }
 
             return $courseformatoptionsforedit;
@@ -114,6 +121,11 @@ class format_topicsactivitycards extends format_topics {
                 $courseformatoptions['sectionlayout'] = [
                     'default' => self::SECTIONLAYOUT_LIST,
                     'type' => PARAM_TEXT,
+                ];
+
+                $courseformatoptions['section0_onsectionpages'] = [
+                    'default' => false,
+                    'type' => PARAM_BOOL,
                 ];
             }
 

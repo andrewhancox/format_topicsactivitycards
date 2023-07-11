@@ -37,4 +37,15 @@ class content extends content_base {
     public function get_template_name(\renderer_base $renderer): string {
         return 'format_topicsactivitycards/local/content';
     }
+
+    public function export_for_template(\renderer_base $output) {
+        $data = parent::export_for_template($output);
+
+        $formatoptions = $this->format->get_format_options();
+        if (empty($formatoptions['section0_onsectionpages']) && !empty($this->format->get_section_number())) {
+            unset($data->initialsection);
+        }
+
+        return $data;
+    }
 }

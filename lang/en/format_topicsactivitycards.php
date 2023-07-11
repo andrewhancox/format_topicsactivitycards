@@ -65,3 +65,4 @@ $string['collapsedefault'] = 'Collapsed by default';
 $string['defaultsectionheading'] = 'Default section layout';
 $string['defaultsectionlayout'] = 'Default activities layout';
 $string['coursedefault'] = 'Course default';
+$string['section0_onsectionpageslabel'] = 'Show section zero on linked sections';
