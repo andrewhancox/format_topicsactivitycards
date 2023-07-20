@@ -20,5 +20,8 @@
     "grunt": "^1.6.1",
     "grunt-sass": "^3.1.0",
     "node-sass": "^8.0.0"
+  },
+  "dependencies": {
+    "grunt-load-gruntfile": "^0.0.2"
   }
 }
