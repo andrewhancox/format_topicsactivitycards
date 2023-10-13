@@ -37,6 +37,27 @@ $context = context_course::instance($course->id);
 
 $renderer = $format->get_renderer($PAGE);
 
+// If we're not going to a specific section then see if we've been referred here by a CM
+// If so then go to that one.
+if (empty($displaysection)) {
+    $referer = get_local_referer(false);
+
+    if (!empty($referer)) {
+        $refererurl = new moodle_url($referer);
+        $path = $refererurl->get_path();
+
+        if (strpos($path, '/mod/') === 0 && strpos(strrev($path), 'php.weiv/') === 0 && !empty($refererurl->get_param('id'))) {
+            $redirectingcm = get_fast_modinfo($course)->get_cm($refererurl->get_param('id'));
+            $sectionoptions = $format->get_format_options($redirectingcm->sectionnum);
+
+            if ($sectionoptions['sectionheading'] == \format_topicsactivitycards::SECTIONHEADING_LINKEDCARD) {
+                $displaysection = $redirectingcm->sectionnum;
+            }
+
+        }
+    }
+}
+
 if (!empty($displaysection)) {
     $format->set_section_number($displaysection);
 }
