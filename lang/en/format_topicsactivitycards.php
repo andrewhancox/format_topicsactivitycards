@@ -68,3 +68,7 @@ $string['defaultsectionheading'] = 'Default section layout';
 $string['defaultsectionlayout'] = 'Default activities layout';
 $string['coursedefault'] = 'Course default';
 $string['section0_onsectionpageslabel'] = 'Show section zero on linked sections';
+
+$string['done'] = 'Done';
+$string['todo'] = 'To do';
+$string['failed'] = 'Failed';
