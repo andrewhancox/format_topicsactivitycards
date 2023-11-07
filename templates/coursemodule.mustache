@@ -1,7 +1,10 @@
 <li id="module-{{mod.id}}"
     data-region="module"
     data-module="{{mod.id}}"
-    class="tac-container {{widthclass}} m-0 mb-4 activity {{mod.modname}} modtype_{{mod.modname}} {{mod.extraclasses}} {{^mod.uservisible}} notavailable {{/mod.uservisible}}">
+    {{#tactagids}}
+    data-tactag-{{.}}=1
+    {{/tactagids}}
+    class="tac-container tactaggable {{widthclass}} m-0 mb-4 activity {{mod.modname}} modtype_{{mod.modname}} {{mod.extraclasses}} {{^mod.uservisible}} notavailable {{/mod.uservisible}}">
 
     {{! Card. }}
     <div class="tac-card m-2 p-0 rounded shadow h-100 d-flex flex-column bg-white

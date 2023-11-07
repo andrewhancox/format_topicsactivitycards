@@ -1,7 +1,10 @@
 <li id="section-{{sectionid}}"
     data-region="section"
     data-section="{{sectionid}}"
-    class="tac-container {{widthclass}} m-0 mb-4 {{^uservisible}} notavailable {{/uservisible}}">
+    {{#tactagids}}
+    data-tactag-{{.}}=1
+    {{/tactagids}}
+    class="tac-container {{widthclass}} m-0 mb-4 {{^uservisible}} notavailable {{/uservisible}} tactaggable">
 
     {{! Card. }}
     <div class="tac-card m-2 p-0 rounded shadow h-100 d-flex flex-column bg-white {{{additionalcssclasses}}}">

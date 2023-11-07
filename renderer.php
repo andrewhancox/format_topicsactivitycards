@@ -114,6 +114,14 @@ class format_topicsactivitycards_renderer extends format_topics_renderer {
             'cardimage' => $imageurl,
             'availability' => $this->section_availability($section),
         ];
+
+        $model['tactagids'] = [];
+        foreach ($format->get_tactags() as $tag) {
+            if (in_array($section->section, $tag->sections)) {
+                $model['tactagids'][] = $tag->id;
+            }
+        }
+
         $sectionoutput .= $this->render_from_template('format_topicsactivitycards/sectioncard', (object)$model);
 
         $section->uservisible = false;
@@ -129,6 +137,24 @@ class format_topicsactivitycards_renderer extends format_topics_renderer {
         $this->sectionlayoutinprogress = null;
 
         return $footer;
+    }
+
+    protected function start_section_list() {
+        global $PAGE, $COURSE;
+
+
+        $format = course_get_format($COURSE);
+
+        $lozenges = $format->get_tactags();
+
+        $oput = '';
+
+        if (!empty($lozenges)) {
+            $oput .= $this->render_from_template('format_topicsactivitycards/lozenges', ['lozenges' => $lozenges]);
+            $PAGE->requires->js_call_amd('format_topicsactivitycards/tactags', 'init');
+        }
+
+        return $oput . parent::start_section_list();
     }
 
     protected function end_section_list() {

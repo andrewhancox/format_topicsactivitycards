@@ -46,3 +46,4 @@ $string['collapsible'] = 'Collapsible sections';
 $string['sectionheading'] = 'Section layout';
 $string['sectionheading_header'] = 'Heading with activities';
 $string['sectionheading_linkedcard'] = 'Linked card';
+$string['tactags'] = 'Tags for sorting on course home (one per line)';

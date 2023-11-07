@@ -341,6 +341,14 @@ class course_renderer extends \core_course_renderer {
         } else {
             $templatename = 'format_topicsactivitycards/coursemoduleoverlay';
         }
+
+        $template->tactagids = [];
+        foreach ($this->format->get_tactags() as $tag) {
+            if (in_array($mod->id, $tag->cms)) {
+                $template->tactagids[] = $tag->id;
+            }
+        }
+
         return $this->render_from_template($templatename, $template);
     }
 
