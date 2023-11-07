@@ -39,11 +39,24 @@ class content extends content_base {
     }
 
     public function export_for_template(\renderer_base $output) {
+        global $PAGE;
+
         $data = parent::export_for_template($output);
 
         $formatoptions = $this->format->get_format_options();
         if (empty($formatoptions['section0_onsectionpages']) && !empty($this->format->get_section_number())) {
             unset($data->initialsection);
+        }
+
+        $lozenges = $this->format->get_tactags();
+
+        if (empty($data->completionhelp)) {
+            $data->completionhelp = '';
+        }
+
+        if (!empty($lozenges)) {
+            $data->completionhelp .= $output->render_from_template('format_topicsactivitycards/lozenges', ['lozenges' => $lozenges]);
+            $PAGE->requires->js_call_amd('format_topicsactivitycards/tactags', 'init');
         }
 
         return $data;

@@ -40,6 +40,13 @@ class section extends section_base {
 
         $sectionoptions = $this->format->get_format_options($this->section);
 
+        $model->tactagids = [];
+        foreach ($this->format->get_tactags() as $tag) {
+            if (in_array($this->section->section, $tag->sections)) {
+                $model->tactagids[] = $tag->id;
+            }
+        }
+
         $model->contentcollapsed = !empty($sectionoptions['collapsedefault']);
         $model->layoutcards = $sectionoptions['sectionlayout'] == \format_topicsactivitycards::SECTIONLAYOUT_CARDS;
         $model->hidesummary = $sectionoptions['sectionheading'] != \format_topicsactivitycards::SECTIONHEADING_LINKEDCARD;

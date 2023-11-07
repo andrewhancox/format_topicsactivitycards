@@ -87,7 +87,7 @@
     }
 }}
 <li id="section-{{num}}"
-    class="section course-section main p-0 {{#onlysummary}} section-summary {{/onlysummary}} clearfix
+    class="section course-section main p-0 {{#onlysummary}} section-summary {{/onlysummary}} clearfix tactaggable
             {{#ishidden}} hidden {{/ishidden}} {{#iscurrent}} current {{/iscurrent}}
             {{extraclasses}} {{#widthclass}} tac-container float-left p-1 {{widthclass}} {{/widthclass}}
             {{^widthclass}} col-12 pull-left {{/widthclass}}
@@ -99,6 +99,9 @@
     data-for="section"
     data-id="{{id}}"
     data-number="{{num}}"
+    {{#tactagids}}
+    data-tactag-{{.}}=1
+    {{/tactagids}}
 >
     <div class="section-inner-wrapper h-100">
         {{#cardimage}}

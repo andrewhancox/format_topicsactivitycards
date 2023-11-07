@@ -72,3 +72,5 @@ $string['section0_onsectionpageslabel'] = 'Show section zero on linked sections'
 $string['done'] = 'Done';
 $string['todo'] = 'To do';
 $string['failed'] = 'Failed';
+
+$string['tactags'] = 'Tags for sorting on course home (one per line)';

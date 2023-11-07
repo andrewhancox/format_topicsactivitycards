@@ -165,6 +165,15 @@ class format_topicsactivitycards extends format_topics {
             ]
         ];
 
+        $retval['tactags'] = array(
+            'label' => get_string('tactags', 'format_topicsactivitycards'),
+            'element_type' => 'textarea',
+            'type' => PARAM_NOTAGS,
+            'element_attributes' => [
+                ['rows' => 5, 'cols' => 20]
+            ]
+        );
+
         $options = range(1, 12);
         $options = array_combine($options, $options);
         $retval['renderwidth'] = [
@@ -509,6 +518,64 @@ class format_topicsactivitycards extends format_topics {
 
         return $options;
     }
+
+    private $tactags = null;
+
+    public function get_tactags() {
+        if (isset($this->tactags)) {
+            return $this->tactags;
+        }
+
+        $indexedtags = [];
+        $id = 0;
+
+        foreach ($this->get_sections() as $section) {
+            $tactags = $this->get_format_options($section);
+
+            if (empty($tactags['tactags'])) {
+                continue;
+            }
+
+            $tactags = explode("\n", $tactags['tactags']);
+            $id = 0;
+            foreach ($tactags as $tactag) {
+                $tactag = trim($tactag);
+                if (empty($tactag)) {
+                    continue;
+                }
+                if (!isset($indexedtags[$tactag])) {
+                    $id++;
+                    $indexedtags[$tactag] = (object)['id' => $id, 'label' => $tactag, 'sections' => [], 'cms' => []];
+                }
+                $indexedtags[$tactag]->sections[] = $section->section;
+            }
+        }
+
+        foreach ($this->get_cm_metadatas() as $metadata) {
+            if (empty($metadata->get('tactags'))) {
+                continue;
+            }
+
+            $tactags = explode("\n", $metadata->get('tactags'));
+            foreach ($tactags as $tactag) {
+                $tactag = trim($tactag);
+                if (empty($tactag)) {
+                    continue;
+                }
+                if (!isset($indexedtags[$tactag])) {
+                    $id++;
+                    $indexedtags[$tactag] = (object)['id' => $id, 'label' => $tactag, 'sections' => [], 'cms' => []];
+                }
+                $indexedtags[$tactag]->cms[] = $metadata->get('cmid');
+            }
+        }
+
+        ksort($indexedtags);
+
+        $this->tactags = array_values($indexedtags);
+
+        return $this->tactags;
+    }
 }
 
 /**
@@ -577,6 +644,9 @@ function format_topicsactivitycards_coursemodule_standard_elements($formwrapper,
     }
 
     $form->addElement('header', 'format_topicsactivitycards', get_string('pluginname', 'format_topicsactivitycards'));
+
+    $form->addElement('textarea', 'tactags', get_string('tactags', 'format_topicsactivitycards'), array('rows' => 5, 'cols' => 20));
+    $form->setType('tactags', PARAM_NOTAGS);
 
     $form->addElement('duration', 'tacduration', get_string('duration', 'format_topicsactivitycards'));
     $form->setDefault('tacduration', 0);
@@ -659,6 +729,7 @@ function format_topicsactivitycards_coursemodule_edit_post_actions($data, $cours
     $metadata->set('cardfooter', $data->cardfooter);
     $metadata->set('cardfooterformat', $data->cardfooterformat);
     $metadata->set('additionalcssclasses', $data->additionalcssclasses);
+    $metadata->set('tactags', $data->tactags);
 
     if (empty($metadata->get('id'))) {
         $metadata->save();

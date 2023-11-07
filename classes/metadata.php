@@ -83,6 +83,9 @@ class metadata extends \core\persistent {
                 'additionalcssclasses' => array(
                     'type' => PARAM_TEXT,
                 ),
+                'tactags' => array(
+                    'type' => PARAM_TEXT,
+                ),
         );
     }
 

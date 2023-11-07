@@ -35,6 +35,13 @@ class cmitem extends cmitem_base {
 
         $sectionoptions = $this->format->get_format_options($this->section);
 
+        $model->tactagids = [];
+        foreach ($this->format->get_tactags() as $tag) {
+            if (in_array($this->mod->id, $tag->cms)) {
+                $model->tactagids[] = $tag->id;
+            }
+        }
+
         $model->layoutlist = $sectionoptions['sectionlayout'] == \format_topicsactivitycards::SECTIONLAYOUT_LIST;
 
         if ($model->layoutlist) {

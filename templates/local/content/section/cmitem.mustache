@@ -39,10 +39,13 @@
 }}
 {{#layoutlist}}
     <li
-            class="activity activity-wrapper {{module}} modtype_{{module}} {{extraclasses}} {{#hasinfo}}hasinfo{{/hasinfo}}"
+            class="activity activity-wrapper {{module}} modtype_{{module}} {{extraclasses}} {{#hasinfo}}hasinfo{{/hasinfo}} tactaggable"
             id="{{anchor}}"
             data-for="cmitem"
             data-id="{{id}}"
+            {{#tactagids}}
+                data-tactag-{{.}}=1
+            {{/tactagids}}
     >
         {{#cmformat}}
             {{$ core_courseformat/local/content/cm}}
@@ -54,11 +57,14 @@
 
 {{^layoutlist}}
 <li
-    class="activity activity-wrapper tac-container {{module}} modtype_{{module}} {{extraclasses}} {{#hasinfo}}hasinfo{{/hasinfo}}
+    class="activity activity-wrapper tac-container {{module}} modtype_{{module}} {{extraclasses}} {{#hasinfo}}hasinfo{{/hasinfo}} tactaggable
         {{#widthclass}}float-left  p-1 {{widthclass}} {{/widthclass}}"
     id="{{anchor}}"
     data-for="cmitem"
     data-id="{{id}}"
+    {{#tactagids}}
+    data-tactag-{{.}}=1
+    {{/tactagids}}
 >
 
     <div class="activity-inner-wrapper h-100">
