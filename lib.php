@@ -522,6 +522,8 @@ class format_topicsactivitycards extends format_topics {
     private $tactags = null;
 
     public function get_tactags() {
+        global $PAGE;
+
         if (isset($this->tactags)) {
             return $this->tactags;
         }
@@ -568,6 +570,15 @@ class format_topicsactivitycards extends format_topics {
                 }
                 $indexedtags[$tactag]->cms[] = $metadata->get('cmid');
             }
+        }
+
+        $selected = optional_param('lozenge', null, PARAM_RAW);
+
+        foreach ($indexedtags as $tactag) {
+            $tactag->selected = $selected == $tactag->label;
+            $link = $PAGE->url;
+            $link->param('lozenge', $tactag->label);
+            $tactag->link = $link->out();
         }
 
         ksort($indexedtags);

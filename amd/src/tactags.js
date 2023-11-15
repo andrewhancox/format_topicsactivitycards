@@ -25,6 +25,8 @@ define(['jquery'], function ($) {
     return {
         init: function () {
             $('body').on('click', '.tactaglozenge', function (e) {
+                e.preventDefault();
+
                 var sender = $(e.target);
                 var tagid = sender.data('tagid');
 
@@ -50,6 +52,8 @@ define(['jquery'], function ($) {
                     $('[data-tactag-' + tagid + '="1"]').toggleClass('d-none', false);
                 }
             });
+
+            $('.tactaglozengeselected').trigger('click');
         }
     };
 });
