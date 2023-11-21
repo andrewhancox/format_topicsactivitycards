@@ -25,6 +25,7 @@
 
 namespace format_topicsactivitycards\output\courseformat\content;
 
+use context_course;
 use core_courseformat\output\local\content\section as section_base;
 use core_media_manager;
 use format_topicsactivitycards;
@@ -37,6 +38,7 @@ class section extends section_base {
         $model = parent::export_for_template($output);
         $format = $this->format;
         $section = $this->section;
+        $coursecontext = context_course::instance($this->format->get_courseid());
 
         $sectionoptions = $this->format->get_format_options($this->section);
 
@@ -81,17 +83,17 @@ class section extends section_base {
             $model->sectionlink = course_get_url($this->format->get_course(), $section->section);
         }
 
-        if (!empty($sectionoptions['overridesectionsummary_editor']['text'])) {
+        if (!empty($sectionoptions['overridesectionsummary'])) {
             $model->summary->summarytext = file_rewrite_pluginfile_urls(
-                $sectionoptions['overridesectionsummary_editor']['text'],
+                $sectionoptions['overridesectionsummary'],
                 'pluginfile.php',
-                $this->section->id,
+                $coursecontext->id,
                 'format_topicsactivitycards',
                 'overridesectionsummary',
-                0
+                $section->id
             );
 
-            $model->summary->summarytext = format_text($model->summary->summarytext, $sectionoptions['overridesectionsummary_editor']['format']);
+            $model->summary->summarytext = format_text($model->summary->summarytext, $sectionoptions['overridesectionsummaryformat']);
         } else {
 
             if (!empty($sectionoptions['cleanandtruncatedescription']) && strlen($model->summary->summarytext) > 250) {//width!

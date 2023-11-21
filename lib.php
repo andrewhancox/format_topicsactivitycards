@@ -228,16 +228,27 @@ class format_topicsactivitycards extends format_topics {
             'element_type' => 'advcheckbox'
         );
 
-        $retval['overridesectionsummary_editor'] = [
-            'default' => '',
-            'type' => PARAM_CLEANHTML,
-            'label' => get_string('overridesectionsummary', 'format_topicsactivitycards'),
-            'element_type' => 'editor',
-            'element_attributes' => [
-                '',
-                $this->texteditoroptions()
-            ]
-        ];
+        if ($foreditform) {
+            $retval['overridesectionsummary_editor'] = [
+                'default' => '',
+                'type' => PARAM_RAW,
+                'label' => get_string('overridesectionsummary', 'format_topicsactivitycards'),
+                'element_type' => 'editor',
+                'element_attributes' => [
+                    '',
+                    $this->texteditoroptions()
+                ]
+            ];
+        } else {
+            $retval['overridesectionsummaryformat'] = array(
+                'default' => FORMAT_HTML,
+                'type' => PARAM_BOOL,
+            );
+            $retval['overridesectionsummary'] = array(
+                'default' => '',
+                'type' => PARAM_RAW,
+            );
+        }
 
         return $retval;
     }
@@ -246,11 +257,9 @@ class format_topicsactivitycards extends format_topics {
         global $DB;
 
         $elements = parent::create_edit_form_elements($mform, $forsection);
+        $coursecontext = context_course::instance($this->get_courseid());
 
         if ($forsection) {
-            $coursecontext = context_course::instance($this->get_courseid());
-
-
             $sectionid = required_param('id', PARAM_INT);
             $format_options = $this->get_format_options((int)$DB->get_field('course_sections', 'section', ['id' => $sectionid]));
 
@@ -263,11 +272,15 @@ class format_topicsactivitycards extends format_topics {
                 'sectioncardbackgroundimage',
                 $sectionid);
 
-            $values->overridesectionsummary = $format_options['overridesectionsummary_editor']['text'] ?? '';
-            $values->overridesectionsummaryformat = $format_options['overridesectionsummary_editor']['format'] ?? FORMAT_HTML;
+            $values->overridesectionsummary = $format_options['overridesectionsummary'] ?? '';
+            $values->overridesectionsummaryformat = $format_options['overridesectionsummaryformat'] ?? FORMAT_HTML;
             $values = file_prepare_standard_editor($values, 'overridesectionsummary', $this->texteditoroptions(), $coursecontext, 'format_topicsactivitycards', 'overridesectionsummary',
                 $sectionid);
 
+            unset($values->overridesectionsummary);
+            unset($values->overridesectionsummaryformat);
+
+            $mform->setDefaults((array)$values);
             $mform->setDefaults((array)$values);
         }
 
@@ -294,10 +307,7 @@ class format_topicsactivitycards extends format_topics {
             $data = file_postupdate_standard_editor($data, 'overridesectionsummary', $this->texteditoroptions(), $context, 'format_topicsactivitycards',
                 'overridesectionsummary', $data->id);
             $data->overridesectionsummary_editor = $data->overridesectionsummary;
-
             unset($data->overridesectionsummary);
-            unset($data->overridesectionsummarytrust);
-            unset($data->overridesectionsummaryformat);
         }
 
         return parent::update_section_format_options($data);

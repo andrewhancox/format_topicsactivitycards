@@ -170,5 +170,12 @@ function xmldb_format_topicsactivitycards_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2023071103, 'format', 'topicsactivitycards');
     }
 
+    if ($oldversion < 2023071104) {
+        $DB->execute("update {course_format_options}
+                            set name = 'overridesectionsummary'
+                            where name = 'overridesectionsummary_editor'");
+        upgrade_plugin_savepoint(true, 2023071104, 'format', 'topicsactivitycards');
+    }
+
     return true;
 }
