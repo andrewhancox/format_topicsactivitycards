@@ -73,4 +73,5 @@ $string['done'] = 'Done';
 $string['todo'] = 'To do';
 $string['failed'] = 'Failed';
 
+$string['tactagsheader'] = 'Tags intro';
 $string['tactags'] = 'Tags for sorting on course home (one per line)';

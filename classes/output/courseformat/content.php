@@ -25,6 +25,7 @@
 
 namespace format_topicsactivitycards\output\courseformat;
 
+use context_course;
 use core_courseformat\output\local\content as content_base;
 
 class content extends content_base {
@@ -55,7 +56,21 @@ class content extends content_base {
         }
 
         if (!empty($lozenges)) {
-            $data->completionhelp .= $output->render_from_template('format_topicsactivitycards/lozenges', ['lozenges' => $lozenges]);
+            $lozengesheader = format_text(
+                file_rewrite_pluginfile_urls(
+                    $formatoptions['tactagsheader'],
+                    'pluginfile.php',
+                    context_course::instance($this->format->get_courseid())->id,
+                    'format_topicsactivitycards',
+                    'tactagsheader',
+                    0
+                ),
+                $formatoptions['tactagsheaderformat']);
+
+            $data->completionhelp .= $output->render_from_template('format_topicsactivitycards/lozenges', [
+                'lozengesheader' => $lozengesheader,
+                'lozenges' => $lozenges
+            ]);
             $PAGE->requires->js_call_amd('format_topicsactivitycards/tactags', 'init');
         }
 

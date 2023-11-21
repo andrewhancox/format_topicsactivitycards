@@ -100,6 +100,17 @@ class format_topicsactivitycards extends format_topics {
                     'default' => false,
                     'type' => PARAM_BOOL,
                 );
+
+                $courseformatoptionsforedit['tactagsheader_editor'] = array(
+                    'default' => '',
+                    'type' => PARAM_RAW,
+                    'label' => get_string('tactagsheader', 'format_topicsactivitycards'),
+                    'element_type' => 'editor',
+                    'element_attributes' => [
+                        '',
+                        $this->texteditoroptions()
+                    ],
+                );
             }
 
             return $courseformatoptionsforedit;
@@ -126,6 +137,16 @@ class format_topicsactivitycards extends format_topics {
                 $courseformatoptions['section0_onsectionpages'] = [
                     'default' => false,
                     'type' => PARAM_BOOL,
+                ];
+
+                $courseformatoptions['tactagsheader'] = [
+                    'default' => '',
+                    'type' => PARAM_RAW,
+                ];
+
+                $courseformatoptions['tactagsheaderformat'] = [
+                    'default' => FORMAT_HTML,
+                    'type' => PARAM_INT,
                 ];
             }
 
@@ -281,10 +302,33 @@ class format_topicsactivitycards extends format_topics {
             unset($values->overridesectionsummaryformat);
 
             $mform->setDefaults((array)$values);
+        } else {
+            $values = new stdClass();
+            $format_options = $this->get_format_options();
+            $values->tactagsheader = $format_options['tactagsheader'] ?? '';
+            $values->tactagsheaderformat = $format_options['tactagsheaderformat'] ?? FORMAT_HTML;
+            $values = file_prepare_standard_editor($values, 'tactagsheader', $this->texteditoroptions(), $coursecontext, 'format_topicsactivitycards', 'tactagsheader', 0);
+
+            unset($values->tactagsheader);
+            unset($values->tactagsheaderformat);
+
             $mform->setDefaults((array)$values);
         }
 
         return $elements;
+    }
+
+    public function update_course_format_options($data, $oldcourse = null) {
+        $coursecontext = context_course::instance($this->get_courseid());
+
+        if (isset($data->tactagsheader_editor)) {
+            $data = file_postupdate_standard_editor($data, 'tactagsheader', $this->texteditoroptions(), $coursecontext, 'format_topicsactivitycards',
+                'tactagsheader', 0);
+            $data->tactagsheader_editor = $data->tactagsheader;
+            unset($data->tactagsheader);
+        }
+
+        return parent::update_course_format_options($data, $oldcourse);
     }
 
     public function update_section_format_options($data): bool {
