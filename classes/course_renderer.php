@@ -25,7 +25,6 @@
 
 namespace format_topicsactivitycards;
 
-use CFPropertyList\PListException;
 use cm_info;
 use completion_info;
 use context_course;
@@ -38,6 +37,8 @@ use moodle_url;
 use pix_icon;
 use section_info;
 use stdClass;
+
+require_once("$CFG->dirroot/course/renderer.php");
 
 class course_renderer extends \core_course_renderer {
     /**
@@ -230,6 +231,28 @@ class course_renderer extends \core_course_renderer {
 
         if (!$mod->is_visible_on_course_page()) {
             return '';
+        }
+
+        if (empty($displayoptions)) {
+            $displayoptions = ['metadatas' => []];
+
+            foreach (metadata::get_records(['cmid' => $mod->id]) as $metadata) {
+                $displayoptions['metadatas'][$metadata->get('cmid')] = $metadata->to_record();
+
+                $filerecords = $this->get_area_files($mod->context->id, 'format_topicsactivitycards', 'cardbackgroundimage');
+
+                foreach ($filerecords as $file) {
+                    if ($file->get_filesize() == 0) {
+                        continue;
+                    }
+                    $imageurl = moodle_url::make_pluginfile_url($file->get_contextid(),
+                        $file->get_component(), $file->get_filearea(), $file->get_itemid(), $file->get_filepath(),
+                        $file->get_filename());
+                    $imageurl = $imageurl->out();
+
+                    $displayoptions['cardimages'][$file->get_contextid()] = $imageurl;
+                }
+            }
         }
 
         $template = new stdClass();
