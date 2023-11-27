@@ -47,13 +47,19 @@ if (empty($displaysection)) {
         $path = $refererurl->get_path();
 
         if (strpos($path, '/mod/') === 0 && strpos(strrev($path), 'php.weiv/') === 0 && !empty($refererurl->get_param('id'))) {
-            $redirectingcm = get_fast_modinfo($course)->get_cm($refererurl->get_param('id'));
+            $cmid = $refererurl->get_param('id');
+        } else if (!empty($refererurl->get_param('cmid'))) {
+            $cmid = $refererurl->get_param('cmid');
+        }
+        $cms = get_fast_modinfo($course)->get_cms();
+
+        if (!empty($cms[$cmid])) {
+            $redirectingcm = $cms[$cmid];
             $sectionoptions = $format->get_format_options($redirectingcm->sectionnum);
 
             if ($sectionoptions['sectionheading'] == \format_topicsactivitycards::SECTIONHEADING_LINKEDCARD) {
                 $displaysection = $redirectingcm->sectionnum;
             }
-
         }
     }
 }
