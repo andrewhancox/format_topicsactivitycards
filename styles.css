@@ -77,7 +77,8 @@
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .activity:not(.tac-container):not(:last-child) .activity-item {
   border: 0;
   border-radius: 0;
-  border-bottom: 1px solid #dee2e6; }
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 15px; }
 
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .activity:not(.tac-container):last-child .activity-item {
   border: 0; }
