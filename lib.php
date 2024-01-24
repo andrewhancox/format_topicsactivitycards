@@ -62,9 +62,9 @@ class format_topicsactivitycards extends format_topics {
                     'element_attributes' => [
                         [
                             self::PAGELAYOUT_FIXEDWIDTH => new lang_string('fixedwidth', 'format_topicsactivitycards'),
-                            self::PAGELAYOUT_FULLWIDTH => new lang_string('fullwidth', 'format_topicsactivitycards')
-                        ]
-                    ]
+                            self::PAGELAYOUT_FULLWIDTH => new lang_string('fullwidth', 'format_topicsactivitycards'),
+                        ],
+                    ],
                 ];
 
                 $courseformatoptionsforedit['sectionheading'] = [
@@ -77,8 +77,8 @@ class format_topicsactivitycards extends format_topics {
                             self::SECTIONHEADING_HEADER => get_string('sectionheading_header', 'format_topicsactivitycards'),
                             self::SECTIONHEADING_LINKEDCARD => get_string('sectionheading_linkedcard', 'format_topicsactivitycards'),
                             self::SECTIONHEADING_CARD_WITHCONTENTS => get_string('sectionheading_card_withcontents', 'format_topicsactivitycards'),
-                        ]
-                    ]
+                        ],
+                    ],
                 ];
 
                 $courseformatoptionsforedit['sectionlayout'] = [
@@ -90,27 +90,27 @@ class format_topicsactivitycards extends format_topics {
                         [
                             self::SECTIONLAYOUT_CARDS => get_string('sectionlayout_cards', 'format_topicsactivitycards'),
                             self::SECTIONLAYOUT_LIST => get_string('sectionlayout_list', 'format_topicsactivitycards'),
-                        ]
-                    ]
+                        ],
+                    ],
                 ];
 
-                $courseformatoptionsforedit['section0_onsectionpages'] = array(
+                $courseformatoptionsforedit['section0_onsectionpages'] = [
                     'label' => get_string('section0_onsectionpageslabel', 'format_topicsactivitycards'),
                     'element_type' => 'advcheckbox',
                     'default' => false,
                     'type' => PARAM_BOOL,
-                );
+                ];
 
-                $courseformatoptionsforedit['tactagsheader_editor'] = array(
+                $courseformatoptionsforedit['tactagsheader_editor'] = [
                     'default' => '',
                     'type' => PARAM_RAW,
                     'label' => get_string('tactagsheader', 'format_topicsactivitycards'),
                     'element_type' => 'editor',
                     'element_attributes' => [
                         '',
-                        $this->texteditoroptions()
+                        $this->texteditoroptions(),
                     ],
-                );
+                ];
             }
 
             return $courseformatoptionsforedit;
@@ -168,8 +168,8 @@ class format_topicsactivitycards extends format_topics {
                     self::SECTIONHEADING_HEADER => get_string('sectionheading_header', 'format_topicsactivitycards'),
                     self::SECTIONHEADING_LINKEDCARD => get_string('sectionheading_linkedcard', 'format_topicsactivitycards'),
                     self::SECTIONHEADING_CARD_WITHCONTENTS => get_string('sectionheading_card_withcontents', 'format_topicsactivitycards'),
-                ]
-            ]
+                ],
+            ],
         ];
 
         $retval['sectionlayout'] = [
@@ -182,18 +182,18 @@ class format_topicsactivitycards extends format_topics {
                     self::SECTIONLAYOUT_COURSEDEFAULT => get_string('coursedefault', 'format_topicsactivitycards'),
                     self::SECTIONLAYOUT_CARDS => get_string('sectionlayout_cards', 'format_topicsactivitycards'),
                     self::SECTIONLAYOUT_LIST => get_string('sectionlayout_list', 'format_topicsactivitycards'),
-                ]
-            ]
+                ],
+            ],
         ];
 
-        $retval['tactags'] = array(
+        $retval['tactags'] = [
             'label' => get_string('tactags', 'format_topicsactivitycards'),
             'element_type' => 'textarea',
             'type' => PARAM_NOTAGS,
             'element_attributes' => [
-                ['rows' => 5, 'cols' => 20]
-            ]
-        );
+                ['rows' => 5, 'cols' => 20],
+            ],
+        ];
 
         $options = range(1, 12);
         $options = array_combine($options, $options);
@@ -203,30 +203,30 @@ class format_topicsactivitycards extends format_topics {
             'label' => get_string('renderwidth', 'format_topicsactivitycards'),
             'element_type' => 'select',
             'element_attributes' => [
-                $options
-            ]
+                $options,
+            ],
         ];
 
-        $retval['collapsible'] = array(
+        $retval['collapsible'] = [
             'default' => false,
             'type' => PARAM_BOOL,
             'label' => new lang_string('collapsible', 'format_topicsactivitycards'),
-            'element_type' => 'advcheckbox'
-        );
+            'element_type' => 'advcheckbox',
+        ];
 
-        $retval['collapsedefault'] = array(
+        $retval['collapsedefault'] = [
             'default' => false,
             'type' => PARAM_BOOL,
             'label' => new lang_string('collapsedefault', 'format_topicsactivitycards'),
-            'element_type' => 'advcheckbox'
-        );
+            'element_type' => 'advcheckbox',
+        ];
 
         $retval['sectioncardbackgroundimage_filemanager'] = [
             'label' => get_string('cardimage', 'format_topicsactivitycards'),
             'element_type' => 'filemanager',
             'element_attributes' => [
-                format_topicsactivitycards_cardbackgroundimage_filemanageroptions()
-            ]
+                format_topicsactivitycards_cardbackgroundimage_filemanageroptions(),
+            ],
         ];
 
         $retval['sectioncardbackgroundvideo'] = [
@@ -239,15 +239,15 @@ class format_topicsactivitycards extends format_topics {
             'default' => '',
             'type' => PARAM_TEXT,
             'label' => get_string('additionalcssclasses', 'format_topicsactivitycards'),
-            'element_type' => 'text'
+            'element_type' => 'text',
         ];
 
-        $retval['cleanandtruncatedescription'] = array(
+        $retval['cleanandtruncatedescription'] = [
             'default' => false,
             'type' => PARAM_BOOL,
             'label' => new lang_string('cleanandtruncatedescription', 'format_topicsactivitycards'),
-            'element_type' => 'advcheckbox'
-        );
+            'element_type' => 'advcheckbox',
+        ];
 
         if ($foreditform) {
             $retval['overridesectionsummary_editor'] = [
@@ -257,18 +257,18 @@ class format_topicsactivitycards extends format_topics {
                 'element_type' => 'editor',
                 'element_attributes' => [
                     '',
-                    $this->texteditoroptions()
-                ]
+                    $this->texteditoroptions(),
+                ],
             ];
         } else {
-            $retval['overridesectionsummaryformat'] = array(
+            $retval['overridesectionsummaryformat'] = [
                 'default' => FORMAT_HTML,
                 'type' => PARAM_BOOL,
-            );
-            $retval['overridesectionsummary'] = array(
+            ];
+            $retval['overridesectionsummary'] = [
                 'default' => '',
                 'type' => PARAM_RAW,
-            );
+            ];
         }
 
         return $retval;
@@ -282,7 +282,7 @@ class format_topicsactivitycards extends format_topics {
 
         if ($forsection) {
             $sectionid = required_param('id', PARAM_INT);
-            $format_options = $this->get_format_options((int)$DB->get_field('course_sections', 'section', ['id' => $sectionid]));
+            $formatoptions = $this->get_format_options((int)$DB->get_field('course_sections', 'section', ['id' => $sectionid]));
 
             $values = new stdClass();
             $values = file_prepare_standard_filemanager($values,
@@ -293,8 +293,8 @@ class format_topicsactivitycards extends format_topics {
                 'sectioncardbackgroundimage',
                 $sectionid);
 
-            $values->overridesectionsummary = $format_options['overridesectionsummary'] ?? '';
-            $values->overridesectionsummaryformat = $format_options['overridesectionsummaryformat'] ?? FORMAT_HTML;
+            $values->overridesectionsummary = $formatoptions['overridesectionsummary'] ?? '';
+            $values->overridesectionsummaryformat = $formatoptions['overridesectionsummaryformat'] ?? FORMAT_HTML;
             $values = file_prepare_standard_editor($values, 'overridesectionsummary', $this->texteditoroptions(), $coursecontext, 'format_topicsactivitycards', 'overridesectionsummary',
                 $sectionid);
 
@@ -304,9 +304,9 @@ class format_topicsactivitycards extends format_topics {
             $mform->setDefaults((array)$values);
         } else {
             $values = new stdClass();
-            $format_options = $this->get_format_options();
-            $values->tactagsheader = $format_options['tactagsheader'] ?? '';
-            $values->tactagsheaderformat = $format_options['tactagsheaderformat'] ?? FORMAT_HTML;
+            $formatoptions = $this->get_format_options();
+            $values->tactagsheader = $formatoptions['tactagsheader'] ?? '';
+            $values->tactagsheaderformat = $formatoptions['tactagsheaderformat'] ?? FORMAT_HTML;
             $values = file_prepare_standard_editor($values, 'tactagsheader', $this->texteditoroptions(), $coursecontext, 'format_topicsactivitycards', 'tactagsheader', 0);
 
             unset($values->tactagsheader);
@@ -357,7 +357,7 @@ class format_topicsactivitycards extends format_topics {
         return parent::update_section_format_options($data);
     }
 
-    public function get_view_url($section, $options = array()) {
+    public function get_view_url($section, $options = []) {
         if (is_object($section)) {
             $sectionnum = $section->section;
         } else {
@@ -367,12 +367,12 @@ class format_topicsactivitycards extends format_topics {
         $url = parent::get_view_url($sectionnum, $options);
 
         if (isset($url)) {
-            $format_options = $this->get_format_options($sectionnum);
+            $formatoptions = $this->get_format_options($sectionnum);
 
             if (
-                isset($format_options['sectionheading'])
+                isset($formatoptions['sectionheading'])
                 &&
-                $format_options['sectionheading'] == self::SECTIONHEADING_LINKEDCARD
+                $formatoptions['sectionheading'] == self::SECTIONHEADING_LINKEDCARD
             ) {
                 $url->param('section', $sectionnum);
                 $url->set_anchor(null);
@@ -396,7 +396,7 @@ class format_topicsactivitycards extends format_topics {
 
         return ['maxfiles' => EDITOR_UNLIMITED_FILES,
             'maxbytes' => $SITE->maxbytes,
-            'context' => context_course::instance($this->get_courseid())];
+            'context' => context_course::instance($this->get_courseid()), ];
     }
 
     public function uses_indentation(): bool {
@@ -417,7 +417,7 @@ class format_topicsactivitycards extends format_topics {
         return $ajaxsupport;
     }
 
-    private $cm_metadatas = null;
+    private $cmmetadatas = null;
 
     public function get_cm_metadatas() {
         global $DB;
@@ -427,9 +427,9 @@ class format_topicsactivitycards extends format_topics {
         }
 
         $this->cm_metadatas = [];
-        $cm_infos = get_fast_modinfo($this->course)->get_cms();
-        if (!empty($cm_infos)) {
-            list($insql, $params) = $DB->get_in_or_equal(array_keys($cm_infos), SQL_PARAMS_NAMED);
+        $cminfos = get_fast_modinfo($this->course)->get_cms();
+        if (!empty($cminfos)) {
+            list($insql, $params) = $DB->get_in_or_equal(array_keys($cminfos), SQL_PARAMS_NAMED);
             $sql = "cmid $insql";
             foreach (metadata::get_records_select($sql, $params) as $metadata) {
                 $this->cm_metadatas[$metadata->get('cmid')] = $metadata;
@@ -439,7 +439,7 @@ class format_topicsactivitycards extends format_topics {
         return $this->cm_metadatas;
     }
 
-    private $cm_cardimages = null;
+    private $cmcardimages = null;
 
     public function get_cm_cardimages() {
         if (isset($this->cm_cardimages)) {
@@ -466,7 +466,7 @@ class format_topicsactivitycards extends format_topics {
         return $this->cm_cardimages;
     }
 
-    private $section_cardimages = null;
+    private $sectioncardimages = null;
 
     public function get_section_cardimages() {
         if (isset($this->section_cardimages)) {
@@ -526,16 +526,16 @@ class format_topicsactivitycards extends format_topics {
     private static function instance_sql_fields($filesprefix, $filesreferenceprefix) {
         // Note, these fieldnames MUST NOT overlap between the two tables,
         // else problems like MDL-33172 occur.
-        $filefields = array('contenthash', 'pathnamehash', 'contextid', 'component', 'filearea',
+        $filefields = ['contenthash', 'pathnamehash', 'contextid', 'component', 'filearea',
             'itemid', 'filepath', 'filename', 'userid', 'filesize', 'mimetype', 'status', 'source',
-            'author', 'license', 'timecreated', 'timemodified', 'sortorder', 'referencefileid');
+            'author', 'license', 'timecreated', 'timemodified', 'sortorder', 'referencefileid', ];
 
-        $referencefields = array('repositoryid' => 'repositoryid',
+        $referencefields = ['repositoryid' => 'repositoryid',
             'reference'    => 'reference',
-            'lastsync'     => 'referencelastsync');
+            'lastsync'     => 'referencelastsync', ];
 
         // id is specifically named to prevent overlaping between the two tables.
-        $fields = array();
+        $fields = [];
         $fields[] = $filesprefix . '.id AS id';
         foreach ($filefields as $field) {
             $fields[] = "{$filesprefix}.{$field}";
@@ -668,7 +668,7 @@ function format_topicsactivitycards_cardbackgroundimage_filemanageroptions() {
         'maxbytes' => $COURSE->maxbytes,
         'subdirs' => 1,
         'accepted_types' => 'image',
-        'maxfiles' => 1
+        'maxfiles' => 1,
     ];
 }
 
@@ -710,7 +710,7 @@ function format_topicsactivitycards_coursemodule_standard_elements($formwrapper,
 
     $form->addElement('header', 'format_topicsactivitycards', get_string('pluginname', 'format_topicsactivitycards'));
 
-    $form->addElement('textarea', 'tactags', get_string('tactags', 'format_topicsactivitycards'), array('rows' => 5, 'cols' => 20));
+    $form->addElement('textarea', 'tactags', get_string('tactags', 'format_topicsactivitycards'), ['rows' => 5, 'cols' => 20]);
     $form->setType('tactags', PARAM_NOTAGS);
 
     $form->addElement('duration', 'tacduration', get_string('duration', 'format_topicsactivitycards'));
@@ -743,7 +743,7 @@ function format_topicsactivitycards_coursemodule_standard_elements($formwrapper,
         0);
 
     $editoroptions = ['maxfiles' => EDITOR_UNLIMITED_FILES,
-        'maxbytes' => $SITE->maxbytes, 'context' => $formwrapper->get_context()];
+        'maxbytes' => $SITE->maxbytes, 'context' => $formwrapper->get_context(), ];
     $form->addElement('editor', 'activitydescription_editor', get_string('activitydescription', 'format_topicsactivitycards'), null, $editoroptions);
     $form->setType('activitydescription_editor', PARAM_CLEANHTML);
 
@@ -772,7 +772,7 @@ function format_topicsactivitycards_coursemodule_edit_post_actions($data, $cours
     $context = context_module::instance($data->coursemodule);
 
     $editoroptions = ['maxfiles' => EDITOR_UNLIMITED_FILES,
-        'maxbytes' => $SITE->maxbytes, 'context' => $context];
+        'maxbytes' => $SITE->maxbytes, 'context' => $context, ];
     $data = file_postupdate_standard_editor($data, 'activitydescription', $editoroptions, $context, 'format_topicsactivitycards',
         'activitydescription', 0);
     $data = file_postupdate_standard_editor($data, 'cardfooter', $editoroptions, $context, 'format_topicsactivitycards',

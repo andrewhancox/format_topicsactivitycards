@@ -69,7 +69,7 @@ class content extends content_base {
 
             $data->completionhelp .= $output->render_from_template('format_topicsactivitycards/lozenges', [
                 'lozengesheader' => $lozengesheader,
-                'lozenges' => $lozenges
+                'lozenges' => $lozenges,
             ]);
             $PAGE->requires->js_call_amd('format_topicsactivitycards/tactags', 'init');
         }

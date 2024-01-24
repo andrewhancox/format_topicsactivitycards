@@ -44,10 +44,10 @@ class backup_format_topicsactivitycards_plugin extends backup_format_plugin {
         $pluginwrapper->add_child($metadatarecords);
 
         // Set source to populate the data.
-        $metadatarecords->set_source_sql('select meta.* 
+        $metadatarecords->set_source_sql('select meta.*
                                             from {topicsactivitycards_metadata} meta
                                              where meta.cmid = :cmid', [
-                'cmid' => backup::VAR_MODID]);
+                'cmid' => backup::VAR_MODID, ]);
 
         $metadatarecords->annotate_files('format_topicsactivitycards', 'cardbackgroundimage', null, $this->task->get_contextid());
 

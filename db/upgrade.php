@@ -37,7 +37,7 @@ function xmldb_format_topicsactivitycards_upgrade($oldversion) {
         $table->add_field('cmid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
         $table->add_field('duration', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
 
-        $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
 
         if (!$dbman->table_exists($table)) {
             $dbman->create_table($table);
@@ -77,9 +77,9 @@ function xmldb_format_topicsactivitycards_upgrade($oldversion) {
 
             $context = context::instance_by_id($fileobj->get_contextid());
 
-            $file_record = new stdClass();
-            $file_record->itemid = 0;
-            $fs->create_file_from_storedfile($file_record, $fileobj);
+            $filerecord = new stdClass();
+            $filerecord->itemid = 0;
+            $fs->create_file_from_storedfile($filerecord, $fileobj);
             $fileobj->delete();
         }
 
@@ -101,7 +101,7 @@ function xmldb_format_topicsactivitycards_upgrade($oldversion) {
 
         $fields = [
             new xmldb_field('activitydescription', XMLDB_TYPE_TEXT, null, null, null, null, null),
-            new xmldb_field('activitydescriptionformat', XMLDB_TYPE_INTEGER, '10', null, null, null, 1)
+            new xmldb_field('activitydescriptionformat', XMLDB_TYPE_INTEGER, '10', null, null, null, 1),
         ];
 
         foreach ($fields as $field) {
@@ -129,7 +129,7 @@ function xmldb_format_topicsactivitycards_upgrade($oldversion) {
 
         $fields = [
             new xmldb_field('cardfooter', XMLDB_TYPE_TEXT, null, null, null, null, null),
-            new xmldb_field('cardfooterformat', XMLDB_TYPE_INTEGER, '10', null, null, null, 1)
+            new xmldb_field('cardfooterformat', XMLDB_TYPE_INTEGER, '10', null, null, null, 1),
         ];
 
         foreach ($fields as $field) {
@@ -147,7 +147,7 @@ function xmldb_format_topicsactivitycards_upgrade($oldversion) {
                      'update {topicsactivitycards_metadata} set renderwidth = 12  where renderwidth = 30',
                      'update {topicsactivitycards_metadata} set renderwidth = 8 where renderwidth = 40',
                      'update {topicsactivitycards_metadata} set renderwidth = 3 where renderwidth = 50',
-                     'update {topicsactivitycards_metadata} set renderwidth = 9 where renderwidth = 60'
+                     'update {topicsactivitycards_metadata} set renderwidth = 9 where renderwidth = 60',
                  ] as $sql) {
             $DB->execute($sql);
         }

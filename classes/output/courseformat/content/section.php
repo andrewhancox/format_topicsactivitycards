@@ -96,7 +96,7 @@ class section extends section_base {
             $model->summary->summarytext = format_text($model->summary->summarytext, $sectionoptions['overridesectionsummaryformat']);
         } else {
 
-            if (!empty($sectionoptions['cleanandtruncatedescription']) && strlen($model->summary->summarytext) > 250) {//width!
+            if (!empty($sectionoptions['cleanandtruncatedescription']) && strlen($model->summary->summarytext) > 250) {// width!
                 $model->summary->summarytext = shorten_text(strip_tags($model->summary->summarytext), 250);
             }
         }

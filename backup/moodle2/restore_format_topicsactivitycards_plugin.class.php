@@ -86,7 +86,7 @@ class restore_format_topicsactivitycards_plugin extends restore_format_plugin {
 
         /* We only process this information if the course we are restoring to
            has 'topicsactivitycards' format (target format can change depending of restore options). */
-        $format = $DB->get_field('course', 'format', array('id' => $this->task->get_courseid()));
+        $format = $DB->get_field('course', 'format', ['id' => $this->task->get_courseid()]);
         if ($format != 'topicsactivitycards') {
             return;
         }

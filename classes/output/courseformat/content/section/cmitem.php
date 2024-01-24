@@ -57,7 +57,7 @@ class cmitem extends cmitem_base {
         if (!empty($metadata)) {
             if (empty($metadata->get('activitydescription'))) {
                 // For none label activities, strip html from the description.
-                if (!empty($metadata->get('cleanandtruncatedescription')) && strlen($model->cmformat->altcontent) > 1000) {//width!
+                if (!empty($metadata->get('cleanandtruncatedescription')) && strlen($model->cmformat->altcontent) > 1000) {// width!
                     $model->cmformat->altcontent = shorten_text(strip_tags($model->cmformat->altcontent), 1000);
                 }
             } else {

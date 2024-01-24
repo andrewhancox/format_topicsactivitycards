@@ -37,56 +37,56 @@ class metadata extends \core\persistent {
      * @return array
      */
     protected static function define_properties() {
-        return array(
-                'renderwidth'       => array(
+        return [
+                'renderwidth'       => [
                         'type'    => PARAM_INT,
                         'default' => 4,
-                ),
-                'overlaycardimage'       => array(
+                ],
+                'overlaycardimage'       => [
                         'type'    => PARAM_INT,
                         'default' => 0,
-                ),
-                'cleanandtruncatedescription' => array(
+                ],
+                'cleanandtruncatedescription' => [
                     'type' => PARAM_INT,
                     'default' => 0,
-                ),
-                'duration'   => array(
+                ],
+                'duration'   => [
                         'type'        => PARAM_INT,
                         'description' => 'duration',
-                ),
-                'cmid'   => array(
+                ],
+                'cmid'   => [
                         'type'        => PARAM_INT,
                         'description' => 'duration',
-                ),
-                'activitydescription' => array(
+                ],
+                'activitydescription' => [
                     'type' => PARAM_RAW,
                     'description' => 'The product description.',
                     'null' => NULL_ALLOWED,
                     'default' => '',
-                ),
-                'activitydescriptionformat' => array(
-                    'choices' => array(FORMAT_HTML, FORMAT_MOODLE, FORMAT_PLAIN, FORMAT_MARKDOWN),
+                ],
+                'activitydescriptionformat' => [
+                    'choices' => [FORMAT_HTML, FORMAT_MOODLE, FORMAT_PLAIN, FORMAT_MARKDOWN],
                     'type' => PARAM_INT,
-                    'default' => FORMAT_HTML
-                ),
-                'cardfooter' => array(
+                    'default' => FORMAT_HTML,
+                ],
+                'cardfooter' => [
                     'type' => PARAM_RAW,
                     'description' => 'The product description.',
                     'null' => NULL_ALLOWED,
                     'default' => '',
-                ),
-                'cardfooterformat' => array(
-                    'choices' => array(FORMAT_HTML, FORMAT_MOODLE, FORMAT_PLAIN, FORMAT_MARKDOWN),
+                ],
+                'cardfooterformat' => [
+                    'choices' => [FORMAT_HTML, FORMAT_MOODLE, FORMAT_PLAIN, FORMAT_MARKDOWN],
                     'type' => PARAM_INT,
-                    'default' => FORMAT_HTML
-                ),
-                'additionalcssclasses' => array(
+                    'default' => FORMAT_HTML,
+                ],
+                'additionalcssclasses' => [
                     'type' => PARAM_TEXT,
-                ),
-                'tactags' => array(
+                ],
+                'tactags' => [
                     'type' => PARAM_TEXT,
-                ),
-        );
+                ],
+        ];
     }
 
     public function formattedduration() {
