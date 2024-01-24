@@ -23,6 +23,7 @@
  * @copyright 2021, Andrew Hancox
  */
 
+use core\output\inplace_editable;
 use format_topicsactivitycards\metadata;
 
 defined('MOODLE_INTERNAL') || die();
@@ -116,7 +117,7 @@ class format_topicsactivitycards extends format_topics {
             return $courseformatoptionsforedit;
         } else {
             if ($courseformatoptions === false) {
-                $courseformatoptions = parent::course_format_options(false);
+                $courseformatoptions = parent::course_format_options();
                 unset($courseformatoptions['coursedisplay']);
 
                 $courseformatoptions['overridefixedwidthcoursepage'] = [
@@ -417,7 +418,7 @@ class format_topicsactivitycards extends format_topics {
         return $ajaxsupport;
     }
 
-    private $cmmetadatas = null;
+    private $cm_metadatas = null;
 
     public function get_cm_metadatas() {
         global $DB;
@@ -439,7 +440,7 @@ class format_topicsactivitycards extends format_topics {
         return $this->cm_metadatas;
     }
 
-    private $cmcardimages = null;
+    private $cm_cardimages = null;
 
     public function get_cm_cardimages() {
         if (isset($this->cm_cardimages)) {
@@ -466,7 +467,7 @@ class format_topicsactivitycards extends format_topics {
         return $this->cm_cardimages;
     }
 
-    private $sectioncardimages = null;
+    private $section_cardimages = null;
 
     public function get_section_cardimages() {
         if (isset($this->section_cardimages)) {
@@ -559,7 +560,7 @@ class format_topicsactivitycards extends format_topics {
         $options = parent::get_format_options($section);
 
         if ($section !== null) {
-            $courseformatoptions = $this->get_format_options(null);
+            $courseformatoptions = $this->get_format_options();
 
             if ($options['sectionheading'] == self::SECTIONHEADING_COURSEDEFAULT) {
                 $options['sectionheading'] = $courseformatoptions['sectionheading'];
@@ -679,7 +680,7 @@ function format_topicsactivitycards_showcoursemoduleelements($course, $section) 
 
     $courseformat = course_get_format($course);
     $sectionoptions = $courseformat->get_format_options((int)$section);
-    if ($sectionoptions['sectionlayout'] != \format_topicsactivitycards::SECTIONLAYOUT_CARDS) {
+    if ($sectionoptions['sectionlayout'] != format_topicsactivitycards::SECTIONLAYOUT_CARDS) {
         return false;
     }
 

@@ -33,9 +33,9 @@ function xmldb_format_topicsactivitycards_upgrade($oldversion) {
         $table = new xmldb_table('topicsactivitycards_metadata');
 
         // Adding fields to table message_popup_notifications.
-        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
-        $table->add_field('cmid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
-        $table->add_field('duration', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE);
+        $table->add_field('cmid', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL);
+        $table->add_field('duration', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL);
 
         $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
 
@@ -70,13 +70,8 @@ function xmldb_format_topicsactivitycards_upgrade($oldversion) {
     if ($oldversion < 2020061542) {
         $fs = new file_storage();
         $filestoshiftcontext = $DB->get_records('files', ['component' => 'format_topicsactivitycards']);
-        $contextidstopurge = [];
         foreach ($filestoshiftcontext as $file) {
             $fileobj = $fs->get_file_by_id($file->id);
-            $contextidstopurge[] = $fileobj->get_contextid();
-
-            $context = context::instance_by_id($fileobj->get_contextid());
-
             $filerecord = new stdClass();
             $filerecord->itemid = 0;
             $fs->create_file_from_storedfile($filerecord, $fileobj);

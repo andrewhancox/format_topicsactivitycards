@@ -108,8 +108,6 @@ class restore_format_topicsactivitycards_plugin extends restore_format_plugin {
      * This method is only executed if course configuration was overridden
      */
     public function after_restore_course() {
-        global $DB;
-
         $this->add_related_files('format_topicsactivitycards', 'sectioncardbackgroundimage', 'course_section');
     }
 }

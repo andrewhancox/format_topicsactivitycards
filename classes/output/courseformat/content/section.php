@@ -34,7 +34,7 @@ use stdClass;
 
 class section extends section_base {
 
-    public function export_for_template(\renderer_base $output): \stdClass {
+    public function export_for_template(renderer_base $output): stdClass {
         $model = parent::export_for_template($output);
         $format = $this->format;
         $section = $this->section;
@@ -50,8 +50,8 @@ class section extends section_base {
         }
 
         $model->contentcollapsed = !empty($sectionoptions['collapsedefault']);
-        $model->layoutcards = $sectionoptions['sectionlayout'] == \format_topicsactivitycards::SECTIONLAYOUT_CARDS;
-        $model->hidesummary = $sectionoptions['sectionheading'] != \format_topicsactivitycards::SECTIONHEADING_LINKEDCARD;
+        $model->layoutcards = $sectionoptions['sectionlayout'] == format_topicsactivitycards::SECTIONLAYOUT_CARDS;
+        $model->hidesummary = $sectionoptions['sectionheading'] != format_topicsactivitycards::SECTIONHEADING_LINKEDCARD;
 
         if (!empty($this->format->get_section_number())) {
             $model->returntocourselink = course_get_url($this->format->get_course()->id);
@@ -59,7 +59,7 @@ class section extends section_base {
 
         }
 
-        if ($sectionoptions['sectionheading'] == \format_topicsactivitycards::SECTIONHEADING_HEADER) {
+        if ($sectionoptions['sectionheading'] == format_topicsactivitycards::SECTIONHEADING_HEADER) {
             return $model;
         }
 
@@ -110,11 +110,11 @@ class section extends section_base {
         $format = $this->format;
 
         if (
-            $sectionoptions['sectionheading'] != \format_topicsactivitycards::SECTIONHEADING_LINKEDCARD
+            $sectionoptions['sectionheading'] != format_topicsactivitycards::SECTIONHEADING_LINKEDCARD
         ) {
             $hasdata = parent::add_cm_data($data, $output);
 
-            if ($sectionoptions['sectionheading'] == \format_topicsactivitycards::SECTIONHEADING_HEADER) {
+            if ($sectionoptions['sectionheading'] == format_topicsactivitycards::SECTIONHEADING_HEADER) {
                 return $hasdata;
             }
         }
@@ -146,7 +146,7 @@ class section extends section_base {
         return $result;
     }
 
-    public function get_template_name(\renderer_base $renderer): string {
+    public function get_template_name(renderer_base $renderer): string {
         return "format_topicsactivitycards/local/content/section";
     }
 }

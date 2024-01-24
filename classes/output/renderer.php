@@ -26,7 +26,6 @@
 namespace format_topicsactivitycards\output;
 
 use format_topics\output\renderer as section_renderer;
-use moodle_page;
 
 class renderer extends section_renderer {
 

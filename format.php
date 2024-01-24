@@ -53,11 +53,11 @@ if (empty($displaysection)) {
         }
         $cms = get_fast_modinfo($course)->get_cms();
 
-        if (!empty($cms[$cmid])) {
+        if (isset($cmid) && !empty($cms[$cmid])) {
             $redirectingcm = $cms[$cmid];
             $sectionoptions = $format->get_format_options($redirectingcm->sectionnum);
 
-            if ($sectionoptions['sectionheading'] == \format_topicsactivitycards::SECTIONHEADING_LINKEDCARD) {
+            if ($sectionoptions['sectionheading'] == format_topicsactivitycards::SECTIONHEADING_LINKEDCARD) {
                 $displaysection = $redirectingcm->sectionnum;
             }
         }
