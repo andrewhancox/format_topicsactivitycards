@@ -279,7 +279,7 @@ class format_topicsactivitycards extends format_topics {
         global $DB;
 
         $elements = parent::create_edit_form_elements($mform, $forsection);
-        $coursecontext = context_course::instance($this->get_courseid());
+        $coursecontext = $this->get_best_editing_context();
 
         if ($forsection) {
             $sectionid = required_param('id', PARAM_INT);
@@ -387,6 +387,16 @@ class format_topicsactivitycards extends format_topics {
         return true;
     }
 
+    private function get_best_editing_context() {
+        global $PAGE;
+
+        if (empty($this->courseid)) {
+            return $PAGE->context;
+        } else {
+            return $this->get_context();
+        }
+    }
+
     /**
      * @return array
      */
@@ -397,7 +407,7 @@ class format_topicsactivitycards extends format_topics {
 
         return ['maxfiles' => EDITOR_UNLIMITED_FILES,
             'maxbytes' => $SITE->maxbytes,
-            'context' => context_course::instance($this->get_courseid()), ];
+            'context' => $this->get_best_editing_context(), ];
     }
 
     public function uses_indentation(): bool {
