@@ -428,7 +428,7 @@ class format_topicsactivitycards extends format_topics {
         return $ajaxsupport;
     }
 
-    private $cm_metadatas = null;
+    private $cmmetadatas = null;
 
     public function get_cm_metadatas() {
         global $DB;
@@ -450,7 +450,7 @@ class format_topicsactivitycards extends format_topics {
         return $this->cm_metadatas;
     }
 
-    private $cm_cardimages = null;
+    private $cmcardimages = null;
 
     public function get_cm_cardimages() {
         if (isset($this->cm_cardimages)) {
@@ -477,7 +477,7 @@ class format_topicsactivitycards extends format_topics {
         return $this->cm_cardimages;
     }
 
-    private $section_cardimages = null;
+    private $sectioncardimages = null;
 
     public function get_section_cardimages() {
         if (isset($this->section_cardimages)) {
