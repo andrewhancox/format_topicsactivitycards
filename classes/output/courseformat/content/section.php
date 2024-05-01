@@ -53,7 +53,12 @@ class section extends section_base {
         $model->layoutcards = $sectionoptions['sectionlayout'] == format_topicsactivitycards::SECTIONLAYOUT_CARDS;
         $model->hidesummary = $sectionoptions['sectionheading'] != format_topicsactivitycards::SECTIONHEADING_LINKEDCARD;
 
-        if (!empty($this->format->get_section_number())) {
+        if (empty($this->format->get_section_number())) {
+            $addsectionclass = $format->get_output_classname('content\\addsection');
+            $addsection = new $addsectionclass($format);
+            $model->numsections = $addsection->export_for_template($output);
+            $model->insertafter = true;
+        } else {
             $model->returntocourselink = course_get_url($this->format->get_course()->id);
             return $model;
 
