@@ -1,6 +1,6 @@
 @format @format_topicsactivitycards
   #Taken directly from format_topics and format name changed.
-Feature: Sections can be edited and deleted in topics format
+Feature: Sections can be edited and deleted in topicsactivitycards format
   In order to rearrange my course contents
   As a teacher
   I need to edit and Delete topics
