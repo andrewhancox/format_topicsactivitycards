@@ -47,8 +47,10 @@ define(['jquery'], function ($) {
                     sender.toggleClass('badge-success', true);
                     sender.toggleClass('badge-info', false);
 
-                    $('[data-tactag-' + tagid + '="1"]').parents('.tactaggable').toggleClass('d-none', false); // If we're showing an activity then make sure the wrapping section is visible.
-                    $('[data-tactag-' + tagid + '="1"]').children('.tactaggable').toggleClass('d-none', false); // If we're showing a section then show all activities.
+                    // If we're showing an activity then make sure the wrapping section is visible.
+                    $('[data-tactag-' + tagid + '="1"]').parents('.tactaggable').toggleClass('d-none', false);
+                    // If we're showing a section then show all activities.
+                    $('[data-tactag-' + tagid + '="1"]').children('.tactaggable').toggleClass('d-none', false);
                     $('[data-tactag-' + tagid + '="1"]').toggleClass('d-none', false);
                 }
             });
