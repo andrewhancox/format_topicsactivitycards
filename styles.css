@@ -59,6 +59,9 @@
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.layoutcards .activity-basis .align-self-start.flex-md-row {
   flex-direction: column !important; }
 
+#page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.layoutcards .activity-grid .align-self-start.flex-md-row {
+  flex-direction: column !important; }
+
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.layoutcards .activity-inner-wrapper {
   border-radius: .5rem;
   border: 1px solid #dee2e6;
