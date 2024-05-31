@@ -393,7 +393,7 @@ class format_topicsactivitycards extends format_topics {
         if (empty($this->courseid)) {
             return $PAGE->context;
         } else {
-            return $this->get_context();
+            return context_course::instance($this->courseid);
         }
     }
 
