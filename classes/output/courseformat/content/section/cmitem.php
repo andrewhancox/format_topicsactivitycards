@@ -89,6 +89,11 @@ class cmitem extends cmitem_base {
 
             $model->duration = $metadata->formattedduration();
             $model->extraclasses = $metadata->get('additionalcssclasses');
+            if (!empty($metadata->get('fontawesomeicon'))) {
+                $model->fontawesomeicon = $output->pix_icon(
+                    explode(':', $metadata->get('fontawesomeicon'))[1], '', null, ['class' => 'text-dark']
+                );
+            }
         }
 
         $cardimages = $format->get_cm_cardimages();
