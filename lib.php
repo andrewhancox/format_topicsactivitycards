@@ -380,16 +380,17 @@ class format_topicsactivitycards extends format_topics {
             $sectionnum = $section;
         }
 
+        $formatoptions = $this->get_format_options($sectionnum);
+        $forcelink = isset($formatoptions['sectionheading']) && $formatoptions['sectionheading'] == self::SECTIONHEADING_LINKEDCARD;
+
+        if ($forcelink) {
+            $options['navigation'] = false;
+        }
+
         $url = parent::get_view_url($sectionnum, $options);
 
         if (isset($url)) {
-            $formatoptions = $this->get_format_options($sectionnum);
-
-            if (
-                isset($formatoptions['sectionheading'])
-                &&
-                $formatoptions['sectionheading'] == self::SECTIONHEADING_LINKEDCARD
-            ) {
+            if ($forcelink) {
                 $url->param('section', $sectionnum);
                 $url->set_anchor(null);
             }
