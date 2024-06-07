@@ -29,6 +29,7 @@ use context_course;
 use core_courseformat\output\local\content\section as section_base;
 use core_media_manager;
 use format_topicsactivitycards;
+use pix_icon;
 use renderer_base;
 use stdClass;
 
@@ -49,6 +50,7 @@ class section extends section_base {
             }
         }
 
+        $model->hidetitle = !empty($sectionoptions['hidetitle']);
         $model->contentcollapsed = !empty($sectionoptions['collapsedefault']);
         $model->layoutcards = $sectionoptions['sectionlayout'] == format_topicsactivitycards::SECTIONLAYOUT_CARDS;
         $model->hidesummary = $sectionoptions['sectionheading'] != format_topicsactivitycards::SECTIONHEADING_LINKEDCARD;
@@ -78,6 +80,11 @@ class section extends section_base {
         $cardimages = $format->get_section_cardimages();
         if (isset($cardimages[$this->section->id])) {
             $model->cardimage = $cardimages[$this->section->id];
+        }
+        if (!empty($sectionoptions['fontawesomeicon'])) {
+            $model->fontawesomeicon = $output->pix_icon(
+                explode(':', $sectionoptions['fontawesomeicon'])[1], '', null, ['class' => 'text-dark']
+            );
         }
 
         if (!empty($sectionoptions['sectioncardbackgroundvideo'])) {

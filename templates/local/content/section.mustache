@@ -86,6 +86,13 @@
         "highlightedlabel" : "Highlighted"
     }
 }}
+{{#hidetitle}}
+    <style>
+        .course-section-header[data-id="{{id}}"] {
+            display: none!important;
+        }
+    </style>
+{{/hidetitle}}
 <li id="section-{{num}}"
     class="section course-section main p-0 {{#onlysummary}} section-summary {{/onlysummary}} clearfix tactaggable
             {{#ishidden}} hidden {{/ishidden}} {{#iscurrent}} current {{/iscurrent}}
@@ -105,12 +112,19 @@
 >
     <div class="section-inner-wrapper h-100">
         {{#cardimage}}
-        <div class="tac-card-image">
-        <a class="tac-card-img-link b-block" href="{{{sectionlink}}}" title="{{header.name}}">
-        <div class="tac-card-img rounded-top" style="background-image: url('{{{cardimage}}}');"></div>
-        </a>
-        </div>
+            <div class="tac-card-image">
+                <a class="tac-card-img-link b-block" href="{{{sectionlink}}}" title="{{header.name}}">
+                    <div class="tac-card-img rounded-top" style="background-image: url('{{{cardimage}}}');"></div>
+                </a>
+            </div>
         {{/cardimage}}
+        {{#fontawesomeicon}}
+        <div class="h-25 w-100 d-flex justify-content-center p-2">
+                <a class="tac-card-img-link b-block icon-size-7" href="{{{sectionlink}}}" title="{{header.name}}">
+                    {{{fontawesomeicon}}}
+                </a>
+        </div>
+        {{/fontawesomeicon}}
         {{#cardvideo}}
         <div class="tac-card-video">
             {{{cardvideo}}}

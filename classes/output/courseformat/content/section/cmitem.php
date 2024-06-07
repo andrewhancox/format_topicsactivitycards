@@ -33,6 +33,16 @@ class cmitem extends cmitem_base {
         $model = parent::export_for_template($output);
         $format = $this->format;
 
+        if (
+            !isset($model->cmformat->activityinfo->uservisible)
+            &&
+            isset($model->cmformat->activityinfo)
+            &&
+            $this->mod->uservisible
+        ) {
+            $model->cmformat->activityinfo->uservisible = true;
+        }
+
         $sectionoptions = $this->format->get_format_options($this->section);
 
         $model->tactagids = [];
@@ -89,6 +99,11 @@ class cmitem extends cmitem_base {
 
             $model->duration = $metadata->formattedduration();
             $model->extraclasses = $metadata->get('additionalcssclasses');
+            if (!empty($metadata->get('fontawesomeicon'))) {
+                $model->fontawesomeicon = $output->pix_icon(
+                    explode(':', $metadata->get('fontawesomeicon'))[1], '', null, ['class' => 'text-dark']
+                );
+            }
         }
 
         $cardimages = $format->get_cm_cardimages();

@@ -35,6 +35,7 @@ $string['newsectionname'] = 'New name for section {$a}';
 $string['pluginname'] = 'Topics activity cards format';
 $string['sectionname'] = 'Section';
 $string['showfromothers'] = 'Show section';
+$string['hidetitle'] = 'Hide title';
 
 $string['returntocourse'] = 'Back to course';
 $string['cardimage'] = 'Card image';
@@ -72,6 +73,7 @@ $string['section0_onsectionpageslabel'] = 'Show section zero on linked sections'
 $string['done'] = 'Done';
 $string['todo'] = 'To do';
 $string['failed'] = 'Failed';
+$string['icon'] = 'FA Icon';
 
 $string['tactagsheader'] = 'Tags intro';
 $string['tactags'] = 'Tags for sorting on course home (one per line)';

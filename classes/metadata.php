@@ -86,6 +86,10 @@ class metadata extends \core\persistent {
                 'tactags' => [
                     'type' => PARAM_TEXT,
                 ],
+                'fontawesomeicon' => [
+                    'type' => PARAM_TEXT,
+                    'default' => '',
+                ],
         ];
     }
 

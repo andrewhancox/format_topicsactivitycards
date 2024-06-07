@@ -23,6 +23,7 @@
  * @copyright 2021, Andrew Hancox
  */
 
+use core\output\icon_system;
 use core\output\inplace_editable;
 use format_topicsactivitycards\metadata;
 
@@ -208,6 +209,13 @@ class format_topicsactivitycards extends format_topics {
             ],
         ];
 
+        $retval['hidetitle'] = [
+            'default' => false,
+            'type' => PARAM_BOOL,
+            'label' => new lang_string('hidetitle', 'format_topicsactivitycards'),
+            'element_type' => 'advcheckbox',
+        ];
+
         $retval['collapsible'] = [
             'default' => false,
             'type' => PARAM_BOOL,
@@ -261,6 +269,16 @@ class format_topicsactivitycards extends format_topics {
                     $this->texteditoroptions(),
                 ],
             ];
+
+            $retval['fontawesomeicon'] = [
+                'default' => '',
+                'type' => PARAM_TEXT,
+                'label' => get_string('icon', 'format_topicsactivitycards'),
+                'element_type' => 'autocomplete',
+                'element_attributes' => [
+                    self::get_fontawesome_icon_options(),
+                ],
+            ];
         } else {
             $retval['overridesectionsummaryformat'] = [
                 'default' => FORMAT_HTML,
@@ -269,6 +287,10 @@ class format_topicsactivitycards extends format_topics {
             $retval['overridesectionsummary'] = [
                 'default' => '',
                 'type' => PARAM_RAW,
+            ];
+            $retval['fontawesomeicon'] = [
+                'default' => '',
+                'type' => PARAM_TEXT,
             ];
         }
 
@@ -365,16 +387,17 @@ class format_topicsactivitycards extends format_topics {
             $sectionnum = $section;
         }
 
+        $formatoptions = $this->get_format_options($sectionnum);
+        $forcelink = isset($formatoptions['sectionheading']) && $formatoptions['sectionheading'] == self::SECTIONHEADING_LINKEDCARD;
+
+        if ($forcelink) {
+            $options['navigation'] = false;
+        }
+
         $url = parent::get_view_url($sectionnum, $options);
 
         if (isset($url)) {
-            $formatoptions = $this->get_format_options($sectionnum);
-
-            if (
-                isset($formatoptions['sectionheading'])
-                &&
-                $formatoptions['sectionheading'] == self::SECTIONHEADING_LINKEDCARD
-            ) {
+            if ($forcelink) {
                 $url->param('section', $sectionnum);
                 $url->set_anchor(null);
             }
@@ -393,7 +416,7 @@ class format_topicsactivitycards extends format_topics {
         if (empty($this->courseid)) {
             return $PAGE->context;
         } else {
-            return $this->get_context();
+            return context_course::instance($this->courseid);
         }
     }
 
@@ -652,6 +675,20 @@ class format_topicsactivitycards extends format_topics {
 
         return $this->tactags;
     }
+
+    /**
+     * @return array
+     * @throws coding_exception
+     */
+    public static function get_fontawesome_icon_options(): array {
+        $fa = icon_system::instance();
+        $iconmap = $fa->get_icon_name_map();
+        $options[0] = '';
+        foreach ($iconmap as $key => $value) {
+            $options[$key] = "$key ($value)";
+        }
+        return $options;
+    }
 }
 
 /**
@@ -744,6 +781,8 @@ function format_topicsactivitycards_coursemodule_standard_elements($formwrapper,
     $form->addElement('filemanager', 'cardbackgroundimage_filemanager', get_string('cardimage', 'format_topicsactivitycards'), '',
         format_topicsactivitycards_cardbackgroundimage_filemanageroptions());
 
+    $form->addElement('autocomplete', 'fontawesomeicon', get_string('icon', 'format_topicsactivitycards'), format_topicsactivitycards::get_fontawesome_icon_options());
+
     $values = $metadata->to_record();
     $values = file_prepare_standard_filemanager($values,
         'cardbackgroundimage',
@@ -806,6 +845,7 @@ function format_topicsactivitycards_coursemodule_edit_post_actions($data, $cours
     $metadata->set('cardfooterformat', $data->cardfooterformat);
     $metadata->set('additionalcssclasses', $data->additionalcssclasses);
     $metadata->set('tactags', $data->tactags);
+    $metadata->set('fontawesomeicon', $data->fontawesomeicon ?? '');
 
     if (empty($metadata->get('id'))) {
         $metadata->save();
