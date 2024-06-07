@@ -209,6 +209,13 @@ class format_topicsactivitycards extends format_topics {
             ],
         ];
 
+        $retval['hidetitle'] = [
+            'default' => false,
+            'type' => PARAM_BOOL,
+            'label' => new lang_string('hidetitle', 'format_topicsactivitycards'),
+            'element_type' => 'advcheckbox',
+        ];
+
         $retval['collapsible'] = [
             'default' => false,
             'type' => PARAM_BOOL,

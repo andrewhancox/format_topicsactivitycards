@@ -50,6 +50,7 @@ class section extends section_base {
             }
         }
 
+        $model->hidetitle = !empty($sectionoptions['hidetitle']);
         $model->contentcollapsed = !empty($sectionoptions['collapsedefault']);
         $model->layoutcards = $sectionoptions['sectionlayout'] == format_topicsactivitycards::SECTIONLAYOUT_CARDS;
         $model->hidesummary = $sectionoptions['sectionheading'] != format_topicsactivitycards::SECTIONHEADING_LINKEDCARD;

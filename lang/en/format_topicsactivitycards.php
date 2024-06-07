@@ -35,6 +35,7 @@ $string['newsectionname'] = 'New name for section {$a}';
 $string['pluginname'] = 'Topics activity cards format';
 $string['sectionname'] = 'Section';
 $string['showfromothers'] = 'Show section';
+$string['hidetitle'] = 'Hide title';
 
 $string['returntocourse'] = 'Back to course';
 $string['cardimage'] = 'Card image';
