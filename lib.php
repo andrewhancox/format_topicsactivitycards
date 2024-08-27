@@ -815,7 +815,7 @@ function format_topicsactivitycards_coursemodule_standard_elements($formwrapper,
 function format_topicsactivitycards_coursemodule_edit_post_actions($data, $course) {
     global $SITE;
 
-    if (!format_topicsactivitycards_showcoursemoduleelements($course, $data->section)) {
+    if (!isset($data->section) || !format_topicsactivitycards_showcoursemoduleelements($course, $data->section)) {
         return $data;
     }
 
