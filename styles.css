@@ -78,8 +78,8 @@
   border: 0 !important;
   padding: 1em;
 }
-#page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container course-description-item, #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .description, #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .description-inner,
-#page-course-view-topicsactivitycards #page ul.topicsactivitycards .activity.tac-container .activity-item course-description-item,
+#page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .course-description-item, #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .description, #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .description-inner,
+#page-course-view-topicsactivitycards #page ul.topicsactivitycards .activity.tac-container .activity-item .course-description-item,
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .activity.tac-container .activity-item .description,
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .activity.tac-container .activity-item .description-inner {
   background: none;
