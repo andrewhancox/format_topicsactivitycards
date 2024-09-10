@@ -1,126 +1,121 @@
-#page-course-view-topicsactivitycards #page #collapsesections {
-    display: none;
+#page-course-view-topicsactivitycards #page .section .activity {
+  list-style: none;
+  padding: 0.25rem 0;
 }
-
+#page-course-view-topicsactivitycards #page #region-main {
+  padding: 0;
+}
+#page-course-view-topicsactivitycards #page #region-main > div {
+  padding: 0;
+}
+#page-course-view-topicsactivitycards #page #collapsesections {
+  display: none;
+}
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards,
 #page-course-view-topicsactivitycards #page .topicsactivitycards .layoutcards .course-content-item-content ul.section {
-    display: flex !important;
-    flex-wrap: wrap;
+  display: flex !important;
+  flex-wrap: wrap;
+  padding: 0;
 }
-
 #page-course-view-topicsactivitycards #page .hidesummary .section-summary-activities {
-    display: none;
+  display: none;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-img {
-    background-size: cover;
-    background-position: center;
+  background-size: cover;
+  background-position: center;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-img,
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .mediaplugin.mediaplugin_vimeo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-image,
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-video {
-    height: 0 !important;
-    position: relative;
-    overflow: hidden;
-    padding-top: 56.25%;
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
+  height: 0 !important;
+  position: relative;
+  overflow: hidden;
+  padding-top: 56.25%;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-image .mediaplugin,
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-video .mediaplugin {
-    margin: 0;
+  margin: 0;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-image iframe,
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-video iframe {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-duration-circle {
-    height: 3.5rem;
-    width: 3.5rem;
-    line-height: 1;
+  height: 3.5rem;
+  width: 3.5rem;
+  line-height: 1;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-tags .badge {
-    background: #d9dde0;
-    color: #212529;
+  background: #d9dde0;
+  color: #212529;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-tags b {
-    font-weight: normal;
-    font-size: small;
+  font-weight: normal;
+  font-size: small;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .course-section {
-    padding: 0;
-    margin-bottom: .5rem;
-    margin-top: .5rem;
+  padding: 0;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  border-bottom: 0;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.layoutcards .activity-basis .align-self-start.flex-md-row {
-    flex-direction: column !important;
+  flex-direction: column !important;
 }
-
-#page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.layoutcards .activity-inner-wrapper {
-    border-radius: .5rem;
-    border: 1px solid #dee2e6;
-    padding: 0 !important;
-}
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container,
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .activity.tac-container .activity-item {
-    border: 0 !important;
-    padding: 1em;
+  border: 0 !important;
+  padding: 1em;
 }
-
+#page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container course-description-item, #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .description, #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .description-inner,
+#page-course-view-topicsactivitycards #page ul.topicsactivitycards .activity.tac-container .activity-item course-description-item,
+#page-course-view-topicsactivitycards #page ul.topicsactivitycards .activity.tac-container .activity-item .description,
+#page-course-view-topicsactivitycards #page ul.topicsactivitycards .activity.tac-container .activity-item .description-inner {
+  background: none;
+  border: none;
+}
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .activity:not(.tac-container) {
-    padding: 0.5em;
+  padding: 0.5em;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .activity:not(.tac-container) .activity-item {
-    padding: 0;
+  padding: 0;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .activity:not(.tac-container):not(:last-child) .activity-item {
-    border: 0;
-    border-radius: 0;
-    border-bottom: 1px solid #dee2e6;
-    padding-bottom: 15px;
+  border: 0;
+  border-radius: 0;
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 15px;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .activity:not(.tac-container):last-child .activity-item {
-    border: 0;
+  border: 0;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .section-inner-wrapper {
-    border-radius: .5rem;
-    border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  border: 1px solid #dee2e6;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .section-inner-wrapper .course-section-header {
-    padding: .5rem;
-    padding-bottom: 0;
+  padding: 0.5rem;
+  padding-bottom: 0;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .section-inner-wrapper .content {
-    padding: .5rem;
+  padding: 0.5rem;
 }
 
 #page-course-view-topicsactivitycards.overridefixedwidthcoursepage #topofscroll,
 #page-course-view-topicsactivitycards.overridefixedwidthcoursepage #page-header,
 #page-course-view-topicsactivitycards.overridefixedwidthcoursepage .secondary-navigation .navigation .nav-tabs {
-    max-width: none !important;
+  max-width: none !important;
 }
+
+/*# sourceMappingURL=styles.css.map */

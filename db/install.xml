@@ -19,6 +19,7 @@
                 <FIELD NAME="additionalcssclasses" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
                 <FIELD NAME="tactags" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
                 <FIELD NAME="fontawesomeicon" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false"/>
+                <FIELD NAME="viewbutton" TYPE="int" LENGTH="1" NOTNULL="false" SEQUENCE="false"/>
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id"/>

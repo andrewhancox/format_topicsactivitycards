@@ -90,6 +90,10 @@ class metadata extends \core\persistent {
                     'type' => PARAM_TEXT,
                     'default' => '',
                 ],
+                'viewbutton' => [
+                    'type'    => PARAM_INT,
+                    'default' => 0,
+                ],
         ];
     }
 

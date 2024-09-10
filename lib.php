@@ -783,6 +783,8 @@ function format_topicsactivitycards_coursemodule_standard_elements($formwrapper,
 
     $form->addElement('autocomplete', 'fontawesomeicon', get_string('icon', 'format_topicsactivitycards'), format_topicsactivitycards::get_fontawesome_icon_options());
 
+    $form->addElement('advcheckbox', 'viewbutton', '', get_string('viewbutton', 'format_topicsactivitycards'));
+
     $values = $metadata->to_record();
     $values = file_prepare_standard_filemanager($values,
         'cardbackgroundimage',
@@ -846,6 +848,7 @@ function format_topicsactivitycards_coursemodule_edit_post_actions($data, $cours
     $metadata->set('additionalcssclasses', $data->additionalcssclasses);
     $metadata->set('tactags', $data->tactags);
     $metadata->set('fontawesomeicon', $data->fontawesomeicon ?? '');
+    $metadata->set('viewbutton', $data->viewbutton ?? false);
 
     if (empty($metadata->get('id'))) {
         $metadata->save();

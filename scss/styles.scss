@@ -1,4 +1,15 @@
 #page-course-view-topicsactivitycards #page {
+  .section .activity {
+    list-style: none;
+    padding: 0.25rem 0;
+  }
+
+  #region-main {
+    padding: 0;
+  }
+  #region-main > div {
+    padding: 0;
+  }
   #collapsesections {
     display: none;
   }
@@ -7,6 +18,7 @@
   .topicsactivitycards .layoutcards .course-content-item-content ul.section {
     display: flex !important;
     flex-wrap: wrap;
+    padding: 0;
   }
 
   .hidesummary .section-summary-activities {
@@ -69,17 +81,12 @@
       padding: 0;
       margin-bottom: .5rem;
       margin-top: .5rem;
+      border-bottom: 0;
     }
 
     li.section.layoutcards {
       .activity-basis .align-self-start.flex-md-row {
         flex-direction: column !important;
-      }
-
-      .activity-inner-wrapper {
-        border-radius: .5rem;
-        border: 1px solid #dee2e6;
-        padding: 0 !important;
       }
     }
 
@@ -87,6 +94,11 @@
     .activity.tac-container .activity-item {
       border: 0 !important;
       padding: 1em;
+
+      course-description-item, .description, .description-inner {
+        background: none;
+        border: none;
+      }
     }
 
     li.section.tac-container .activity:not(.tac-container) {
