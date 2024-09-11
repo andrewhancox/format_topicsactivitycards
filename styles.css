@@ -1,3 +1,6 @@
+#page-course-view-topicsactivitycards #page li.activity > div:not(.activity-item) {
+  padding: 0;
+}
 #page-course-view-topicsactivitycards #page .section .activity {
   list-style: none;
   padding: 0.25rem 0;

@@ -118,6 +118,24 @@
                 {{> core_courseformat/local/content/cm}}
             {{/ core_courseformat/local/content/cm}}
         {{/cmformat}}
+
+        {{#viewbutton}}
+        <div class="activity-item">
+            {{#cmformat.activityinfo.uservisible}}
+                <a href="{{cmformat.url}}"
+                   class="btn {{#cmformat.activityinfo.overallcomplete}}btn-success{{/cmformat.activityinfo.overallcomplete}}{{^cmformat.activityinfo.overallcomplete}}btn-outline-primary{{/cmformat.activityinfo.overallcomplete}} d-block {{cmformat.linkclasses}} aalink"
+                   onclick="{{{cmformat.onclick}}}">
+
+                    {{#cmformat.activityinfo.overallcomplete}}
+                        {{#str}}completed, format_topicsactivitycards{{/str}}
+                    {{/cmformat.activityinfo.overallcomplete}}
+                    {{^cmformat.activityinfo.overallcomplete}}
+                        {{#str}}view, format_topicsactivitycards{{/str}}
+                    {{/cmformat.activityinfo.overallcomplete}}
+                </a>
+            {{/cmformat.activityinfo.uservisible}}
+        </div>
+        {{/viewbutton}}
     </div>
 </li>
 {{/layoutlist}}
