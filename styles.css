@@ -5,6 +5,11 @@
   list-style: none;
   padding: 0.25rem 0;
 }
+#page-course-view-topicsactivitycards #page .section .activity .activity-item .viewbutton {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
 #page-course-view-topicsactivitycards #page #region-main {
   padding: 0;
 }
@@ -88,6 +93,10 @@
   background: none;
   border: none;
 }
+#page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .course-description-item,
+#page-course-view-topicsactivitycards #page ul.topicsactivitycards .activity.tac-container .activity-item .course-description-item {
+  padding: 0;
+}
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .activity:not(.tac-container) {
   padding: 0.5em;
 }
@@ -110,9 +119,6 @@
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .section-inner-wrapper .course-section-header {
   padding: 0.5rem;
   padding-bottom: 0;
-}
-#page-course-view-topicsactivitycards #page ul.topicsactivitycards .section-inner-wrapper .content {
-  padding: 0.5rem;
 }
 
 #page-course-view-topicsactivitycards.overridefixedwidthcoursepage #topofscroll,
