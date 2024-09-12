@@ -5,10 +5,14 @@
   list-style: none;
   padding: 0.25rem 0;
 }
-#page-course-view-topicsactivitycards #page .section .activity .activity-item.viewbutton {
+#page-course-view-topicsactivitycards #page .section .activity .containsviewbutton .activity-item {
+  padding-bottom: 4em;
+}
+#page-course-view-topicsactivitycards #page .section .activity .containsviewbutton .activity-item.viewbutton {
   position: absolute;
   bottom: 0;
   width: 100%;
+  padding-bottom: 1em;
 }
 #page-course-view-topicsactivitycards #page #region-main {
   padding: 0;
