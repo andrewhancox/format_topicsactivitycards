@@ -6,15 +6,17 @@
   .section .activity {
     list-style: none;
     padding: 0.25rem 0;
-    .containsviewbutton .activity-item {
-      padding-bottom: 4em;
+
+
+    .containsviewbutton .activity-item:not(.viewbutton) {
+      padding-bottom: 4em!important;
     }
 
     .containsviewbutton .activity-item.viewbutton {
       position: absolute;
       bottom: 0;
       width: 100%;
-      padding-bottom: 1em;
+      padding-bottom: 1em!important;
     }
   }
 
