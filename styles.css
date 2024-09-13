@@ -121,6 +121,9 @@
   padding: 0.5rem;
   padding-bottom: 0;
 }
+#page-course-view-topicsactivitycards #page ul.topicsactivitycards .section-inner-wrapper .course-content-item-content .course-description-item.summarytext {
+  padding-left: 0.5em;
+}
 
 #page-course-view-topicsactivitycards.overridefixedwidthcoursepage #topofscroll,
 #page-course-view-topicsactivitycards.overridefixedwidthcoursepage #page-header,
