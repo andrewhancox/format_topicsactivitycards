@@ -159,3 +159,101 @@
     max-width: none !important;
   }
 }
+
+
+
+$light:         #eaeaea;
+$success:       #83C55B;
+$body-color:                #010101;
+
+
+$doughnut-size: 100px;
+
+$stroke: 7.5px;
+$radius: calc($doughnut-size / 2) - calc($stroke * 2);
+
+@function pi() {
+  @return 3.14159265359;
+}
+
+$circumference: $radius * 2 * pi();
+$doughnut-empty-colour: $light;
+$doughnut-fill-colour: $success;
+$doughnut-text-colour: $body-color;
+
+.progress-chart-container {
+  height: $doughnut-size;
+  width: $doughnut-size;
+
+  .progress-doughnut {
+    height: $doughnut-size;
+    width: $doughnut-size;
+
+    .progress-background {
+      width: $doughnut-size - ( 3 * $stroke);
+      height: $doughnut-size - ( 3 * $stroke);
+      top: (1.5 * $stroke);
+      left: (1.5 * $stroke);
+      border-radius: 50%;
+      border: $stroke solid $doughnut-empty-colour;
+      background-color: white;
+    }
+    .progress-text {
+      top: 50%;
+      /*rtl:ignore*/
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: $doughnut-text-colour;
+
+      &.has-percent {
+        color: $doughnut-text-colour;
+      }
+    }
+
+    .progress-indicator {
+      height: $doughnut-size;
+      width: $doughnut-size;
+
+      svg {
+        position: relative;
+        height: $doughnut-size;
+        width: $doughnut-size;
+
+        .circle {
+          stroke-width: 7px; // SHAME - magic number.
+          stroke: $success;
+          fill: none;
+          stroke-dasharray: $circumference $circumference;
+          stroke-dashoffset: $circumference;
+          transform: rotate(-90deg);
+          transform-origin: 50% 50%;
+          stroke-linecap: round;
+
+          @for $i from 1 through 100 {
+            &.percent-#{$i} {
+              stroke-dashoffset: calc($circumference - ($i / 100 * $circumference));
+            }
+          }
+
+          // When 100% progress...
+          &.percent-100 {
+            stroke-dashoffset: 0; // Magic number for full circle.
+          }
+        }
+      }
+    }
+
+    &.completed {
+      .progress-indicator {
+        svg {
+          .circle {
+            stroke: $success;
+          }
+        }
+      }
+      .progress-text {
+        color: $success;
+      }
+    }
+  }
+}

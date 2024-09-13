@@ -81,3 +81,4 @@ $string['tactags'] = 'Tags for sorting on course home (one per line)';
 $string['viewbutton'] = 'Replace activity with name with view button';
 $string['view'] = 'View';
 $string['completed'] = 'Completed';
+$string['showcompletionstate'] = 'Show completion state in header';
