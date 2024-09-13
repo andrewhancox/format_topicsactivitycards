@@ -79,11 +79,8 @@
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .course-section {
   padding: 0;
   margin-bottom: 0.5rem;
-  margin-top: 0.5rem;
+  margin-top: 1.5rem;
   border-bottom: 0;
-}
-#page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.layoutcards .activity-basis .align-self-start.flex-md-row {
-  flex-direction: column !important;
 }
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container,
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .activity.tac-container .activity-item {
