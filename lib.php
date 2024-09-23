@@ -49,10 +49,13 @@ class format_topicsactivitycards extends format_topics {
         if ($format_options['overridefixedwidthcoursepage'] == self::PAGELAYOUT_FULLWIDTH) {
             $page->add_body_class('overridefixedwidthcoursepage');
         }
-
         global $OUTPUT;
         $course = $this->get_course();
-        if (!empty($format_options['showcompletionstate']) && $course->enablecompletion) {
+        if (
+            strpos($page->pagetype, 'course-view') === 0
+            && !empty($format_options['showcompletionstate'])
+            && $course->enablecompletion)
+        {
             $page->add_header_action
             ($OUTPUT->render_from_template('format_topicsactivitycards/progress_doughnut', [
                 'statuspercentage' => number_format(\core_completion\progress::get_course_progress_percentage($course)),
