@@ -97,6 +97,7 @@
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .course-description-item,
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .activity.tac-container .activity-item .course-description-item {
   padding: 0;
+  margin-top: 0;
 }
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .activity:not(.tac-container) {
   padding: 0.5em;
