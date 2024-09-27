@@ -6,7 +6,7 @@
   padding: 0.25rem 0;
 }
 #page-course-view-topicsactivitycards #page .section .activity .containsviewbutton .activity-item:not(.viewbutton) {
-  padding-bottom: 4em !important;
+  padding-bottom: 50px !important;
 }
 #page-course-view-topicsactivitycards #page .section .activity .containsviewbutton .activity-item.viewbutton {
   position: absolute;
