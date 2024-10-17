@@ -112,7 +112,7 @@ class cmitem extends cmitem_base {
         }
 
         $model->taglist = $output->tag_list(core_tag_tag::get_item_tags('core', 'course_modules', $this->mod->id));
-        if (!empty($metadata->get('viewbutton'))) {
+        if (!empty($metadata) && !empty($metadata->get('viewbutton'))) {
             $model->viewbutton = true;
         }
         return $model;
