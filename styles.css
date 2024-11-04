@@ -37,8 +37,7 @@
   background-position: center;
 }
 @media (min-width: 768px) {
-  #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-container.col-12 .tac-card-image,
-  #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-container.col-12 .tac-card-video, #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-container.col-md-12 .tac-card-image,
+  #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-container.col-md-12 .tac-card-image,
   #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-container.col-md-12 .tac-card-video {
     padding-top: 28%;
   }
