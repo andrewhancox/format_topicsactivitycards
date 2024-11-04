@@ -36,6 +36,13 @@
   background-size: cover;
   background-position: center;
 }
+@media (min-width: 768px) {
+  #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-container.col-12 .tac-card-image,
+  #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-container.col-12 .tac-card-video, #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-container.col-md-12 .tac-card-image,
+  #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-container.col-md-12 .tac-card-video {
+    padding-top: 28%;
+  }
+}
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-img,
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .mediaplugin.mediaplugin_vimeo {
   position: absolute;
@@ -487,5 +494,3 @@
 .progress-chart-container .progress-doughnut.completed .progress-text {
   color: #83C55B;
 }
-
-/*# sourceMappingURL=styles.css.map */

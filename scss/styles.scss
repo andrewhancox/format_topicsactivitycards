@@ -47,6 +47,15 @@
       background-position: center;
     }
 
+    @media (min-width:768px) {
+      .tac-container.col-12, .tac-container.col-md-12 {
+        .tac-card-image,
+        .tac-card-video {
+          padding-top: 28%;
+        }
+      }
+    }
+
     .tac-card-img,
     .mediaplugin.mediaplugin_vimeo {
       position: absolute;
