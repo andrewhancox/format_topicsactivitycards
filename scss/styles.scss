@@ -1,4 +1,31 @@
 #page-course-view-topicsactivitycards #page {
+  li.activity > div:not(.activity-item) {
+    padding: 0;
+  }
+
+  .section .activity {
+    list-style: none;
+    padding: 0.25rem 0;
+
+
+    .containsviewbutton .activity-item:not(.viewbutton) {
+      padding-bottom: 50px!important;
+    }
+
+    .containsviewbutton .activity-item.viewbutton {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      padding-bottom: 1em!important;
+    }
+  }
+
+  #region-main {
+    padding: 0;
+  }
+  #region-main > div {
+    padding: 0;
+  }
   #collapsesections {
     display: none;
   }
@@ -7,6 +34,7 @@
   .topicsactivitycards .layoutcards .course-content-item-content ul.section {
     display: flex !important;
     flex-wrap: wrap;
+    padding: 0;
   }
 
   .hidesummary .section-summary-activities {
@@ -17,6 +45,15 @@
     .tac-card-img {
       background-size: cover;
       background-position: center;
+    }
+
+    @media (min-width:768px) {
+      .tac-container.col-md-12 {
+        .tac-card-image,
+        .tac-card-video {
+          padding-top: 28%;
+        }
+      }
     }
 
     .tac-card-img,
@@ -68,25 +105,23 @@
     .course-section {
       padding: 0;
       margin-bottom: .5rem;
-      margin-top: .5rem;
-    }
-
-    li.section.layoutcards {
-      .activity-basis .align-self-start.flex-md-row {
-        flex-direction: column !important;
-      }
-
-      .activity-inner-wrapper {
-        border-radius: .5rem;
-        border: 1px solid #dee2e6;
-        padding: 0 !important;
-      }
+      margin-top: 1.5rem;
+      border-bottom: 0;
     }
 
     li.section.tac-container,
     .activity.tac-container .activity-item {
       border: 0 !important;
       padding: 1em;
+
+      .course-description-item, .description, .description-inner {
+        background: none;
+        border: none;
+      }
+      .course-description-item{
+        padding: 0;
+        margin-top: 0;
+      }
     }
 
     li.section.tac-container .activity:not(.tac-container) {
@@ -119,8 +154,8 @@
         padding-bottom: 0;
       }
 
-      .content {
-        padding: .5rem;
+      .course-content-item-content .course-description-item.summarytext {
+        padding-left: 0.5em;
       }
     }
   }
@@ -132,5 +167,103 @@
   #page-header,
   .secondary-navigation .navigation .nav-tabs {
     max-width: none !important;
+  }
+}
+
+
+
+$light:         #eaeaea;
+$success:       #83C55B;
+$body-color:                #010101;
+
+
+$doughnut-size: 100px;
+
+$stroke: 7.5px;
+$radius: calc($doughnut-size / 2) - calc($stroke * 2);
+
+@function pi() {
+  @return 3.14159265359;
+}
+
+$circumference: $radius * 2 * pi();
+$doughnut-empty-colour: $light;
+$doughnut-fill-colour: $success;
+$doughnut-text-colour: $body-color;
+
+.progress-chart-container {
+  height: $doughnut-size;
+  width: $doughnut-size;
+
+  .progress-doughnut {
+    height: $doughnut-size;
+    width: $doughnut-size;
+
+    .progress-background {
+      width: $doughnut-size - ( 3 * $stroke);
+      height: $doughnut-size - ( 3 * $stroke);
+      top: (1.5 * $stroke);
+      left: (1.5 * $stroke);
+      border-radius: 50%;
+      border: $stroke solid $doughnut-empty-colour;
+      background-color: white;
+    }
+    .progress-text {
+      top: 50%;
+      /*rtl:ignore*/
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: $doughnut-text-colour;
+
+      &.has-percent {
+        color: $doughnut-text-colour;
+      }
+    }
+
+    .progress-indicator {
+      height: $doughnut-size;
+      width: $doughnut-size;
+
+      svg {
+        position: relative;
+        height: $doughnut-size;
+        width: $doughnut-size;
+
+        .circle {
+          stroke-width: 7px; // SHAME - magic number.
+          stroke: $success;
+          fill: none;
+          stroke-dasharray: $circumference $circumference;
+          stroke-dashoffset: $circumference;
+          transform: rotate(-90deg);
+          transform-origin: 50% 50%;
+          stroke-linecap: round;
+
+          @for $i from 1 through 100 {
+            &.percent-#{$i} {
+              stroke-dashoffset: calc($circumference - ($i / 100 * $circumference));
+            }
+          }
+
+          // When 100% progress...
+          &.percent-100 {
+            stroke-dashoffset: 0; // Magic number for full circle.
+          }
+        }
+      }
+    }
+
+    &.completed {
+      .progress-indicator {
+        svg {
+          .circle {
+            stroke: $success;
+          }
+        }
+      }
+      .progress-text {
+        color: $success;
+      }
+    }
   }
 }

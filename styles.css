@@ -1,126 +1,495 @@
-#page-course-view-topicsactivitycards #page #collapsesections {
-    display: none;
+#page-course-view-topicsactivitycards #page li.activity > div:not(.activity-item) {
+  padding: 0;
 }
-
+#page-course-view-topicsactivitycards #page .section .activity {
+  list-style: none;
+  padding: 0.25rem 0;
+}
+#page-course-view-topicsactivitycards #page .section .activity .containsviewbutton .activity-item:not(.viewbutton) {
+  padding-bottom: 50px !important;
+}
+#page-course-view-topicsactivitycards #page .section .activity .containsviewbutton .activity-item.viewbutton {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding-bottom: 1em !important;
+}
+#page-course-view-topicsactivitycards #page #region-main {
+  padding: 0;
+}
+#page-course-view-topicsactivitycards #page #region-main > div {
+  padding: 0;
+}
+#page-course-view-topicsactivitycards #page #collapsesections {
+  display: none;
+}
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards,
 #page-course-view-topicsactivitycards #page .topicsactivitycards .layoutcards .course-content-item-content ul.section {
-    display: flex !important;
-    flex-wrap: wrap;
+  display: flex !important;
+  flex-wrap: wrap;
+  padding: 0;
 }
-
 #page-course-view-topicsactivitycards #page .hidesummary .section-summary-activities {
-    display: none;
+  display: none;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-img {
-    background-size: cover;
-    background-position: center;
+  background-size: cover;
+  background-position: center;
 }
-
+@media (min-width: 768px) {
+  #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-container.col-md-12 .tac-card-image,
+  #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-container.col-md-12 .tac-card-video {
+    padding-top: 28%;
+  }
+}
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-img,
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .mediaplugin.mediaplugin_vimeo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-image,
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-video {
-    height: 0 !important;
-    position: relative;
-    overflow: hidden;
-    padding-top: 56.25%;
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
+  height: 0 !important;
+  position: relative;
+  overflow: hidden;
+  padding-top: 56.25%;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-image .mediaplugin,
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-video .mediaplugin {
-    margin: 0;
+  margin: 0;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-image iframe,
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-video iframe {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-duration-circle {
-    height: 3.5rem;
-    width: 3.5rem;
-    line-height: 1;
+  height: 3.5rem;
+  width: 3.5rem;
+  line-height: 1;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-tags .badge {
-    background: #d9dde0;
-    color: #212529;
+  background: #d9dde0;
+  color: #212529;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .tac-card-tags b {
-    font-weight: normal;
-    font-size: small;
+  font-weight: normal;
+  font-size: small;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .course-section {
-    padding: 0;
-    margin-bottom: .5rem;
-    margin-top: .5rem;
+  padding: 0;
+  margin-bottom: 0.5rem;
+  margin-top: 1.5rem;
+  border-bottom: 0;
 }
-
-#page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.layoutcards .activity-basis .align-self-start.flex-md-row {
-    flex-direction: column !important;
-}
-
-#page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.layoutcards .activity-inner-wrapper {
-    border-radius: .5rem;
-    border: 1px solid #dee2e6;
-    padding: 0 !important;
-}
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container,
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .activity.tac-container .activity-item {
-    border: 0 !important;
-    padding: 1em;
+  border: 0 !important;
+  padding: 1em;
 }
-
+#page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .course-description-item, #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .description, #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .description-inner,
+#page-course-view-topicsactivitycards #page ul.topicsactivitycards .activity.tac-container .activity-item .course-description-item,
+#page-course-view-topicsactivitycards #page ul.topicsactivitycards .activity.tac-container .activity-item .description,
+#page-course-view-topicsactivitycards #page ul.topicsactivitycards .activity.tac-container .activity-item .description-inner {
+  background: none;
+  border: none;
+}
+#page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .course-description-item,
+#page-course-view-topicsactivitycards #page ul.topicsactivitycards .activity.tac-container .activity-item .course-description-item {
+  padding: 0;
+  margin-top: 0;
+}
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .activity:not(.tac-container) {
-    padding: 0.5em;
+  padding: 0.5em;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .activity:not(.tac-container) .activity-item {
-    padding: 0;
+  padding: 0;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .activity:not(.tac-container):not(:last-child) .activity-item {
-    border: 0;
-    border-radius: 0;
-    border-bottom: 1px solid #dee2e6;
-    padding-bottom: 15px;
+  border: 0;
+  border-radius: 0;
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 15px;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .activity:not(.tac-container):last-child .activity-item {
-    border: 0;
+  border: 0;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .section-inner-wrapper {
-    border-radius: .5rem;
-    border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  border: 1px solid #dee2e6;
 }
-
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards .section-inner-wrapper .course-section-header {
-    padding: .5rem;
-    padding-bottom: 0;
+  padding: 0.5rem;
+  padding-bottom: 0;
 }
-
-#page-course-view-topicsactivitycards #page ul.topicsactivitycards .section-inner-wrapper .content {
-    padding: .5rem;
+#page-course-view-topicsactivitycards #page ul.topicsactivitycards .section-inner-wrapper .course-content-item-content .course-description-item.summarytext {
+  padding-left: 0.5em;
 }
 
 #page-course-view-topicsactivitycards.overridefixedwidthcoursepage #topofscroll,
 #page-course-view-topicsactivitycards.overridefixedwidthcoursepage #page-header,
 #page-course-view-topicsactivitycards.overridefixedwidthcoursepage .secondary-navigation .navigation .nav-tabs {
-    max-width: none !important;
+  max-width: none !important;
+}
+
+.progress-chart-container {
+  height: 100px;
+  width: 100px;
+}
+.progress-chart-container .progress-doughnut {
+  height: 100px;
+  width: 100px;
+}
+.progress-chart-container .progress-doughnut .progress-background {
+  width: 77.5px;
+  height: 77.5px;
+  top: 11.25px;
+  left: 11.25px;
+  border-radius: 50%;
+  border: 7.5px solid #eaeaea;
+  background-color: white;
+}
+.progress-chart-container .progress-doughnut .progress-text {
+  top: 50%;
+  /*rtl:ignore*/
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #010101;
+}
+.progress-chart-container .progress-doughnut .progress-text.has-percent {
+  color: #010101;
+}
+.progress-chart-container .progress-doughnut .progress-indicator {
+  height: 100px;
+  width: 100px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg {
+  position: relative;
+  height: 100px;
+  width: 100px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle {
+  stroke-width: 7px;
+  stroke: #83C55B;
+  fill: none;
+  stroke-dasharray: 219.9114857513px 219.9114857513px;
+  stroke-dashoffset: 219.9114857513px;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  stroke-linecap: round;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-1 {
+  stroke-dashoffset: 217.7123708938px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-2 {
+  stroke-dashoffset: 215.5132560363px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-3 {
+  stroke-dashoffset: 213.3141411788px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-4 {
+  stroke-dashoffset: 211.1150263212px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-5 {
+  stroke-dashoffset: 208.9159114637px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-6 {
+  stroke-dashoffset: 206.7167966062px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-7 {
+  stroke-dashoffset: 204.5176817487px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-8 {
+  stroke-dashoffset: 202.3185668912px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-9 {
+  stroke-dashoffset: 200.1194520337px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-10 {
+  stroke-dashoffset: 197.9203371762px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-11 {
+  stroke-dashoffset: 195.7212223187px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-12 {
+  stroke-dashoffset: 193.5221074611px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-13 {
+  stroke-dashoffset: 191.3229926036px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-14 {
+  stroke-dashoffset: 189.1238777461px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-15 {
+  stroke-dashoffset: 186.9247628886px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-16 {
+  stroke-dashoffset: 184.7256480311px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-17 {
+  stroke-dashoffset: 182.5265331736px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-18 {
+  stroke-dashoffset: 180.3274183161px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-19 {
+  stroke-dashoffset: 178.1283034586px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-20 {
+  stroke-dashoffset: 175.929188601px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-21 {
+  stroke-dashoffset: 173.7300737435px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-22 {
+  stroke-dashoffset: 171.530958886px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-23 {
+  stroke-dashoffset: 169.3318440285px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-24 {
+  stroke-dashoffset: 167.132729171px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-25 {
+  stroke-dashoffset: 164.9336143135px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-26 {
+  stroke-dashoffset: 162.734499456px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-27 {
+  stroke-dashoffset: 160.5353845984px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-28 {
+  stroke-dashoffset: 158.3362697409px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-29 {
+  stroke-dashoffset: 156.1371548834px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-30 {
+  stroke-dashoffset: 153.9380400259px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-31 {
+  stroke-dashoffset: 151.7389251684px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-32 {
+  stroke-dashoffset: 149.5398103109px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-33 {
+  stroke-dashoffset: 147.3406954534px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-34 {
+  stroke-dashoffset: 145.1415805959px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-35 {
+  stroke-dashoffset: 142.9424657383px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-36 {
+  stroke-dashoffset: 140.7433508808px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-37 {
+  stroke-dashoffset: 138.5442360233px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-38 {
+  stroke-dashoffset: 136.3451211658px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-39 {
+  stroke-dashoffset: 134.1460063083px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-40 {
+  stroke-dashoffset: 131.9468914508px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-41 {
+  stroke-dashoffset: 129.7477765933px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-42 {
+  stroke-dashoffset: 127.5486617358px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-43 {
+  stroke-dashoffset: 125.3495468782px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-44 {
+  stroke-dashoffset: 123.1504320207px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-45 {
+  stroke-dashoffset: 120.9513171632px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-46 {
+  stroke-dashoffset: 118.7522023057px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-47 {
+  stroke-dashoffset: 116.5530874482px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-48 {
+  stroke-dashoffset: 114.3539725907px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-49 {
+  stroke-dashoffset: 112.1548577332px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-50 {
+  stroke-dashoffset: 109.9557428757px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-51 {
+  stroke-dashoffset: 107.7566280181px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-52 {
+  stroke-dashoffset: 105.5575131606px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-53 {
+  stroke-dashoffset: 103.3583983031px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-54 {
+  stroke-dashoffset: 101.1592834456px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-55 {
+  stroke-dashoffset: 98.9601685881px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-56 {
+  stroke-dashoffset: 96.7610537306px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-57 {
+  stroke-dashoffset: 94.5619388731px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-58 {
+  stroke-dashoffset: 92.3628240155px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-59 {
+  stroke-dashoffset: 90.163709158px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-60 {
+  stroke-dashoffset: 87.9645943005px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-61 {
+  stroke-dashoffset: 85.765479443px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-62 {
+  stroke-dashoffset: 83.5663645855px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-63 {
+  stroke-dashoffset: 81.367249728px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-64 {
+  stroke-dashoffset: 79.1681348705px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-65 {
+  stroke-dashoffset: 76.969020013px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-66 {
+  stroke-dashoffset: 74.7699051554px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-67 {
+  stroke-dashoffset: 72.5707902979px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-68 {
+  stroke-dashoffset: 70.3716754404px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-69 {
+  stroke-dashoffset: 68.1725605829px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-70 {
+  stroke-dashoffset: 65.9734457254px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-71 {
+  stroke-dashoffset: 63.7743308679px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-72 {
+  stroke-dashoffset: 61.5752160104px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-73 {
+  stroke-dashoffset: 59.3761011529px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-74 {
+  stroke-dashoffset: 57.1769862953px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-75 {
+  stroke-dashoffset: 54.9778714378px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-76 {
+  stroke-dashoffset: 52.7787565803px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-77 {
+  stroke-dashoffset: 50.5796417228px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-78 {
+  stroke-dashoffset: 48.3805268653px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-79 {
+  stroke-dashoffset: 46.1814120078px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-80 {
+  stroke-dashoffset: 43.9822971503px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-81 {
+  stroke-dashoffset: 41.7831822927px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-82 {
+  stroke-dashoffset: 39.5840674352px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-83 {
+  stroke-dashoffset: 37.3849525777px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-84 {
+  stroke-dashoffset: 35.1858377202px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-85 {
+  stroke-dashoffset: 32.9867228627px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-86 {
+  stroke-dashoffset: 30.7876080052px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-87 {
+  stroke-dashoffset: 28.5884931477px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-88 {
+  stroke-dashoffset: 26.3893782902px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-89 {
+  stroke-dashoffset: 24.1902634326px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-90 {
+  stroke-dashoffset: 21.9911485751px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-91 {
+  stroke-dashoffset: 19.7920337176px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-92 {
+  stroke-dashoffset: 17.5929188601px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-93 {
+  stroke-dashoffset: 15.3938040026px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-94 {
+  stroke-dashoffset: 13.1946891451px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-95 {
+  stroke-dashoffset: 10.9955742876px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-96 {
+  stroke-dashoffset: 8.7964594301px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-97 {
+  stroke-dashoffset: 6.5973445725px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-98 {
+  stroke-dashoffset: 4.398229715px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-99 {
+  stroke-dashoffset: 2.1991148575px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-100 {
+  stroke-dashoffset: 0px;
+}
+.progress-chart-container .progress-doughnut .progress-indicator svg .circle.percent-100 {
+  stroke-dashoffset: 0;
+}
+.progress-chart-container .progress-doughnut.completed .progress-indicator svg .circle {
+  stroke: #83C55B;
+}
+.progress-chart-container .progress-doughnut.completed .progress-text {
+  color: #83C55B;
 }

@@ -44,8 +44,23 @@ class format_topicsactivitycards extends format_topics {
     public const PAGELAYOUT_FULLWIDTH = 20;
 
     public function page_set_course(moodle_page $page) {
-        if ($this->get_format_options()['overridefixedwidthcoursepage'] == self::PAGELAYOUT_FULLWIDTH) {
+        $format_options = $this->get_format_options();
+
+        if ($format_options['overridefixedwidthcoursepage'] == self::PAGELAYOUT_FULLWIDTH) {
             $page->add_body_class('overridefixedwidthcoursepage');
+        }
+        global $OUTPUT;
+        $course = $this->get_course();
+        if (
+            strpos($page->pagetype, 'course-view') === 0
+            && !empty($format_options['showcompletionstate'])
+            && $course->enablecompletion)
+        {
+            $page->add_header_action
+            ($OUTPUT->render_from_template('format_topicsactivitycards/progress_doughnut', [
+                'statuspercentage' => number_format(\core_completion\progress::get_course_progress_percentage($course)),
+            ])
+            );
         }
     }
 
@@ -67,6 +82,13 @@ class format_topicsactivitycards extends format_topics {
                             self::PAGELAYOUT_FULLWIDTH => new lang_string('fullwidth', 'format_topicsactivitycards'),
                         ],
                     ],
+                ];
+
+                $courseformatoptionsforedit['showcompletionstate'] = [
+                    'label' => new lang_string('showcompletionstate', 'format_topicsactivitycards'),
+                    'element_type' => 'advcheckbox',
+                    'default' => false,
+                    'type' => PARAM_BOOL,
                 ];
 
                 $courseformatoptionsforedit['sectionheading'] = [
@@ -137,6 +159,11 @@ class format_topicsactivitycards extends format_topics {
                 ];
 
                 $courseformatoptions['section0_onsectionpages'] = [
+                    'default' => false,
+                    'type' => PARAM_BOOL,
+                ];
+
+                $courseformatoptions['showcompletionstate'] = [
                     'default' => false,
                     'type' => PARAM_BOOL,
                 ];
@@ -783,6 +810,8 @@ function format_topicsactivitycards_coursemodule_standard_elements($formwrapper,
 
     $form->addElement('autocomplete', 'fontawesomeicon', get_string('icon', 'format_topicsactivitycards'), format_topicsactivitycards::get_fontawesome_icon_options());
 
+    $form->addElement('advcheckbox', 'viewbutton', '', get_string('viewbutton', 'format_topicsactivitycards'));
+
     $values = $metadata->to_record();
     $values = file_prepare_standard_filemanager($values,
         'cardbackgroundimage',
@@ -846,6 +875,7 @@ function format_topicsactivitycards_coursemodule_edit_post_actions($data, $cours
     $metadata->set('additionalcssclasses', $data->additionalcssclasses);
     $metadata->set('tactags', $data->tactags);
     $metadata->set('fontawesomeicon', $data->fontawesomeicon ?? '');
+    $metadata->set('viewbutton', $data->viewbutton ?? false);
 
     if (empty($metadata->get('id'))) {
         $metadata->save();
