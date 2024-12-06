@@ -25,9 +25,8 @@
  * @copyright  2015 Marina Glancy
  */
 
-namespace tests;
+namespace format_topicsactivitycards;
 
-use core_external\external_api;
 use format_topicsactivitycards\fixtures\overridde_testing_data_generator;
 use format_topics\format_topics_test;
 use testing_data_generator;
@@ -116,7 +115,7 @@ class format_topicsactivitycards_test extends format_topics_test {
         $this->getDataGenerator()->enrol_user($user->id, $course->id, $teacherrole->id);
 
         $res = \core_external::update_inplace_editable('format_topicsactivitycards', 'sectionname', $section->id, 'New section name');
-        $res = external_api::clean_returnvalue(\core_external::update_inplace_editable_returns(), $res);
+        $res = \external_api::clean_returnvalue(\core_external::update_inplace_editable_returns(), $res);
         $this->assertEquals('New section name', $res['value']);
         $this->assertEquals('New section name', $DB->get_field('course_sections', 'name', ['id' => $section->id]));
     }

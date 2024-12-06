@@ -25,6 +25,9 @@ Alternatively, you can run
 
 to complete the installation from the command line.
 
+## To recompile the CSS ##
+sass scss/styles.scss styles.css
+
 ## License ##
 
 2023 Andrew Hancox <andrewdchancox@googlemail.com>

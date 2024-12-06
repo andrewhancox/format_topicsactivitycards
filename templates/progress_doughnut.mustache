@@ -1,0 +1,18 @@
+
+<div class="progress-chart-container">
+    <div class="progress-doughnut position-relative">
+        <div class="progress-background position-absolute"></div>
+        <div class="progress-text position-absolute {{#statuspercentage}}has-percent{{/statuspercentage}}">{{statuspercentage}}&#37;</div>
+        <div class="progress-indicator position-absolute">
+            <svg xmlns="http://www.w3.org/2000/svg">
+                <g>
+                    <title aria-hidden="true">{{statuspercentage}}&#37;</title>
+                    <circle class="circle percent-{{statuspercentage}}"
+                            r="35"
+                            cx="50"
+                            cy="50"/>
+                </g>
+            </svg>
+        </div>
+    </div>
+</div>

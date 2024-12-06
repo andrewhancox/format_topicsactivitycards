@@ -58,7 +58,7 @@
 {{^layoutlist}}
 <li
     class="activity activity-wrapper tac-container {{module}} modtype_{{module}} {{extraclasses}} {{#hasinfo}}hasinfo{{/hasinfo}} tactaggable
-        {{#widthclass}}float-left  p-1 {{widthclass}} {{/widthclass}}"
+        {{#widthclass}}float-left  p-3 {{widthclass}} {{/widthclass}}"
     id="{{anchor}}"
     data-for="cmitem"
     data-id="{{id}}"
@@ -67,7 +67,7 @@
     {{/tactagids}}
 >
 
-    <div class="activity-inner-wrapper h-100">
+    <div class="activity-inner-wrapper shadow rounded h-100 {{#viewbutton}}containsviewbutton{{/viewbutton}}">
         {{#cardimage}}
         {{#cmformat.activityinfo.uservisible}}
             <a href="{{cmformat.url}}" class="{{cmformat.linkclasses}} aalink" onclick="{{{cmformat.onclick}}}">
@@ -118,6 +118,24 @@
                 {{> core_courseformat/local/content/cm}}
             {{/ core_courseformat/local/content/cm}}
         {{/cmformat}}
+
+        {{#viewbutton}}
+        <div class="activity-item viewbutton">
+            {{#cmformat.activityinfo.uservisible}}
+                <a href="{{cmformat.url}}"
+                   class="btn {{#cmformat.activityinfo.overallcomplete}}btn-success btn-success-gradient{{/cmformat.activityinfo.overallcomplete}}{{^cmformat.activityinfo.overallcomplete}}btn-outline-primary{{/cmformat.activityinfo.overallcomplete}} d-block {{cmformat.linkclasses}} aalink"
+                   onclick="{{{cmformat.onclick}}}">
+
+                    {{#cmformat.activityinfo.overallcomplete}}
+                        {{#str}}completed, format_topicsactivitycards{{/str}}
+                    {{/cmformat.activityinfo.overallcomplete}}
+                    {{^cmformat.activityinfo.overallcomplete}}
+                        {{#str}}view, format_topicsactivitycards{{/str}}
+                    {{/cmformat.activityinfo.overallcomplete}}
+                </a>
+            {{/cmformat.activityinfo.uservisible}}
+        </div>
+        {{/viewbutton}}
     </div>
 </li>
 {{/layoutlist}}
