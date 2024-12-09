@@ -43,7 +43,7 @@ class format_topicsactivitycards extends format_topics {
     public const PAGELAYOUT_FIXEDWIDTH = 10;
     public const PAGELAYOUT_FULLWIDTH = 20;
 
-    public function course_header() {
+    public function page_set_course(moodle_page $page) {
         global $PAGE;
 
         $format_options = $this->get_format_options();
@@ -51,7 +51,11 @@ class format_topicsactivitycards extends format_topics {
         if ($format_options['overridefixedwidthcoursepage'] == self::PAGELAYOUT_FULLWIDTH) {
             $PAGE->add_body_class('overridefixedwidthcoursepage');
         }
-        global $OUTPUT;
+    }
+
+    public function course_header() {
+        global $PAGE, $OUTPUT;
+
         $course = $this->get_course();
         if (
             strpos($PAGE->pagetype, 'course-view') === 0
