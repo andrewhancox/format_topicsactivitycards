@@ -59,7 +59,7 @@ class format_topicsactivitycards extends format_topics {
         $course = $this->get_course();
         if (
             strpos($PAGE->pagetype, 'course-view') === 0
-            && !empty($format_options['showcompletionstate'])
+            && !empty($this->get_format_options()['showcompletionstate'])
             && $course->enablecompletion)
         {
             $PAGE->add_header_action
