@@ -25,7 +25,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$string['aboutthiscourse'] = 'About this course';
 $string['addsections'] = 'Add section';
+$string['close'] = 'Close';
 $string['currentsection'] = 'This section';
 $string['deletesection'] = 'Delete section';
 $string['editsection'] = 'Edit section';
@@ -82,3 +84,4 @@ $string['viewbutton'] = 'Replace activity with name with view button';
 $string['view'] = 'View';
 $string['completed'] = 'Completed';
 $string['showcompletionstate'] = 'Show completion state in header';
+$string['showhomepageheadingascard'] = 'Show heading as card on course home page';

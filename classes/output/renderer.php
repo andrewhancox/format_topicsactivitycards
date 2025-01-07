@@ -25,10 +25,48 @@
 
 namespace format_topicsactivitycards\output;
 
+use core_course_list_element;
+use coursecat_helper;
 use format_topics\output\renderer as section_renderer;
+use format_topicsactivitycards\coursehomeheader;
+use moodle_url;
 
 class renderer extends section_renderer {
 
     // Override any necessary renderer method here.
 
+    public function render_coursehomeheader(coursehomeheader $renderable) {
+        $course = new core_course_list_element($renderable->course);
+
+        $model = new \stdClass();
+
+        foreach ($course->get_course_overviewfiles() as $file) {
+            if ($file->is_valid_image()) {
+                $model->courseimage = moodle_url::make_pluginfile_url(
+                    $file->get_contextid(),
+                    $file->get_component(),
+                    $file->get_filearea(),
+                    null,
+                    $file->get_filepath(),
+                    $file->get_filename()
+                )->out();
+            }
+        }
+
+        $model->fullname = $course->get_formatted_fullname();
+
+        if ($course->has_summary()) {
+            $chelper = new coursecat_helper();
+            $model->coursesummary = $chelper->get_course_formatted_summary($course,
+                array('overflowdiv' => true, 'noclean' => true, 'para' => false));
+        }
+
+        if (
+            !empty($renderable->format_options['showcompletionstate'])
+            && $renderable->course->enablecompletion) {
+            $model->statuspercentage = number_format(\core_completion\progress::get_course_progress_percentage($renderable->course));
+        }
+
+        return $this->render_from_template('format_topicsactivitycards/coursehomeheader', $model);
+    }
 }
