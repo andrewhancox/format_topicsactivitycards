@@ -1,0 +1,53 @@
+<style>
+    div#course-header {
+        flex: auto;
+    }
+
+    header#page-header div.page-header-headings h1 {
+        display: none;
+    }
+</style>
+
+<div class="p-3 row"
+     {{#courseimage}}style="background-image: url({{{courseimage}}}); background-size: cover; background-position: center; background-color: white;"{{/courseimage}} >
+
+    <div class="shadow rounded bg-white p-3 m-3 col-xl-6 col-lg-7 col-md-8 col-sm-9 row">
+
+        <div class="col-md-9">
+            <h1 class="h2">{{{fullname}}}</h1>
+
+            {{#coursesummary}}
+                <a class="text-uppercase small pb-2 mt-auto mb-lg-n3 d-lg-inline" data-toggle="modal"
+                   data-target="#course-info" href="#">{{#str}}aboutthiscourse, format_topicsactivitycards {{/str}} <i
+                        class="fa fa-arrow-right"></i></a>
+
+                <div class="modal fade" id="course-info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body p-5">
+                                {{#courseimage}}
+                                    <div class="rounded mb-3"
+                                         style="background-image: url({{{courseimage}}}); background-size: cover; background-position: center; background-color: #ccc; height: 250px;"></div>
+                                {{/courseimage}}
+                                <h1 class="py-3">{{{fullname}}}</h1>
+                                {{{coursesummary}}}
+                            </div>
+
+                            <div class="text-center py-3 mb-3">
+                                <button type="button" class="btn btn-outline-info" data-dismiss="modal">{{#str}}
+                                    close, format_topicsactivitycards {{/str}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/coursesummary}}
+        </div>
+
+        {{#statuspercentage}}
+            <div class="col-3">
+                {{> format_topicsactivitycards/progress_doughnut }}
+            </div>
+        {{/statuspercentage}}
+    </div>
+</div>

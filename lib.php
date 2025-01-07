@@ -25,6 +25,7 @@
 
 use core\output\icon_system;
 use core\output\inplace_editable;
+use format_topicsactivitycards\coursehomeheader;
 use format_topicsactivitycards\metadata;
 
 defined('MOODLE_INTERNAL') || die();
@@ -55,18 +56,20 @@ class format_topicsactivitycards extends format_topics {
 
     public function course_header() {
         global $PAGE, $OUTPUT;
-
         $course = $this->get_course();
-        if (
-            strpos($PAGE->pagetype, 'course-view') === 0
-            && !empty($format_options['showcompletionstate'])
-            && $course->enablecompletion)
-        {
-            $PAGE->add_header_action
-            ($OUTPUT->render_from_template('format_topicsactivitycards/progress_doughnut', [
-                'statuspercentage' => number_format(\core_completion\progress::get_course_progress_percentage($course)),
-            ])
-            );
+
+        if (strpos($PAGE->pagetype, 'course-view') === 0) {
+            $format_options = $this->get_format_options();
+
+            if (!empty($format_options['showhomepageheadingascard'])) {
+                return new coursehomeheader($course, $format_options);
+            } else if (!empty($format_options['showcompletionstate']) && $course->enablecompletion) {
+                $PAGE->add_header_action
+                ($OUTPUT->render_from_template('format_topicsactivitycards/progress_doughnut', [
+                    'statuspercentage' => number_format(\core_completion\progress::get_course_progress_percentage($course)),
+                ])
+                );
+            }
         }
     }
 
@@ -88,6 +91,13 @@ class format_topicsactivitycards extends format_topics {
                             self::PAGELAYOUT_FULLWIDTH => new lang_string('fullwidth', 'format_topicsactivitycards'),
                         ],
                     ],
+                ];
+
+                $courseformatoptionsforedit['showhomepageheadingascard'] = [
+                    'label' => new lang_string('showhomepageheadingascard', 'format_topicsactivitycards'),
+                    'element_type' => 'advcheckbox',
+                    'default' => false,
+                    'type' => PARAM_BOOL,
                 ];
 
                 $courseformatoptionsforedit['showcompletionstate'] = [
@@ -165,6 +175,11 @@ class format_topicsactivitycards extends format_topics {
                 ];
 
                 $courseformatoptions['section0_onsectionpages'] = [
+                    'default' => false,
+                    'type' => PARAM_BOOL,
+                ];
+
+                $courseformatoptions['showhomepageheadingascard'] = [
                     'default' => false,
                     'type' => PARAM_BOOL,
                 ];
