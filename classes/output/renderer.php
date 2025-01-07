@@ -65,6 +65,7 @@ class renderer extends section_renderer {
             !empty($renderable->format_options['showcompletionstate'])
             && $renderable->course->enablecompletion
         ) {
+            $model->showstatuspercentage = true;
             $model->statuspercentage = number_format(\core_completion\progress::get_course_progress_percentage($renderable->course) ?? 0);
         }
 

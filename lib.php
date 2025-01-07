@@ -66,6 +66,7 @@ class format_topicsactivitycards extends format_topics {
             } else if (!empty($format_options['showcompletionstate']) && $course->enablecompletion) {
                 $PAGE->add_header_action
                 ($OUTPUT->render_from_template('format_topicsactivitycards/progress_doughnut', [
+                    'showstatuspercentage' => true,
                     'statuspercentage' => number_format(\core_completion\progress::get_course_progress_percentage($course)),
                 ])
                 );
