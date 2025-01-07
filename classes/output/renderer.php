@@ -63,8 +63,9 @@ class renderer extends section_renderer {
 
         if (
             !empty($renderable->format_options['showcompletionstate'])
-            && $renderable->course->enablecompletion) {
-            $model->statuspercentage = number_format(\core_completion\progress::get_course_progress_percentage($renderable->course));
+            && $renderable->course->enablecompletion
+        ) {
+            $model->statuspercentage = number_format(\core_completion\progress::get_course_progress_percentage($renderable->course) ?? 0);
         }
 
         return $this->render_from_template('format_topicsactivitycards/coursehomeheader', $model);
