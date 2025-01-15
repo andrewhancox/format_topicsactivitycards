@@ -43,6 +43,7 @@ class cmitem extends cmitem_base {
             $model->cmformat->activityinfo->uservisible = true;
         }
 
+        $formatoptions = $this->format->get_format_options();
         $sectionoptions = $this->format->get_format_options($this->section);
 
         $model->tactagids = [];
@@ -113,7 +114,20 @@ class cmitem extends cmitem_base {
 
         $model->taglist = $output->tag_list(core_tag_tag::get_item_tags('core', 'course_modules', $this->mod->id));
         if (!empty($metadata) && !empty($metadata->get('viewbutton'))) {
-            $model->viewbutton = true;
+            $activityviewbutton = $metadata->get('viewbutton');
+        } else {
+            $activityviewbutton = \format_topicsactivitycards::VIEWBUTTON_COURSEDEFAULT;
+        }
+        switch ($activityviewbutton) {
+            case \format_topicsactivitycards::VIEWBUTTON_COURSEDEFAULT:
+                $model->viewbutton = $formatoptions['activityviewbutton'];
+                break;
+            case \format_topicsactivitycards::VIEWBUTTON_BUTTON:
+                $model->viewbutton = true;
+                break;
+            default:
+                $model->viewbutton = false;
+                break;
         }
         return $model;
     }
