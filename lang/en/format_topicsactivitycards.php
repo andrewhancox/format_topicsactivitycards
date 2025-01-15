@@ -80,8 +80,12 @@ $string['icon'] = 'FA Icon';
 $string['tactagsheader'] = 'Tags intro';
 $string['tactags'] = 'Tags for sorting on course home (one per line)';
 
+$string['defaultactivityviewbutton'] = 'Replace activity with name with view button by default';
 $string['viewbutton'] = 'Replace activity with name with view button';
 $string['view'] = 'View';
 $string['completed'] = 'Completed';
 $string['showcompletionstate'] = 'Show completion state in header';
 $string['showhomepageheadingascard'] = 'Show heading as card on course home page';
+$string['viewbutton_coursedefault'] = 'Course default';
+$string['viewbutton_activityname'] = 'Show activity name';
+$string['viewbutton_button'] = 'Show view button';
