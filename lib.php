@@ -38,6 +38,10 @@ class format_topicsactivitycards extends format_topics {
     public const SECTIONHEADING_COURSEDEFAULT = 0;
     public const SECTIONHEADING_HEADER = 10;
     public const SECTIONHEADING_LINKEDCARD = 20;
+
+    public const VIEWBUTTON_COURSEDEFAULT = 0;
+    public const VIEWBUTTON_ACTIVITYNAME = 10;
+    public const VIEWBUTTON_BUTTON = 20;
     public const SECTIONHEADING_CARD_WITHCONTENTS = 30;
 
     public const PAGELAYOUT_FIXEDWIDTH = 10;
@@ -118,6 +122,13 @@ class format_topicsactivitycards extends format_topics {
                     ],
                 ];
 
+                $courseformatoptionsforedit['activityviewbutton'] = [
+                    'default' => false,
+                    'type' => PARAM_BOOL,
+                    'label' => get_string('defaultactivityviewbutton', 'format_topicsactivitycards'),
+                    'element_type' => 'advcheckbox',
+                ];
+
                 $courseformatoptionsforedit['section0_onsectionpages'] = [
                     'label' => get_string('section0_onsectionpageslabel', 'format_topicsactivitycards'),
                     'element_type' => 'advcheckbox',
@@ -159,6 +170,11 @@ class format_topicsactivitycards extends format_topics {
                 ];
 
                 $courseformatoptions['section0_onsectionpages'] = [
+                    'default' => false,
+                    'type' => PARAM_BOOL,
+                ];
+
+                $courseformatoptions['activityviewbutton'] = [
                     'default' => false,
                     'type' => PARAM_BOOL,
                 ];
@@ -810,7 +826,13 @@ function format_topicsactivitycards_coursemodule_standard_elements($formwrapper,
 
     $form->addElement('autocomplete', 'fontawesomeicon', get_string('icon', 'format_topicsactivitycards'), format_topicsactivitycards::get_fontawesome_icon_options());
 
-    $form->addElement('advcheckbox', 'viewbutton', '', get_string('viewbutton', 'format_topicsactivitycards'));
+    $form->addElement('select', 'viewbutton', get_string('viewbutton', 'format_topicsactivitycards'), [
+        \format_topicsactivitycards::VIEWBUTTON_COURSEDEFAULT => get_string('viewbutton_coursedefault', 'format_topicsactivitycards'),
+        \format_topicsactivitycards::VIEWBUTTON_ACTIVITYNAME => get_string('viewbutton_activityname', 'format_topicsactivitycards'),
+        \format_topicsactivitycards::VIEWBUTTON_BUTTON => get_string('viewbutton_button', 'format_topicsactivitycards'),
+    ]);
+    $form->setType('viewbutton', PARAM_INT);
+    $form->setDefault('viewbutton', \format_topicsactivitycards::VIEWBUTTON_COURSEDEFAULT);
 
     $values = $metadata->to_record();
     $values = file_prepare_standard_filemanager($values,
@@ -875,7 +897,7 @@ function format_topicsactivitycards_coursemodule_edit_post_actions($data, $cours
     $metadata->set('additionalcssclasses', $data->additionalcssclasses);
     $metadata->set('tactags', $data->tactags);
     $metadata->set('fontawesomeicon', $data->fontawesomeicon ?? '');
-    $metadata->set('viewbutton', $data->viewbutton ?? false);
+    $metadata->set('viewbutton', $data->viewbutton ?? \format_topicsactivitycards::VIEWBUTTON_COURSEDEFAULT);
 
     if (empty($metadata->get('id'))) {
         $metadata->save();
