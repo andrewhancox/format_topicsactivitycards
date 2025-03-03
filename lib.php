@@ -692,7 +692,6 @@ class format_topicsactivitycards extends format_topics {
             }
 
             $tactags = explode("\n", $tactags['tactags']);
-            $id = 0;
             foreach ($tactags as $tactag) {
                 $tactag = trim($tactag);
                 if (empty($tactag)) {
