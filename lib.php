@@ -426,13 +426,28 @@ class format_topicsactivitycards extends format_topics {
             return $this->cm_metadatas;
         }
 
+        $relevantsections = [];
+        $sectionnumber = $this->get_section_number();
+        if (!empty($sectionnumber)) {
+            $relevantsections[] = $sectionnumber;
+        } else {
+            foreach ($this->get_sections() as $section){
+                $formatoptions = $this->get_format_options($section->section);
+                if ($formatoptions['sectionheading'] != format_topicsactivitycards::SECTIONHEADING_LINKEDCARD) {
+                    $relevantsections[] = $section->section;
+                }
+            }
+        }
+
         $this->cm_metadatas = [];
         $cm_infos = get_fast_modinfo($this->course)->get_cms();
         if (!empty($cm_infos)) {
             list($insql, $params) = $DB->get_in_or_equal(array_keys($cm_infos), SQL_PARAMS_NAMED);
             $sql = "cmid $insql";
             foreach (metadata::get_records_select($sql, $params) as $metadata) {
-                $this->cm_metadatas[$metadata->get('cmid')] = $metadata;
+                if (in_array($cminfos[$metadata->get('cmid')]->sectionnum, $relevantsections)) {
+                    $this->cm_metadatas[$metadata->get('cmid')] = $metadata;
+                }
             }
         }
 
@@ -585,24 +600,26 @@ class format_topicsactivitycards extends format_topics {
         $indexedtags = [];
         $id = 0;
 
-        foreach ($this->get_sections() as $section) {
-            $tactags = $this->get_format_options($section);
+        if (empty($this->get_section_number())) {
+            foreach ($this->get_sections() as $section) {
+                $tactags = $this->get_format_options($section);
 
-            if (empty($tactags['tactags'])) {
-                continue;
-            }
-
-            $tactags = explode("\n", $tactags['tactags']);
-            foreach ($tactags as $tactag) {
-                $tactag = trim($tactag);
-                if (empty($tactag)) {
+                if (empty($tactags['tactags'])) {
                     continue;
                 }
-                if (!isset($indexedtags[$tactag])) {
-                    $id++;
-                    $indexedtags[$tactag] = (object)['id' => $id, 'label' => $tactag, 'sections' => [], 'cms' => []];
+
+                $tactags = explode("\n", $tactags['tactags']);
+                foreach ($tactags as $tactag) {
+                    $tactag = trim($tactag);
+                    if (empty($tactag)) {
+                        continue;
+                    }
+                    if (!isset($indexedtags[$tactag])) {
+                        $id++;
+                        $indexedtags[$tactag] = (object)['id' => $id, 'label' => $tactag, 'sections' => [], 'cms' => []];
+                    }
+                    $indexedtags[$tactag]->sections[] = $section->section;
                 }
-                $indexedtags[$tactag]->sections[] = $section->section;
             }
         }
 
