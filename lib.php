@@ -445,7 +445,7 @@ class format_topicsactivitycards extends format_topics {
             list($insql, $params) = $DB->get_in_or_equal(array_keys($cm_infos), SQL_PARAMS_NAMED);
             $sql = "cmid $insql";
             foreach (metadata::get_records_select($sql, $params) as $metadata) {
-                if (in_array($cminfos[$metadata->get('cmid')]->sectionnum, $relevantsections)) {
+                if (in_array($cm_infos[$metadata->get('cmid')]->sectionnum, $relevantsections)) {
                     $this->cm_metadatas[$metadata->get('cmid')] = $metadata;
                 }
             }
