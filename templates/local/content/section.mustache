@@ -88,13 +88,13 @@
 }}
 {{#hidetitle}}
     <style>
-        .course-section-header[data-id="{{id}}"] {
+        body:not(.editing) .course-section-header[data-id="{{id}}"] {
             display: none!important;
         }
     </style>
 {{/hidetitle}}
 <li id="section-{{num}}"
-    class="section course-section main p-0 {{#onlysummary}} section-summary {{/onlysummary}} clearfix tactaggable
+    class="section course-section main p-3 m-0 {{#onlysummary}} section-summary {{/onlysummary}} clearfix tactaggable
             {{#ishidden}} hidden {{/ishidden}} {{#iscurrent}} current {{/iscurrent}}
             {{extraclasses}} {{#widthclass}} tac-container float-left {{widthclass}} {{/widthclass}}
             {{^widthclass}} col-12 pull-left {{/widthclass}}
