@@ -26,10 +26,9 @@
 namespace format_topicsactivitycards\output\courseformat\content;
 
 use context_course;
-use core_courseformat\output\local\content\section as section_base;
+use format_topics\output\courseformat\content\section as section_base;
 use core_media_manager;
 use format_topicsactivitycards;
-use pix_icon;
 use renderer_base;
 use stdClass;
 
@@ -55,7 +54,7 @@ class section extends section_base {
         $model->layoutcards = $sectionoptions['sectionlayout'] == format_topicsactivitycards::SECTIONLAYOUT_CARDS;
         $model->hidesummary = $sectionoptions['sectionheading'] != format_topicsactivitycards::SECTIONHEADING_LINKEDCARD;
 
-        if (empty($this->format->get_section_number())) {
+        if (empty($this->format->get_sectionnum())) {
             $addsectionclass = $format->get_output_classname('content\\addsection');
             $addsection = new $addsectionclass($format);
             $model->numsections = $addsection->export_for_template($output);
@@ -70,7 +69,7 @@ class section extends section_base {
             return $model;
         }
 
-        if (!empty($this->format->get_section_number()) && $this->format->get_section_number() == $this->section->section) {
+        if (!empty($this->format->get_sectionnum()) && $this->format->get_sectionnum() == $this->section->section) {
             $sectionoptions['renderwidth'] = 12;
         }
 
@@ -133,7 +132,7 @@ class section extends section_base {
 
         $result = false;
 
-        $showsummary = ($section->section != 0 && $section->section != $format->get_section_number());
+        $showsummary = ($section->section != 0 && $section->section != $format->get_sectionnum());
 
         $showcmlist = $section->uservisible;
 

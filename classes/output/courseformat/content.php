@@ -26,7 +26,7 @@
 namespace format_topicsactivitycards\output\courseformat;
 
 use context_course;
-use core_courseformat\output\local\content as content_base;
+use format_topics\output\courseformat\content as content_base;
 
 class content extends content_base {
 
@@ -45,7 +45,7 @@ class content extends content_base {
         $data = parent::export_for_template($output);
 
         $formatoptions = $this->format->get_format_options();
-        if (empty($formatoptions['section0_onsectionpages']) && !empty($this->format->get_section_number())) {
+        if (empty($formatoptions['section0_onsectionpages']) && !empty($this->format->get_sectionnum())) {
             unset($data->initialsection);
         }
 

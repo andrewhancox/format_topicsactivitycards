@@ -516,7 +516,7 @@ class format_topicsactivitycards extends format_topics {
         return $ajaxsupport;
     }
 
-    private $cmmetadatas = null;
+    private $cm_metadatas = null;
 
     public function get_cm_metadatas() {
         global $DB;
@@ -526,7 +526,7 @@ class format_topicsactivitycards extends format_topics {
         }
 
         $relevantsections = [];
-        $sectionnumber = $this->get_section_number();
+        $sectionnumber = $this->get_sectionnum();
         if (!empty($sectionnumber)) {
             $relevantsections[] = $sectionnumber;
         } else {
@@ -553,7 +553,7 @@ class format_topicsactivitycards extends format_topics {
         return $this->cm_metadatas;
     }
 
-    private $cmcardimages = null;
+    private $cm_cardimages = null;
 
     public function get_cm_cardimages() {
         if (isset($this->cm_cardimages)) {
@@ -580,7 +580,7 @@ class format_topicsactivitycards extends format_topics {
         return $this->cm_cardimages;
     }
 
-    private $sectioncardimages = null;
+    private $section_cardimages = null;
 
     public function get_section_cardimages() {
         if (isset($this->section_cardimages)) {
@@ -699,7 +699,7 @@ class format_topicsactivitycards extends format_topics {
         $indexedtags = [];
         $id = 0;
 
-        if (empty($this->get_section_number())) {
+        if (empty($this->get_sectionnum())) {
             foreach ($this->get_sections() as $section) {
                 $tactags = $this->get_format_options($section);
 

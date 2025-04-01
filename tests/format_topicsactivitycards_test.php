@@ -27,6 +27,7 @@
 
 namespace format_topicsactivitycards;
 
+use core_external\external_api;
 use format_topicsactivitycards\fixtures\overridde_testing_data_generator;
 use format_topics\format_topics_test;
 use testing_data_generator;
@@ -59,7 +60,7 @@ class format_topicsactivitycards_test extends format_topics_test {
      *
      * @return void
      */
-    public function test_get_default_section_name() {
+    public function test_get_default_section_name(): void {
         global $DB;
         $this->resetAfterTest(true);
 
@@ -79,7 +80,7 @@ class format_topicsactivitycards_test extends format_topics_test {
                 $sectionname = get_string('general');
                 $this->assertEquals($sectionname, $courseformat->get_default_section_name($section));
             } else {
-                $sectionname = get_string('sectionname', 'format_topicsactivitycards') . ' ' . $section->section;
+                $sectionname = get_string('newsection', 'format_topics');
                 $this->assertEquals($sectionname, $courseformat->get_default_section_name($section));
             }
         }
@@ -90,7 +91,7 @@ class format_topicsactivitycards_test extends format_topics_test {
      *
      * @return void
      */
-    public function test_update_inplace_editable() {
+    public function test_update_inplace_editable(): void {
         global $CFG, $DB, $PAGE;
         require_once($CFG->dirroot . '/lib/external/externallib.php');
 
@@ -115,7 +116,7 @@ class format_topicsactivitycards_test extends format_topics_test {
         $this->getDataGenerator()->enrol_user($user->id, $course->id, $teacherrole->id);
 
         $res = \core_external::update_inplace_editable('format_topicsactivitycards', 'sectionname', $section->id, 'New section name');
-        $res = \external_api::clean_returnvalue(\core_external::update_inplace_editable_returns(), $res);
+        $res = external_api::clean_returnvalue(\core_external::update_inplace_editable_returns(), $res);
         $this->assertEquals('New section name', $res['value']);
         $this->assertEquals('New section name', $DB->get_field('course_sections', 'name', ['id' => $section->id]));
     }
@@ -125,7 +126,7 @@ class format_topicsactivitycards_test extends format_topics_test {
      *
      * @return void
      */
-    public function test_inplace_editable() {
+    public function test_inplace_editable(): void {
         global $DB, $PAGE;
 
         $this->resetAfterTest();

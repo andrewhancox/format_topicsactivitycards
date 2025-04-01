@@ -65,7 +65,7 @@ if (empty($displaysection)) {
 }
 
 if (!empty($displaysection)) {
-    $format->set_section_number($displaysection);
+    $format->set_sectionnum($displaysection);
 }
 
 // Output course content.
