@@ -27,18 +27,33 @@ namespace format_topicsactivitycards\output\courseformat\content\section;
 
 
 use core_courseformat\output\local\content\section\header as header_base;
+use format_topicsactivitycards;
 
 class header extends header_base {
     public function export_for_template(\renderer_base $output): \stdClass {
         $model = parent::export_for_template($output);
 
         $sectionoptions = $this->format->get_format_options($this->section);
+        $courseoptions = $this->format->get_format_options();
 
         $format = $this->format;
         $section = $this->section;
         $course = $format->get_course();
 
-        $model->headerdisplaymultipage = empty($sectionoptions['collapsible']);
+        $model->headerdisplaymultipage = true;
+
+        if (
+            $sectionoptions['collapsible'] == format_topicsactivitycards::SECTIONCOLLAPSIBLE_YES
+        ) {
+            $model->headerdisplaymultipage = false;
+        } else if (
+            $sectionoptions['collapsible'] == format_topicsactivitycards::SECTIONCOLLAPSIBLE_COURSEDEFAULT
+            &&
+            $courseoptions['sectioncollapsible'] == true
+        ) {
+            $model->headerdisplaymultipage = false;
+        }
+
         $model->contentcollapsed = !empty($sectionoptions['collapsedefault']);
 
         $model->title = $output->section_title($section, $course);

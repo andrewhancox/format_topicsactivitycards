@@ -89,3 +89,4 @@ $string['showhomepageheadingascard'] = 'Show heading as card on course home page
 $string['viewbutton_coursedefault'] = 'Course default';
 $string['viewbutton_activityname'] = 'Show activity name';
 $string['viewbutton_button'] = 'Show view button';
+$string['sectioncollapsible'] = 'Collapsible sections';

@@ -35,6 +35,9 @@ class format_topicsactivitycards extends format_topics {
     public const SECTIONLAYOUT_COURSEDEFAULT = 0;
     public const SECTIONLAYOUT_CARDS = 10;
     public const SECTIONLAYOUT_LIST = 20;
+    public const SECTIONCOLLAPSIBLE_COURSEDEFAULT = 0;
+    public const SECTIONCOLLAPSIBLE_YES = 1;
+    public const SECTIONCOLLAPSIBLE_NO = 10;
 
     public const SECTIONHEADING_COURSEDEFAULT = 0;
     public const SECTIONHEADING_HEADER = 10;
@@ -139,6 +142,13 @@ class format_topicsactivitycards extends format_topics {
                     ],
                 ];
 
+                $courseformatoptionsforedit['sectioncollapsible'] = [
+                    'default' => true,
+                    'type' => PARAM_BOOL,
+                    'label' => get_string('sectioncollapsible', 'format_topicsactivitycards'),
+                    'element_type' => 'advcheckbox',
+                ];
+
                 $courseformatoptionsforedit['activityviewbutton'] = [
                     'default' => false,
                     'type' => PARAM_BOOL,
@@ -183,6 +193,11 @@ class format_topicsactivitycards extends format_topics {
 
                 $courseformatoptions['sectionlayout'] = [
                     'default' => self::SECTIONLAYOUT_LIST,
+                    'type' => PARAM_INT,
+                ];
+
+                $courseformatoptions['sectioncollapsible'] = [
+                    'default' => true,
                     'type' => PARAM_INT,
                 ];
 
@@ -282,10 +297,17 @@ class format_topicsactivitycards extends format_topics {
         ];
 
         $retval['collapsible'] = [
-            'default' => false,
-            'type' => PARAM_BOOL,
+            'default' => self::SECTIONCOLLAPSIBLE_COURSEDEFAULT,
+            'type' => PARAM_INT,
             'label' => new lang_string('collapsible', 'format_topicsactivitycards'),
-            'element_type' => 'advcheckbox',
+            'element_type' => 'select',
+            'element_attributes' => [
+                [
+                    self::SECTIONCOLLAPSIBLE_COURSEDEFAULT => get_string('coursedefault', 'format_topicsactivitycards'),
+                    self::SECTIONCOLLAPSIBLE_YES => get_string('yes'),
+                    self::SECTIONCOLLAPSIBLE_NO => get_string('no'),
+                ],
+            ],
         ];
 
         $retval['collapsedefault'] = [
