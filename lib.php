@@ -468,7 +468,9 @@ class format_topicsactivitycards extends format_topics {
     }
 
     public function get_view_url($section, $options = []) {
-        if (is_object($section)) {
+        if (array_key_exists('sr', $options) && !is_null($options['sr'])) {
+            $sectionnum = $options['sr'];
+        } else if (is_object($section)) {
             $sectionnum = $section->section;
         } else {
             $sectionnum = $section;

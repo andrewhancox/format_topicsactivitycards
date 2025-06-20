@@ -74,6 +74,7 @@ class content extends content_base {
             $PAGE->requires->js_call_amd('format_topicsactivitycards/tactags', 'init');
         }
 
+        $data->format .= ' topics';
         return $data;
     }
 }

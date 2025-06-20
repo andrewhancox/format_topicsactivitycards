@@ -95,17 +95,19 @@
 {{/hidetitle}}
 <li id="section-{{num}}"
     class="section course-section main p-3 m-0 {{#onlysummary}} section-summary {{/onlysummary}} clearfix tactaggable
-            {{#ishidden}} hidden {{/ishidden}} {{#iscurrent}} current {{/iscurrent}}
+            {{#ishidden}} hidden {{/ishidden}} {{#iscurrent}}{{^displayonesection}} current {{/displayonesection}}{{/iscurrent}}
             {{extraclasses}} {{#widthclass}} tac-container float-left {{widthclass}} {{/widthclass}}
             {{^widthclass}} col-12 pull-left {{/widthclass}}
             {{#layoutcards}} layoutcards p-1 {{/layoutcards}}
             {{#isstealth}} orphaned {{/isstealth}}
             {{#hidesummary}} hidesummary {{/hidesummary}}"
     data-sectionid="{{num}}"
-    data-sectionreturnid="{{sectionreturnid}}"
+    data-sectionreturnnum="{{sectionreturnnum}}"
     data-for="section"
     data-id="{{id}}"
     data-number="{{num}}"
+    data-sectionname="{{sectionname}}"
+    {{#isstealth}} data-orphan="true" {{/isstealth}}
     {{#tactagids}}
     data-tactag-{{.}}=1
     {{/tactagids}}
@@ -146,5 +148,13 @@
         {{#returntocourselink}}
             <a class="btn btn-primary" href="{{{returntocourselink}}}">{{#str}} returntocourse, format_topicsactivitycards, {{heading}} {{/str}}</a>
         {{/returntocourselink}}
+
+        {{#insertafter}}
+            {{#numsections}}
+                {{$ core_courseformat/local/content/addsection}}
+                    {{> core_courseformat/local/content/section/addsectiondivider }}
+                {{/ core_courseformat/local/content/addsection}}
+            {{/numsections}}
+        {{/insertafter}}
     </div>
 </li>

@@ -64,7 +64,7 @@ if (empty($displaysection)) {
     }
 }
 
-if (!empty($displaysection)) {
+if (!is_null($displaysection)) {
     $format->set_sectionnum($displaysection);
 }
 
@@ -72,6 +72,3 @@ if (!empty($displaysection)) {
 $outputclass = $format->get_output_classname('content');
 $widget = new $outputclass($format);
 echo $renderer->render($widget);
-
-// Include any format js module here using $PAGE->requires->js.
-$PAGE->requires->js('/course/format/topicsactivitycards/format.js');
