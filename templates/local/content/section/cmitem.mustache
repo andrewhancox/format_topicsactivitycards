@@ -69,9 +69,9 @@
 
     <div class="activity-inner-wrapper shadow rounded h-100 {{#viewbutton}}containsviewbutton{{/viewbutton}}">
         {{#cardimage}}
-        {{#cmformat.activityinfo.uservisible}}
+        {{#cmformat.uservisible}}
             <a href="{{cmformat.url}}" class="{{cmformat.linkclasses}} aalink" onclick="{{{cmformat.onclick}}}">
-        {{/cmformat.activityinfo.uservisible}}
+        {{/cmformat.uservisible}}
 
         <div class="tac-card-mediawrapper">
         <div class="tac-card-img rounded-top {{^cardimage}} bg-light {{/cardimage}}" style="background-image: url('{{{cardimage}}}');">
@@ -79,9 +79,9 @@
         {{/cardimage}}
 
         {{#fontawesomeicon}}
-            {{#cmformat.activityinfo.uservisible}}
+            {{#cmformat.uservisible}}
             <a href="{{cmformat.url}}" class="text-decoration-none {{cmformat.linkclasses}} aalink" onclick="{{{cmformat.onclick}}}">
-            {{/cmformat.activityinfo.uservisible}}
+            {{/cmformat.uservisible}}
             <div class="w-100 d-flex justify-content-center icon-size-7  pt-2">
             {{{fontawesomeicon}}}
             </div>
@@ -102,15 +102,15 @@
         </div>
 
         {{#cardimage}}
-            {{#cmformat.activityinfo.uservisible}}
+            {{#cmformat.uservisible}}
             </a>
-            {{/cmformat.activityinfo.uservisible}}
+            {{/cmformat.uservisible}}
         {{/cardimage}}
 
         {{#fontawesomeicon}}
-            {{#cmformat.activityinfo.uservisible}}
+            {{#cmformat.uservisible}}
             </a>
-            {{/cmformat.activityinfo.uservisible}}
+            {{/cmformat.uservisible}}
         {{/fontawesomeicon}}
 
         {{#cmformat}}
@@ -121,7 +121,7 @@
 
         {{#viewbutton}}
         <div class="activity-item viewbutton">
-            {{#cmformat.activityinfo.uservisible}}
+            {{#cmformat.uservisible}}
                 <a href="{{cmformat.url}}"
                    class="btn {{#cmformat.activityinfo.overallcomplete}}btn-success btn-success-gradient{{/cmformat.activityinfo.overallcomplete}}{{^cmformat.activityinfo.overallcomplete}}btn-outline-primary{{/cmformat.activityinfo.overallcomplete}} d-block {{cmformat.linkclasses}} aalink"
                    onclick="{{{cmformat.onclick}}}">
@@ -133,7 +133,7 @@
                         {{#str}}view, format_topicsactivitycards{{/str}}
                     {{/cmformat.activityinfo.overallcomplete}}
                 </a>
-            {{/cmformat.activityinfo.uservisible}}
+            {{/cmformat.uservisible}}
         </div>
         {{/viewbutton}}
     </div>

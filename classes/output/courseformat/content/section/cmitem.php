@@ -33,14 +33,8 @@ class cmitem extends cmitem_base {
         $model = parent::export_for_template($output);
         $format = $this->format;
 
-        if (
-            !isset($model->cmformat->activityinfo->uservisible)
-            &&
-            isset($model->cmformat->activityinfo)
-            &&
-            $this->mod->uservisible
-        ) {
-            $model->cmformat->activityinfo->uservisible = true;
+        if ($this->mod->uservisible) {
+            $model->cmformat->uservisible = true;
         }
 
         $formatoptions = $this->format->get_format_options();
