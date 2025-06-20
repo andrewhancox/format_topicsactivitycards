@@ -58,7 +58,7 @@ class renderer extends section_renderer {
         if ($course->has_summary()) {
             $chelper = new coursecat_helper();
             $model->coursesummary = $chelper->get_course_formatted_summary($course,
-                array('overflowdiv' => true, 'noclean' => true, 'para' => false));
+                ['overflowdiv' => true, 'noclean' => true, 'para' => false]);
         }
 
         if (

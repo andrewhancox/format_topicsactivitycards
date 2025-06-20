@@ -54,9 +54,9 @@ class format_topicsactivitycards extends format_topics {
     public function page_set_course(moodle_page $page) {
         global $PAGE;
 
-        $format_options = $this->get_format_options();
+        $formatoptions = $this->get_format_options();
 
-        if ($format_options['overridefixedwidthcoursepage'] == self::PAGELAYOUT_FULLWIDTH) {
+        if ($formatoptions['overridefixedwidthcoursepage'] == self::PAGELAYOUT_FULLWIDTH) {
             $PAGE->add_body_class('overridefixedwidthcoursepage');
         }
     }
@@ -66,11 +66,11 @@ class format_topicsactivitycards extends format_topics {
         $course = $this->get_course();
 
         if (strpos($PAGE->pagetype, 'course-view') === 0) {
-            $format_options = $this->get_format_options();
+            $formatoptions = $this->get_format_options();
 
-            if (!empty($format_options['showhomepageheadingascard'])) {
-                return new coursehomeheader($course, $format_options);
-            } else if (!empty($format_options['showcompletionstate']) && $course->enablecompletion) {
+            if (!empty($formatoptions['showhomepageheadingascard'])) {
+                return new coursehomeheader($course, $formatoptions);
+            } else if (!empty($formatoptions['showcompletionstate']) && $course->enablecompletion) {
                 $PAGE->add_header_action
                 ($OUTPUT->render_from_template('format_topicsactivitycards/progress_doughnut', [
                     'showstatuspercentage' => true,
@@ -540,7 +540,7 @@ class format_topicsactivitycards extends format_topics {
         return $ajaxsupport;
     }
 
-    private $cm_metadatas = null;
+    private $cmmetadatas = null;
 
     public function get_cm_metadatas() {
         global $DB;
@@ -556,7 +556,7 @@ class format_topicsactivitycards extends format_topics {
         } else {
             foreach ($this->get_sections() as $section){
                 $formatoptions = $this->get_format_options($section->section);
-                if ($formatoptions['sectionheading'] != format_topicsactivitycards::SECTIONHEADING_LINKEDCARD) {
+                if ($formatoptions['sectionheading'] != self::SECTIONHEADING_LINKEDCARD) {
                     $relevantsections[] = $section->section;
                 }
             }
@@ -577,7 +577,7 @@ class format_topicsactivitycards extends format_topics {
         return $this->cm_metadatas;
     }
 
-    private $cm_cardimages = null;
+    private $cmcardimages = null;
 
     public function get_cm_cardimages() {
         if (isset($this->cm_cardimages)) {
@@ -604,7 +604,7 @@ class format_topicsactivitycards extends format_topics {
         return $this->cm_cardimages;
     }
 
-    private $section_cardimages = null;
+    private $sectioncardimages = null;
 
     public function get_section_cardimages() {
         if (isset($this->section_cardimages)) {

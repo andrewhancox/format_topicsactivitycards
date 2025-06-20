@@ -38,7 +38,7 @@ global $CFG;
 require_once($CFG->dirroot . '/course/lib.php');
 require_once($CFG->dirroot . '/course/format/topics/tests/format_topics_test.php');
 
-class format_topicsactivitycards_test extends format_topics_test {
+final class format_topicsactivitycards_test extends format_topics_test {
 
     protected static $generator = null;
     /**
