@@ -145,10 +145,6 @@
             </div>
         </div>
 
-        {{#returntocourselink}}
-            <a class="btn btn-primary" href="{{{returntocourselink}}}">{{#str}} returntocourse, format_topicsactivitycards, {{heading}} {{/str}}</a>
-        {{/returntocourselink}}
-
         {{#insertafter}}
             {{#numsections}}
                 {{$ core_courseformat/local/content/addsection}}
@@ -158,3 +154,8 @@
         {{/insertafter}}
     </div>
 </li>
+{{#returntocourselink}}
+    <li class="col-12">
+        <a class="btn btn-primary" href="{{{returntocourselink}}}">{{#str}}returntocourse, format_topicsactivitycards, {{heading}} {{/str}}</a>
+    </li>
+{{/returntocourselink}}
