@@ -64,6 +64,19 @@ class section extends section_base {
             $model->hidesummary = true;
         }
 
+        if (!empty($sectionoptions['overridesectionsummary'])) {
+            $model->summary->summarytext = file_rewrite_pluginfile_urls(
+                $sectionoptions['overridesectionsummary'],
+                'pluginfile.php',
+                $coursecontext->id,
+                'format_topicsactivitycards',
+                'overridesectionsummary',
+                $section->id
+            );
+
+            $model->summary->summarytext = format_text($model->summary->summarytext, $sectionoptions['overridesectionsummaryformat']);
+        }
+
         if (empty($this->format->get_sectionnum())) {
             $addsectionclass = $format->get_output_classname('content\\addsection');
             $addsection = new $addsectionclass($format);
@@ -104,19 +117,7 @@ class section extends section_base {
             $model->sectionlink = course_get_url($this->format->get_course(), $section->section);
         }
 
-        if (!empty($sectionoptions['overridesectionsummary'])) {
-            $model->summary->summarytext = file_rewrite_pluginfile_urls(
-                $sectionoptions['overridesectionsummary'],
-                'pluginfile.php',
-                $coursecontext->id,
-                'format_topicsactivitycards',
-                'overridesectionsummary',
-                $section->id
-            );
-
-            $model->summary->summarytext = format_text($model->summary->summarytext, $sectionoptions['overridesectionsummaryformat']);
-        } else {
-
+        if (empty($sectionoptions['overridesectionsummary'])) {
             if (!empty($sectionoptions['cleanandtruncatedescription']) && strlen($model->summary->summarytext) > 250) {// width!
                 $model->summary->summarytext = shorten_text(strip_tags($model->summary->summarytext), 250);
             }
