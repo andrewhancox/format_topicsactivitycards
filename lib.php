@@ -932,6 +932,16 @@ function format_topicsactivitycards_coursemodule_edit_post_actions($data, $cours
         return $data;
     }
 
+    $fieldspresent = false;
+    foreach (array_keys(metadata::properties_definition()) as $key) {
+        if (isset($data->$key)) {
+            $fieldspresent = true;
+        }
+    }
+    if (!$fieldspresent) {
+        return $data;
+    }
+
     $context = context_module::instance($data->coursemodule);
 
     $editoroptions = ['maxfiles' => EDITOR_UNLIMITED_FILES,
