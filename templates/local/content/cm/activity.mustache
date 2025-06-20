@@ -35,18 +35,17 @@
     }
 }}
 
-{{> core_courseformat/local/content/cm/availability }}
+{{> core_courseformat/local/content/cm/activity }}
+
+{{#taglist}}
+    <div class="availabilityinfo tac-card-tags">
+        {{{taglist}}}
+    </div>
+{{/taglist}}
+
 
 {{#cardfooter}}
 <div class="availabilityinfo small course-description-item">
     {{{cardfooter}}}
 </div>
 {{/cardfooter}}
-
-<div class="footer pb-2 d-flex">
-{{#taglist}}
-    <div class="tac-card-tags mb-1">
-        {{{taglist}}}
-    </div>
-{{/taglist}}
-</div>
