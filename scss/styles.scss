@@ -6,12 +6,149 @@
   }
 }
 
+#page-course-view-topicsactivitycards #page {
+  #collapsesections {
+    display: none;
+  }
+
+  ul.topicsactivitycards {
+    display: flex !important;
+    flex-wrap: wrap;
+
+    .section-inner-wrapper {
+      .course-section-header {
+        padding: .5rem;
+        padding-bottom: 0;
+      }
+
+      .content {
+        padding: .5rem;
+      }
+    }
+
+    .course-section {
+      padding: 0;
+      margin-bottom: .5rem;
+      margin-top: .5rem;
+    }
+
+    .activity.tac-container .activity-item {
+      border: 0 !important;
+      padding: 1em;
+    }
+
+    .hidesummary .section-summary-activities {
+      display: none;
+    }
+
+    li.section.tac-container {
+      border: 0 !important;
+      padding: 1em;
+
+      .activity:not(.tac-container) {
+        padding: 0.5em;
+
+        .activity-item {
+          padding: 0;
+        }
+      }
+
+      .activity:not(.tac-container):not(:last-child) .activity-item {
+        border: 0;
+        border-radius: 0;
+        border-bottom: 1px solid #dee2e6;
+        padding-bottom: 15px;
+      }
+
+      .activity:not(.tac-container):last-child .activity-item {
+        border: 0;
+      }
+
+      .section-inner-wrapper {
+        border-radius: .5rem;
+        border: 1px solid #dee2e6;
+      }
+    }
+
+    li.section.layoutcards {
+      .activity-basis .align-self-start.flex-md-row {
+        flex-direction: column !important;
+      }
+
+      .activity-grid .align-self-start.flex-md-row {
+        flex-direction: column !important;
+      }
+
+      .activity-inner-wrapper {
+        border-radius: .5rem;
+        border: 1px solid #dee2e6;
+        padding: 0 !important;
+      }
+
+      .course-content-item-content ul.section {
+        display: flex !important;
+        flex-wrap: wrap;
+      }
+    }
+
+    .tac-card-img {
+      background-size: cover;
+      background-position: center;
+    }
+
+    .tac-card-img,
+    .mediaplugin.mediaplugin_vimeo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .tac-card-tags {
+      .badge {
+        background: #d9dde0;
+        color: #212529;
+      }
+
+      b {
+        font-weight: normal;
+        font-size: small;
+      }
+    }
+
+    .tac-card-mediawrapper {
+      height: 0 !important;
+      position: relative;
+      overflow: hidden;
+      padding-top: 56.25%;
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
+
+      iframe {
+        height: 100%;
+        width: 100%;
+      }
+
+      .mediaplugin {
+        margin: 0;
+      }
+
+      .tac-card-duration-circle {
+        height: 3.5rem;
+        width: 3.5rem;
+        line-height: 1;
+      }
+    }
+
+  }
+}
 
 
-$light:         #eaeaea;
-$success:       #83C55B;
-$body-color:                #010101;
-
+$light: #eaeaea;
+$success: #83C55B;
+$body-color: #010101;
 
 $doughnut-size: 100px;
 
@@ -44,6 +181,7 @@ $doughnut-text-colour: $body-color;
       border: $stroke solid $doughnut-empty-colour;
       background-color: white;
     }
+
     .progress-text {
       top: 50%;
       /*rtl:ignore*/
@@ -97,6 +235,7 @@ $doughnut-text-colour: $body-color;
           }
         }
       }
+
       .progress-text {
         color: $success;
       }

@@ -27,6 +27,6 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'format_topicsactivitycards';
 $plugin->release = '1.1.0';
-$plugin->version = 2024120612;
+$plugin->version = 2024120613;
 $plugin->requires = 2023100900;
 $plugin->maturity = MATURITY_STABLE;
