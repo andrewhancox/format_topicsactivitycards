@@ -1,4 +1,4 @@
-#page-course-view-topicsactivitycards.overridefixedwidthcoursepage {
+.format-topicsactivitycards.path-course-view.overridefixedwidthcoursepage {
   #topofscroll,
   #page-header,
   .secondary-navigation .navigation .nav-tabs {
@@ -6,7 +6,7 @@
   }
 }
 
-#page-course-view-topicsactivitycards #page {
+.format-topicsactivitycards.path-course-view #page {
   #collapsesections {
     display: none;
   }
@@ -98,7 +98,7 @@
         padding: 0 !important;
       }
 
-      .course-content-item-content ul.section {
+      .content ul.section {
         display: flex !important;
         flex-wrap: wrap;
       }
