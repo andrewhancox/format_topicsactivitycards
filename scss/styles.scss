@@ -64,6 +64,11 @@
         border: 0;
       }
 
+      .activity {
+        border: 0;
+        padding: 0;
+      }
+
       .section-inner-wrapper {
         border-radius: .5rem;
         border: 1px solid #dee2e6;
@@ -71,6 +76,11 @@
     }
 
     li.section.layoutcards {
+      .activity {
+        border: 0;
+        padding: 0;
+      }
+
       .activity-basis .align-self-start.flex-md-row {
         flex-direction: column !important;
       }

@@ -49,9 +49,17 @@
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .activity:not(.tac-container):last-child .activity-item {
   border: 0;
 }
+#page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .activity {
+  border: 0;
+  padding: 0;
+}
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.tac-container .section-inner-wrapper {
   border-radius: 0.5rem;
   border: 1px solid #dee2e6;
+}
+#page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.layoutcards .activity {
+  border: 0;
+  padding: 0;
 }
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.layoutcards .activity-basis .align-self-start.flex-md-row {
   flex-direction: column !important;
