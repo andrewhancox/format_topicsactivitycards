@@ -52,7 +52,17 @@ class section extends section_base {
         $model->hidetitle = !empty($sectionoptions['hidetitle']);
         $model->contentcollapsed = !empty($sectionoptions['collapsedefault']);
         $model->layoutcards = $sectionoptions['sectionlayout'] == format_topicsactivitycards::SECTIONLAYOUT_CARDS;
-        $model->hidesummary = $sectionoptions['sectionheading'] != format_topicsactivitycards::SECTIONHEADING_LINKEDCARD;
+
+        if (!isset($model->extraclasses)) {
+            $model->extraclasses = '';
+        }
+
+        if ($sectionoptions['sectionheading'] == format_topicsactivitycards::SECTIONHEADING_LINKEDCARD) {
+            $model->contentcollapsed = false;
+            $model->extraclasses .= ' sectionheadinglinkedcard';
+        } else {
+            $model->hidesummary = true;
+        }
 
         if (empty($this->format->get_sectionnum())) {
             $addsectionclass = $format->get_output_classname('content\\addsection');
@@ -74,7 +84,7 @@ class section extends section_base {
         }
 
         $model->widthclass = $this->format->normalise_render_width($sectionoptions['renderwidth'] ?? null);
-        $model->extraclasses = $sectionoptions['additionalcssclasses'] ?? null;
+        $model->extraclasses .= $sectionoptions['additionalcssclasses'] ?? '';
 
         $cardimages = $format->get_section_cardimages();
         if (isset($cardimages[$this->section->id])) {

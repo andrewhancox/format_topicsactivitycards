@@ -57,6 +57,9 @@
   border-radius: 0.5rem;
   border: 1px solid #dee2e6;
 }
+#page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.sectionheadinglinkedcard .icons-collapse-expand {
+  display: none;
+}
 #page-course-view-topicsactivitycards #page ul.topicsactivitycards li.section.layoutcards .activity {
   border: 0;
   padding: 0;
