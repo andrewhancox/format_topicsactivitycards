@@ -143,15 +143,16 @@ class section extends section_base {
 
         $result = false;
 
-        $showsummary = ($section->section != 0 && $section->section != $format->get_sectionnum());
-
         $showcmlist = $section->uservisible;
 
         // Add activities summary if necessary.
-        if ($showsummary) {
-            $cmsummary = new $this->cmsummaryclass($format, $section);
-            $data->cmsummary = $cmsummary->export_for_template($output);
-            $data->onlysummary = true;
+        if ($section->section != 0 && $section->section != $format->get_sectionnum()) {
+            if ($sectionoptions['sectionheading'] == format_topicsactivitycards::SECTIONHEADING_LINKEDCARD) {
+                $cmsummary = new $this->cmsummaryclass($format, $section);
+                $data->cmsummary = $cmsummary->export_for_template($output);
+                $data->onlysummary = true;
+            }
+
             $result = true;
 
             if (!$format->is_section_current($section)) {
