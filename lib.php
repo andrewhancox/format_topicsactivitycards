@@ -540,7 +540,7 @@ class format_topicsactivitycards extends format_topics {
         return $ajaxsupport;
     }
 
-    private $cmmetadatas = null;
+    private $cm_metadatas = null;
 
     public function get_cm_metadatas() {
         global $DB;
@@ -577,7 +577,7 @@ class format_topicsactivitycards extends format_topics {
         return $this->cm_metadatas;
     }
 
-    private $cmcardimages = null;
+    private $cm_cardimages = null;
 
     public function get_cm_cardimages() {
         if (isset($this->cm_cardimages)) {
