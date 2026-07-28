@@ -74,6 +74,7 @@ $string['sectionlayout_list'] = 'List';
 $string['sectionname'] = 'Section';
 $string['showcompletionstate'] = 'Show completion state in header';
 $string['showfromothers'] = 'Show section';
+$string['showfullscreen'] = 'Show full-screen toggle';
 
 
 $string['collapsible'] = 'Collapsible';
@@ -83,10 +84,10 @@ $string['showhomepageheadingascard'] = 'Show heading as card on course home page
 $string['tactags'] = 'Tags for sorting on course home (one per line)';
 $string['tactagsheader'] = 'Tags intro';
 $string['todo'] = 'To do';
+$string['togglefullscreen'] = 'Toggle full-screen';
 
 
 $string['view'] = 'View';
 $string['viewbutton'] = 'Replace activity with name with view button';
 $string['viewbutton_activityname'] = 'Show activity name';
 $string['viewbutton_button'] = 'Show view button';
-$string['viewbutton_coursedefault'] = 'Course default';

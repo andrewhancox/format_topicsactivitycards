@@ -64,6 +64,7 @@ class format_topicsactivitycards extends format_topics {
     public function course_header() {
         global $PAGE, $OUTPUT;
         $course = $this->get_course();
+        $formatoptions = $this->get_format_options();
 
         if (strpos($PAGE->pagetype, 'course-view') === 0) {
             $formatoptions = $this->get_format_options();
@@ -78,6 +79,11 @@ class format_topicsactivitycards extends format_topics {
                 ])
                 );
             }
+        }
+
+        if (!empty($formatoptions['showfullscreen'])) {
+            $PAGE->requires->js_call_amd('format_topicsactivitycards/fullscreen', 'init');
+            $PAGE->add_header_action($OUTPUT->render_from_template('format_topicsactivitycards/fullscreentoggle', []));
         }
     }
 
@@ -110,6 +116,13 @@ class format_topicsactivitycards extends format_topics {
 
                 $courseformatoptionsforedit['showcompletionstate'] = [
                     'label' => new lang_string('showcompletionstate', 'format_topicsactivitycards'),
+                    'element_type' => 'advcheckbox',
+                    'default' => false,
+                    'type' => PARAM_BOOL,
+                ];
+
+                $courseformatoptionsforedit['showfullscreen'] = [
+                    'label' => new lang_string('showfullscreen', 'format_topicsactivitycards'),
                     'element_type' => 'advcheckbox',
                     'default' => false,
                     'type' => PARAM_BOOL,
@@ -217,6 +230,11 @@ class format_topicsactivitycards extends format_topics {
                 ];
 
                 $courseformatoptions['showcompletionstate'] = [
+                    'default' => false,
+                    'type' => PARAM_BOOL,
+                ];
+
+                $courseformatoptions['showfullscreen'] = [
                     'default' => false,
                     'type' => PARAM_BOOL,
                 ];
@@ -1018,4 +1036,10 @@ function format_topicsactivitycards_pluginfile($course, $cm, context $context, $
 
     // Force download.
     send_stored_file($file, 0, 0, true);
+}
+
+function format_topicsactivitycards_get_fontawesome_icon_map() {
+    return [
+        'format_topicsactivitycards:i/fullscreen' => 'fa-expand'
+    ];
 }
