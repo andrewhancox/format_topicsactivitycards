@@ -32,7 +32,7 @@ class backup_format_topicsactivitycards_plugin extends backup_format_plugin {
      */
     protected function define_module_plugin_structure() {
         // Define the virtual plugin element with the condition to fulfill.
-        $plugin = $this->get_plugin_element();
+        $plugin = $this->get_plugin_element(null, $this->get_format_condition(), 'topicsactivitycards');
 
         // Create one standard named plugin element (the visible container).
         // The courseid not required as populated on restore.
@@ -55,7 +55,7 @@ class backup_format_topicsactivitycards_plugin extends backup_format_plugin {
     }
 
     protected function define_course_plugin_structure() {
-        $plugin = $this->get_plugin_element();
+        $plugin = $this->get_plugin_element(null, $this->get_format_condition(), 'topicsactivitycards');
 
         $pluginwrapper = new backup_nested_element($this->get_recommended_name());
         $pluginwrapper->annotate_files('format_topicsactivitycards', 'sectioncardbackgroundimage', null, $this->task->get_contextid());
